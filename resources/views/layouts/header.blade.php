@@ -16,6 +16,8 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
     <link rel="stylesheet" href="{{asset('assets/css/styleGeneral.css')}}">
     <link rel="shortcut icon" href="{{  asset('logo/zaha.jpg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        
 </head>
 
 <body>
@@ -25,12 +27,12 @@
             <div class="col-md-12">
                 
                 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-text-center"
-                    style="background-color: rgb(23, 199, 23);">
+                    style="background-color: rgb(23, 199, 23);>
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#">
                             <img src="{{ asset('logo/zaha.jpg') }}" width="50" height="50"
                                 class="d-inline-block align-text-top" alt="" srcset="">
-                            ASA.RH
+                                @yield('title')
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -63,15 +65,19 @@
                                         paie</a>
                                 </li>
                             </ul>
-                            <form class="d-flex">
-                                <label class="form-control-label me-2" > Nom User connecter</label>
-                                <button class="btn btn-outline-success" type="submit">Déconnexion</button>
-                            </form>
+                            <div class="d-flex">
+                                <label class="form-control-label me-2" >  {{auth()->user()->name}}</label>
+                                @auth
+                                <div class="text-end">
+                                  <a href="{{ route('logout.perform') }}" class="btn btn-outline-success me-2">Logout</a>
+                                </div>
+                              @endauth
+                            </div>
                         </div>
                     </div>
                 </nav>
 
-                <div class="row mt-5">
+                <div class="row">
                     <div class="col-md-12">
                         <div class="container-fluid content_body px-0 "
                             style="padding-bottom: 1rem; padding-top: 4.5rem;">

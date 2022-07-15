@@ -19,7 +19,7 @@
 </head>
 
 <body>
-   
+
    <style>
         body{
             background-color: rgb(238, 230, 230);
@@ -54,8 +54,23 @@
 
                             </ul>
                             <div class="d-flex">
-                                <a class="nav-link active" aria-current="page" href="#">Se connecter</a>
-                                <a class="nav-link active" aria-current="page" href="#">S'inscrire</a>
+                                @auth
+                                {{auth()->user()->name}}
+                                <div class="text-end">
+                                  <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
+                                </div>
+                              @endauth
+                        
+                              @guest
+                                <div class="text-end">
+                                    <a href="{{ route('admin.index') }}" class="nav-link btn btn-outline-light me-2">Login</a>
+                               
+                                  {{-- <a href="{{ route('login.perform') }}" class="nav-link btn btn-outline-light me-2">Login</a> --}}
+                                  {{-- <a href="{{ route('register.perform') }}" class="nav-link btn btn-warning">Sign-up</a> --}}
+                                </div>
+                              @endguest
+
+                             
                             </div>
                         </div>
                     </div>
@@ -70,19 +85,21 @@
                                     <div class="col-4  justify-content-center align-center" >
                                         <img src="{{ asset('logo/zaha.jpg') }}" width="80" height="80"
                                         class="d-inline-block align-text-top" alt="" srcset="">
-                                        <h4>Login</h4>
+                                        <h4>Administratif</h4>
                                     </div>
                                     <div class="col"></div>
 
                                 </div>
                                 <form action="{{route('login')}}" class="formulaire mt-5" id="msform_facture" method="POST" enctype="multipart/form-data">
                                     @csrf
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+      
                                     <div class="form-group my-1">
                                         <label for="identifiant" class="mb-1 form-control-placeholder">Email ou Identifiant<strong style="color:#ff0000;">*</strong></label>
                                         <input type="text" name="identifiant" class="form-control input_inscription" placeholder="email ou identifiant" id="identifiant" required />
                                     </div>
                                     <div class="form-group my-1">
-                                        <label for="password" class="mb-1 form-control-placeholder">Password<strong style="color:#ff0000;">*</strong></label>
+                                        <label for="password" class="mb-1 form-control-placeholder">Mot de passe<strong style="color:#ff0000;">*</strong></label>
                                         <input type="password" name="password" class="form-control input_inscription" placeholder="password" id="password" required />
                                     </div>
 
@@ -97,7 +114,13 @@
 
 
                                 </form>
-                            </div> 
+
+                                    @if(Session::has('error'))
+                                    <div class="alert alert-danger">
+                                        {{Session::get('error')}}
+                                    </div>
+                                    @endif
+                            </div>
                         </div>
                     </div>
                 </div>

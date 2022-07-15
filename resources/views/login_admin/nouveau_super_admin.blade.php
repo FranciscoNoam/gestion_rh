@@ -19,7 +19,7 @@
 </head>
 
 <body>
-   
+
    <style>
         body{
             background-color: rgb(238, 230, 230);
@@ -67,29 +67,41 @@
                             <div class="shadow p-3 bg-body  rounded">
                                 <div  class=" row" >
                                     <div class="col"></div>
-                                    <div class="col-4  justify-content-center align-center" >
+                                    <div class="col-5  justify-content-center align-center" >
                                         <img src="{{ asset('logo/zaha.jpg') }}" width="80" height="80"
                                         class="d-inline-block align-text-top" alt="" srcset="">
-                                        <h4>Login</h4>
+                                        <h4> Nouveau Super Admin</h4>
                                     </div>
                                     <div class="col"></div>
 
                                 </div>
-                                <form action="{{route('login')}}" class="formulaire mt-5" id="msform_facture" method="POST" enctype="multipart/form-data">
+                                <form action="{{route('admin.store.super.admin')}}" class="formulaire_new mt-5" id="msform_facture" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group my-1">
-                                        <label for="identifiant" class="mb-1 form-control-placeholder">Email ou Identifiant<strong style="color:#ff0000;">*</strong></label>
-                                        <input type="text" name="identifiant" class="form-control input_inscription" placeholder="email ou identifiant" id="identifiant" required />
+                                        <label for="nom" class="mb-1 form-control-placeholder">Nom Complet<strong style="color:#ff0000;">*</strong></label>
+                                        <input type="text" name="nom" class="@error('nom') is-invalid @enderror form-control input_inscription" placeholder="Nom complet" id="nom" required />
                                     </div>
                                     <div class="form-group my-1">
-                                        <label for="password" class="mb-1 form-control-placeholder">Password<strong style="color:#ff0000;">*</strong></label>
-                                        <input type="password" name="password" class="form-control input_inscription" placeholder="password" id="password" required />
+                                        <label for="email" class="mb-1 form-control-placeholder">Email<strong style="color:#ff0000;">*</strong></label>
+                                        <input type="email" name="email" class="@error('email') is-invalid @enderror form-control input_inscription" placeholder="email" id="email" required />
+                                    </div>
+                                    <div class="form-group my-1">
+                                        <label for="identifiant" class="mb-1 form-control-placeholder">Identifiant<strong style="color:#ff0000;">*</strong></label>
+                                        <input type="text" name="identifiant" class="@error('identifiant') is-invalid @enderror form-control input_inscription" placeholder="identifiant" id="identifiant" required />
+                                    </div>
+                                    <div class="form-group my-1">
+                                        <label for="new_password" class="mb-1 form-control-placeholder">Nouveau mot de passe<strong style="color:#ff0000;">*</strong></label>
+                                        <input type="password" name="new_password" class="@error('new_password') is-invalid @enderror form-control input_inscription" placeholder="nouveau mot de passe" id="new_password" required />
+                                    </div>
+                                    <div class="form-group my-1">
+                                        <label for="confirm_password" class="mb-1 form-control-placeholder">Confirmer Nouveau mot de passe<strong style="color:#ff0000;">*</strong></label>
+                                        <input type="password" name="confirm_password" class="@error('confirm_password') is-invalid @enderror form-control input_inscription" placeholder="confirmer Nouveau mot de passe" id="confirm_password" required />
                                     </div>
 
                                     <div  class=" row" >
                                         <div class="col"></div>
                                         <div class="col-4  justify-content-center align-center" >
-                                            <input type="submit" name="next" class=" my-2 btn btn-success sidentifier " value="S'identifier" />
+                                            <input type="submit" name="next" class=" my-2 btn btn-success nouveau_admin_super " value="S'identifier" />
                                         </div>
                                         <div class="col"></div>
 
@@ -97,7 +109,7 @@
 
 
                                 </form>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -117,14 +129,17 @@
     <script type="text/javascript">
   $(document).ready(function() {
 
-    $('.sidentifier').prop('disabled', true);
+    $('.nouveau_admin_super').prop('disabled', true);
 
-    $('.formulaire input').keyup(function() {
-            if ($('#identifiant').val().length > 5 &&
-                $('#password').val().length > 3) {
-                    $('.sidentifier').prop('disabled', false);
+    $('.formulaire_new input').keyup(function() {
+            if ($('#nom').val().length > 2 &&
+                $('#email').val().length > 5 &&
+                $('#identifiant').val().length > 5 &&
+                $('#new_password').val().length > 3 &&
+                $('#new_password').val().length == $('#confirm_password').val().length) {
+                    $('.nouveau_admin_super').prop('disabled', false);
             } else {
-                $('.sidentifier').prop('disabled', true);
+                $('.nouveau_admin_super').prop('disabled', true);
             }
         });
   });
