@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-text-center">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-success justify-content-text-center">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#">
                             <img src="{{ asset('logo/zaha.jpg') }}" width="50" height="50"
@@ -40,7 +40,7 @@
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="collapse  navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 @canany(['isAdmin','isSuperAdmin'])
                                 <li class="nav-item">
@@ -48,7 +48,7 @@
                                         href="{{ route('home') }}">Employers</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.generale') }}">Génerales</a>
+                                    <a class="nav-link" href="{{ route('admin.generale') }}"><p> Génerales</p></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#" style="color:red;">Demande des congers</a>
@@ -63,17 +63,17 @@
 
                                 @canany(['isEmployer'])
                                  <li class="nav-item">
-                                    <a class="nav-link  active" href="#" style="color:red;">Mes Fiches de paie</a>
+                                    <a class="nav-link  active" href="#" >Mes Fiches de paie</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" style="color:red;">Mes Demandes de conger</a>
+                                    <a class="nav-link" href="#" >Mes Demandes de conger</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" style="color:red;">Mes Demandes d' absence</a>
+                                    <a class="nav-link" href="#" >Mes Demandes d' absence</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" style="color:red;">Mon Compte</a>
+                                    <a class="nav-link" href="#" >Mon Compte</a>
                                 </li>
                                 @endcanany
 
@@ -81,10 +81,11 @@
                             </ul>
 
                             <div class="d-flex justify-content-end">
-                                <label class="form-control-label me-2"> {{auth()->user()->name}}</label>
+
+                                <label style="color:white;" class=" form-control-label me-2"> {{auth()->user()->name}}</label>
                                 @auth
                                 <div class="text-end">
-                                    <a href="{{ route('logout') }}" class="btn btn-outline-success me-2">Déconnexion</a>
+                                    <a href="{{ route('logout') }}" class="btn btn-dark me-2">Déconnexion</a>
                                 </div>
                                 @endauth
                             </div>
@@ -103,6 +104,13 @@
                 </div>
             </div>
         </div>
+
+        <footer class="mt-4 py-3 bg-success">
+            <div class="container">
+              <p class="m-0 text-center text-white">Copyright &copy; ASA-RH {{ date('Y') }}</p>
+            </div>
+            <!-- /.container -->
+          </footer>
     </div>
 
 

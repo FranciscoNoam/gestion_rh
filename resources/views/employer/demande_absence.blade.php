@@ -1,12 +1,12 @@
 @extends('layouts.header')
-@section('title')ASA-RH/ Demande de conger
+@section('title')ASA-RH/ Demande  d'absence
 @endsection
 @section('content')
 
 <div class="container-fluid">
 <div class="row mb-3">
     <div class="col">
-        <h3 class="text-center " style="color:#198754;">Demande de conger</h3>
+        <h3 class="text-center " style="color:#198754;">Demande  d'absence</h3>
 
     </div>
 </div>
@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label for="object" class="mb-1 form-control-placeholder">Object du conger<strong
+                                <label for="object" class="mb-1 form-control-placeholder">Object  d'absence<strong
                                         style="color:#ff0000;">*</strong></label>
                                 <input type="text" name="object" class="form-control input_inscription"
                                     placeholder="Object" id="object" required />
@@ -37,8 +37,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group my-1">
-                                <label for="date_debut" class="mb-1 form-control-placeholder">Date début du
-                                    conger<strong style="color:#ff0000;">*</strong></label>
+                                <label for="date_debut" class="mb-1 form-control-placeholder">Date début  d'absence<strong style="color:#ff0000;">*</strong></label>
                                 <input type="date" name="date_debut" class="form-control input_inscription"
                                     id="date_debut" required />
                                 @error('date_debut')
@@ -48,7 +47,7 @@
                         </div>
                         <div class="col">
                             <div class="form-group my-1">
-                                <label for="date_fin" class="mb-1 form-control-placeholder">Date fin du conger<strong
+                                <label for="date_fin" class="mb-1 form-control-placeholder">Date fin  d'absence<strong
                                         style="color:#ff0000;">*</strong></label>
                                 <input type="date" name="date_fin" class="form-control input_inscription"
                                     id="date_fin" required />
@@ -62,8 +61,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group my-1">
-                                <label for="hour_debut" class="mb-1 form-control-placeholder">Heure début du
-                                    conger<strong style="color:#ff0000;">*</strong></label>
+                                <label for="hour_debut" class="mb-1 form-control-placeholder">Heure début  d'absence<strong style="color:#ff0000;">*</strong></label>
                                 <input type="time" name="hour_debut" class="form-control input_inscription"
                                     id="hour_debut" required />
                                 @error('hour_debut')
@@ -73,7 +71,7 @@
                         </div>
                         <div class="col">
                             <div class="form-group my-1">
-                                <label for="hour_fin" class="mb-1 form-control-placeholder">Heure fin du conger<strong
+                                <label for="hour_fin" class="mb-1 form-control-placeholder">Heure fin  d'absence<strong
                                         style="color:#ff0000;">*</strong></label>
                                 <input type="time" name="hour_fin" class="form-control input_inscription" id="hour_fin"
                                     required />
@@ -106,7 +104,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Suppression du
-                                    demande de conger ""</h5>
+                                    demande  d'absence ""</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -115,7 +113,7 @@
                                 <div class="modal-body">
                                     <p>Voulez vous vraiment rétiré cette information crusial? Cela est
                                         irréversible. cette information sera
-                                        retiré dans la vos liste de demande de conger et de celle de l'administration</p>
+                                        retiré dans la vos liste de demande  d'absence et de celle de l'administration</p>
                                     <p>Voulez vous continuer <span style="color:red;"> ?</span></p>
                                 </div>
                                 <div class="modal-footer  justify-content-center">
@@ -133,7 +131,7 @@
                     <div class="modal-dialog   shadow p-3 lg-body  rounded">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modification du demande de conger</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Modification du demande  d'absence</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -143,7 +141,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group my-1">
-                                                <label for="object" class="mb-1 form-control-placeholder">Object du conger<strong
+                                                <label for="object" class="mb-1 form-control-placeholder">Object  d'absence<strong
                                                         style="color:#ff0000;">*</strong></label>
                                                 <input type="text" name="object" class="form-control input_inscription"
                                                     placeholder="Object" id="object" required />
@@ -158,8 +156,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group my-1">
-                                                <label for="date_debut" class="mb-1 form-control-placeholder">Date début du
-                                                    conger<strong style="color:#ff0000;">*</strong></label>
+                                                <label for="date_debut" class="mb-1 form-control-placeholder">Date début  d'absence<strong style="color:#ff0000;">*</strong></label>
                                                 <input type="date" name="date_debut" class="form-control input_inscription"
                                                     id="date_debut" required />
                                                 @error('date_debut')
@@ -169,7 +166,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="form-group my-1">
-                                                <label for="date_fin" class="mb-1 form-control-placeholder">Date fin du conger<strong
+                                                <label for="date_fin" class="mb-1 form-control-placeholder">Date fin  d'absence<strong
                                                         style="color:#ff0000;">*</strong></label>
                                                 <input type="date" name="date_fin" class="form-control input_inscription"
                                                     id="date_fin" required />
@@ -183,8 +180,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group my-1">
-                                                <label for="hour_debut" class="mb-1 form-control-placeholder">Heure début du
-                                                    conger<strong style="color:#ff0000;">*</strong></label>
+                                                <label for="hour_debut" class="mb-1 form-control-placeholder">Heure début d'absence<strong style="color:#ff0000;">*</strong></label>
                                                 <input type="time" name="hour_debut" class="form-control input_inscription"
                                                     id="hour_debut" required />
                                                 @error('hour_debut')
@@ -194,7 +190,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="form-group my-1">
-                                                <label for="hour_fin" class="mb-1 form-control-placeholder">Heure fin du conger<strong
+                                                <label for="hour_fin" class="mb-1 form-control-placeholder">Heure fin  d'absence<strong
                                                         style="color:#ff0000;">*</strong></label>
                                                 <input type="time" name="hour_fin" class="form-control input_inscription" id="hour_fin"
                                                     required />

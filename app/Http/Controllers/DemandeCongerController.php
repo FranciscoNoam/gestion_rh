@@ -26,7 +26,7 @@ class DemandeCongerController extends Controller
 
     public function index()
     {
-        //
+        return view("employer.demande_conger");
     }
 
 
