@@ -141,7 +141,7 @@ class FonctionGenerique extends Model
 
 
     //select colonne/* from table where value =  ... => une seule données
-    public function findWhereMulitOne($nomTab, $para = [], $val = [])
+    public function findWhereMultiOne($nomTab, $para = [], $val = [])
     {
         $fonction = new FonctionGenerique();
         $data =  DB::select($fonction->queryWhere($nomTab, $para, $val), $val);

@@ -1,28 +1,28 @@
 @extends('layouts.header')
-@section('title')ASA-RH/ Demande de conger
+@section('title')ASA-RH/ Demande d'absence
 @endsection
 @section('content')
 
 <div class="container-fluid">
-<div class="row mb-3">
-    <div class="col">
-        <h3 class="text-center " style="color:#198754;">Demande de conger</h3>
+    <div class="row mb-3">
+        <div class="col">
+            <h3 class="text-center " style="color:#198754;">Demande de conger: {{ " ".$totale_conger->rest_conger_year." jr restant en ".$totale_conger->year_date_fin  }} </h3>
 
+        </div>
     </div>
-</div>
 
     <div class="row ">
 
         <div class="col-md-4">
             <div class="shadow p-3 bg-body  rounded">
-                <h4  class="text-center">Formulaire</h4>
+                <h4 class="text-center">Formulaire</h4>
                 <form action="{{route('demandeconger.store')}}" class="formulaire_new mt-5" id="msform_facture"
                     method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label for="object" class="mb-1 form-control-placeholder">Object du conger<strong
+                                <label for="object" class="mb-1 form-control-placeholder">Object de conger<strong
                                         style="color:#ff0000;">*</strong></label>
                                 <input type="text" name="object" class="form-control input_inscription"
                                     placeholder="Object" id="object" required />
@@ -37,8 +37,8 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group my-1">
-                                <label for="date_debut" class="mb-1 form-control-placeholder">Date début du
-                                    conger<strong style="color:#ff0000;">*</strong></label>
+                                <label for="date_debut" class="mb-1 form-control-placeholder">Date début
+                                    de conger<strong style="color:#ff0000;">*</strong></label>
                                 <input type="date" name="date_debut" class="form-control input_inscription"
                                     id="date_debut" required />
                                 @error('date_debut')
@@ -48,10 +48,10 @@
                         </div>
                         <div class="col">
                             <div class="form-group my-1">
-                                <label for="date_fin" class="mb-1 form-control-placeholder">Date fin du conger<strong
+                                <label for="date_fin" class="mb-1 form-control-placeholder">Date fin de conger<strong
                                         style="color:#ff0000;">*</strong></label>
-                                <input type="date" name="date_fin" class="form-control input_inscription"
-                                    id="date_fin" required />
+                                <input type="date" name="date_fin" class="form-control input_inscription" id="date_fin"
+                                    required />
                                 @error('date_fin')
                                 <span style="color:#ff0000;"> {{$message}} </span>
                                 @enderror
@@ -59,34 +59,11 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group my-1">
-                                <label for="hour_debut" class="mb-1 form-control-placeholder">Heure début du
-                                    conger<strong style="color:#ff0000;">*</strong></label>
-                                <input type="time" name="hour_debut" class="form-control input_inscription"
-                                    id="hour_debut" required />
-                                @error('hour_debut')
-                                <span style="color:#ff0000;"> {{$message}} </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group my-1">
-                                <label for="hour_fin" class="mb-1 form-control-placeholder">Heure fin du conger<strong
-                                        style="color:#ff0000;">*</strong></label>
-                                <input type="time" name="hour_fin" class="form-control input_inscription" id="hour_fin"
-                                    required />
-                                @error('hour_fin')
-                                <span style="color:#ff0000;"> {{$message}} </span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
+                
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="description" class="form-control" id="description" rows="4" placeholder="motif du conger"></textarea>
+                        <textarea name="description" class="form-control" id="description" rows="4"
+                            placeholder="motif du conger"></textarea>
                     </div>
 
                     <div class="modal-footer  justify-content-center">
@@ -98,173 +75,203 @@
 
         <div class="col-md-8" style="max-height: 800px; overflow-x: auto; overflow-y: 800px;">
             <div class="shadow p-3 bg-body  rounded">
-                <h4  class="text-center">Liste</h4>
-
-                <div class="modal fade " id="dropDatapost" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-
-                    <div class="modal-dialog   shadow p-3 lg-body  rounded">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Suppression du
-                                    demande de conger ""</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <form action="#" class="formulaire_new mt-5" id="msform_facture" method="GET"enctype="multipart/form-data">
-                                @csrf
-                                <div class="modal-body">
-                                    <p>Voulez vous vraiment rétiré cette information crusial? Cela est
-                                        irréversible. cette information sera
-                                        retiré dans la vos liste de demande de conger et de celle de l'administration</p>
-                                    <p>Voulez vous continuer <span style="color:red;"> ?</span></p>
-                                </div>
-                                <div class="modal-footer  justify-content-center">
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Non,
-                                        j'annule</button>
-                                    <button type="submit" class="btn btn-success">Oui, je le
-                                        veux</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                <h4 class="text-center">Liste</h4>
+                @if(Session::has('success'))
+                <div class="alert alert-success">
+                    {{Session::get('success')}}
                 </div>
-
-                <div class="modal fade " id="NewDatapost" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                    <div class="modal-dialog   shadow p-3 lg-body  rounded">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modification du demande de conger</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <form action="#" class="formulaire_new mt-5" id="msform_facture" method="POST"  enctype="multipart/form-data">
-                                @csrf
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group my-1">
-                                                <label for="object" class="mb-1 form-control-placeholder">Object du conger<strong
-                                                        style="color:#ff0000;">*</strong></label>
-                                                <input type="text" name="object" class="form-control input_inscription"
-                                                    placeholder="Object" id="object" required />
-                                                @error('object')
-                                                <span style="color:#ff0000;"> {{$message}} </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group my-1">
-                                                <label for="date_debut" class="mb-1 form-control-placeholder">Date début du
-                                                    conger<strong style="color:#ff0000;">*</strong></label>
-                                                <input type="date" name="date_debut" class="form-control input_inscription"
-                                                    id="date_debut" required />
-                                                @error('date_debut')
-                                                <span style="color:#ff0000;"> {{$message}} </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group my-1">
-                                                <label for="date_fin" class="mb-1 form-control-placeholder">Date fin du conger<strong
-                                                        style="color:#ff0000;">*</strong></label>
-                                                <input type="date" name="date_fin" class="form-control input_inscription"
-                                                    id="date_fin" required />
-                                                @error('date_fin')
-                                                <span style="color:#ff0000;"> {{$message}} </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group my-1">
-                                                <label for="hour_debut" class="mb-1 form-control-placeholder">Heure début du
-                                                    conger<strong style="color:#ff0000;">*</strong></label>
-                                                <input type="time" name="hour_debut" class="form-control input_inscription"
-                                                    id="hour_debut" required />
-                                                @error('hour_debut')
-                                                <span style="color:#ff0000;"> {{$message}} </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group my-1">
-                                                <label for="hour_fin" class="mb-1 form-control-placeholder">Heure fin du conger<strong
-                                                        style="color:#ff0000;">*</strong></label>
-                                                <input type="time" name="hour_fin" class="form-control input_inscription" id="hour_fin"
-                                                    required />
-                                                @error('hour_fin')
-                                                <span style="color:#ff0000;"> {{$message}} </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="description" class="form-label">Description</label>
-                                        <textarea name="description" class="form-control" id="description" rows="4"></textarea>
-                                    </div>
-                                </div>
-                                <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-primary"
-                                        data-bs-dismiss="modal">Annuler</button>
-                                    <button type="submit" class="btn btn-success">Modifier</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                @endif
+                @if(Session::has('error'))
+                <div class="alert alert-danger">
+                    {{Session::get('error')}}
                 </div>
+                @endif
 
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col" colspan="2" class="text-center">Action</th>
-                            <th scope="col">debut conger</th>
-                            <th scope="col">fin conger</th>
-                            <th scope="col">Object</th>
+                            <th scope="col" colspan="2" class="text-center">#</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Description</th>
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if (count($demande_conger)>0)
+                        @foreach ($demande_conger as $demand)
+                        {{-- {{ dd($demand) }} --}}
+
+                        <div class="modal fade " id="dropDatapost{{ $demand->id }}" aria-hidden="true"
+                            aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+
+                            <div class="modal-dialog   shadow p-3 lg-body  rounded">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Suppression du
+                                            demande de conger "{{$demand->object}}"</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('demandeconger.destroy',$demand->id) }}"
+                                        class="formulaire_new mt-5" id="msform_facture" method="GET"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <p>Voulez vous vraiment rétiré cette information crusial? Cela est
+                                                irréversible. cette information sera
+                                                retiré dans la vos liste de demande de conger et de celle de
+                                                l'administration</p>
+                                            <p>Voulez vous continuer <span style="color:red;"> ?</span></p>
+                                        </div>
+                                        <div class="modal-footer  justify-content-center">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Non,
+                                                j'annule</button>
+                                            <button type="submit" class="btn btn-success">Oui, je le
+                                                veux</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade " id="NewDatapost{{ $demand->id }}" aria-hidden="true"
+                            aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog   shadow p-3 lg-body  rounded">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modification du demande de conger "{{ $demand->object }}"
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('demandeconger.update',$demand->id) }}"
+                                        class="formulaire_new mt-5" id="msform_facture" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group my-1">
+                                                        <label for="object" class="mb-1 form-control-placeholder">Object
+                                                            d'absence<strong style="color:#ff0000;">*</strong></label>
+                                                        <input type="text" name="object"
+                                                            class="form-control input_inscription"
+                                                            value="{{ $demand->object }}" placeholder="Object"
+                                                            id="object" required />
+                                                        @error('object')
+                                                        <span style="color:#ff0000;"> {{$message}} </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group my-1">
+                                                        <label for="date_debut"
+                                                            class="mb-1 form-control-placeholder">Date début
+                                                            d'absence<strong style="color:#ff0000;">*</strong></label>
+                                                        <input type="date" name="date_debut"
+                                                            class="form-control input_inscription"
+                                                            value="{{ $demand->date_debut }}" id="date_debut"
+                                                            required />
+                                                        @error('date_debut')
+                                                        <span style="color:#ff0000;"> {{$message}} </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group my-1">
+                                                        <label for="date_fin" class="mb-1 form-control-placeholder">Date
+                                                            fin d'absence<strong
+                                                                style="color:#ff0000;">*</strong></label>
+                                                        <input type="date" name="date_fin"
+                                                            class="form-control input_inscription"
+                                                            value="{{ $demand->date_fin }}" id="date_fin" required />
+                                                        @error('date_fin')
+                                                        <span style="color:#ff0000;"> {{$message}} </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                          
+
+                                            <div class="mb-3">
+                                                <label for="description" class="form-label">Description</label>
+                                                <textarea name="description" class="form-control" id="description"
+                                                    rows="4">{{ $demand->description }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" class="btn btn-primary"
+                                                data-bs-dismiss="modal">Annuler</button>
+                                            <button type="submit" class="btn btn-success">Modifier</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <tr>
-                            <td> <a data-bs-toggle="modal" href="#dropDatapost" role="button"
-                                class="btn btn-link" style="color:red;"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                        <td> <a data-bs-toggle="modal" href="#NewDatapost" role="button"
-                                class="btn btn-link" style="color:green;"><i class="material-icons">&#xE254;</i></a>
-                        </td>
-                            <td>
-                                <h6>01-01-2022</h6>
+                            <td> <a data-bs-toggle="modal" href="#dropDatapost{{ $demand->id }}" role="button"
+                                    class="btn btn-link" style="color:red;"><i class="material-icons">&#xE872;</i></a>
+                            </td>
+                            <td> <a data-bs-toggle="modal" href="#NewDatapost{{ $demand->id }}" role="button"
+                                    class="btn btn-link" style="color:green;"><i class="material-icons">&#xE254;</i></a>
                             </td>
                             <td>
-                                <h6>01-02-2022</h6>
+                                <div>
+                                    <h6>date: <span class="text-muted">{{$demand->date_debut}}</span> à <span class="text-muted">{{$demand->date_fin }}</span></h6>
+                                </div>
+
                             </td>
                             <td>
-                                <h6>Malade</h6>
+                                <h6>{{ $demand->object }}</h6>
+                                <p>{{ $demand->description }}</p>
                             </td>
                             <td>
-                                <p>Visite medical</p>
-                            </td>
-                            <td>
+                                @if ($demand->validation==false && $demand->refus==false)
+                                <div
+                                    style="background-color: rgb(102, 90, 65); border-radius: 10px; text-align: center;color: white">
+                                    En attente</div>
+                                @elseif($demand->refus==true && $demand->validation==false)
                                 <div
                                     style="background-color: red; border-radius: 10px; text-align: center;color: white">
-                                    En attente</div>
-
-                                {{-- <div
+                                    Refusé</div>
+                                @elseif( $demand->validation==true && $demand->refus==false)
+                                <div
                                     style="background-color: green; border-radius: 10px; text-align: center;color: white">
-                                    Non Défini</div> --}}
+                                    Accepté</div>
+                                @endif
+
                             </td>
                         </tr>
+
+                        @endforeach
+                        @else
+                        <tr>
+                            <td colspan="7" class="text-center" style="color:red;">Aucun Résultat</td>
+                        </tr>
+                        @endif
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
+<script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // document.getElementById("due_date").setAttribute("min", $(this).val());
+});
+
+$(document).on("keyup change", "#date_debut", function() {
+    document.getElementById("date_fin").setAttribute("min", $(this).val());
+});
+</script>
 @endsection

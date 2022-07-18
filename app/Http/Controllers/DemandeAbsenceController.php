@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Demande_conger;
+use App\Models\Demande_absence;
 use Illuminate\Http\Request;
 use App\Models\generique\FonctionGenerique;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
-class DemandeCongerController extends Controller
+class DemandeAbsenceController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -21,15 +20,14 @@ class DemandeCongerController extends Controller
         });
 
         $this->fonct = new FonctionGenerique();
-        $this->demande = new Demande_conger();
+        $this->demande = new Demande_absence();
     }
 
     public function index()
     {
         $employe_id = $this->fonct->findWhereMultiOne("employes",["user_id"],[Auth::user()->id])->id;
-        $demande_conger = $this->fonct->findWhere("demande_congers",["employe_id"],[$employe_id]);
-        $totale_conger = $this->fonct->findWhereMultiOne("v_totale_conger",["employe_id"],[$employe_id]);
-        return view("employer.demande_conger",compact('demande_conger','totale_conger'));
+        $demande_absence = $this->fonct->findWhere("demande_absences",["employe_id"],[$employe_id]);
+        return view("employer.demande_absence",compact('demande_absence'));
     }
 
 
@@ -75,7 +73,7 @@ class DemandeCongerController extends Controller
     public function destroy($id)
     {
         if (Gate::allows('isEmployer')) {
-            DB::delete("DELETE FROM demande_congers WHERE id=?", [$id]);
+            DB::delete("DELETE FROM demande_absences WHERE id=?", [$id]);
             return back();
         } else {
             return back()->with('error', 'les employers seulement ont le droit d\'y entrer');

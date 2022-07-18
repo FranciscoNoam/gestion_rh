@@ -63,13 +63,13 @@
 
                                 @canany(['isEmployer'])
                                  <li class="nav-item">
-                                    <a class="nav-link  active" href="#" >Mes Fiches de paie</a>
+                                    <a class="nav-link {{Route::currentRouteNamed('home') ? 'active' : '' }}" href="{{ route('home') }}" >Mes Fiches de paie</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" >Mes Demandes de conger</a>
+                                    <a class="nav-link {{Route::currentRouteNamed('demandeconger.index') ? 'active' : '' }}" href="{{ route('demandeconger.index') }}" >Mes Demandes de conger</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" >Mes Demandes d' absence</a>
+                                    <a class="nav-link {{Route::currentRouteNamed('demandeabsence.index') ? 'active' : '' }}" href="{{ route('demandeabsence.index') }}" >Mes Demandes d' absence</a>
                                 </li>
 
                                 <li class="nav-item">

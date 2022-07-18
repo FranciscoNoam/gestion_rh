@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DemandeAbsenceController;
 use App\Http\Controllers\DemandeCongerController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\LoginController;
@@ -77,7 +78,11 @@ Route::get('genre.destroy/{id}',[GenreController::class,'destroy'])->name('genre
 Route::resource('poste',PosteController::class)->except(['update','destroy']);
 Route::post('poste.update/{id}',[PosteController::class,'update'])->name('poste.update');
 Route::get('poste.destroy/{id}',[PosteController::class,'destroy'])->name('poste.destroy');
-// =============== URL POSTE ==================================
+// =============== URL DEMMANDE CONGER ==================================
 Route::resource('demandeconger',DemandeCongerController::class)->except(['update','destroy']);
 Route::post('demandeconger.update/{id}',[DemandeCongerController::class,'update'])->name('demandeconger.update');
 Route::get('demandeconger.destroy/{id}',[DemandeCongerController::class,'destroy'])->name('demandeconger.destroy');
+// =============== URL DEMMANDE ABSENCE ==================================
+Route::resource('demandeabsence',DemandeAbsenceController::class)->except(['update','destroy']);
+Route::post('demandeabsence.update/{id}',[DemandeAbsenceController::class,'update'])->name('demandeabsence.update');
+Route::get('demandeabsence.destroy/{id}',[DemandeAbsenceController::class,'destroy'])->name('demandeabsence.destroy');
