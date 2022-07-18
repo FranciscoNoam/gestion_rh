@@ -6,14 +6,16 @@ use App\Models\generique\FonctionGenerique;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+
 class HomeController extends Controller
 {
     //
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if (Auth::user()->exists == false) return redirect()->route('admin');
+            if (Auth::user()->exists == false) return redirect()->route('connection');
             return $next($request);
         });
 
@@ -21,38 +23,28 @@ class HomeController extends Controller
     }
 
 
-    public function index(){
+    public function index()
+    {
         $user_id = Auth::user()->id;
-        if (Gate::allows('isSuperAdmin')) {
-            $employes = $this->fonct->findAll("employes");
+
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
+            $employes = $this->fonct->findAll("v_employe");
             $departements = $this->fonct->findAll("departements");
             $genres = $this->fonct->findAll("genres");
-            // dd("tong: ".Auth::user()->role_id);
-
-        return view('admin.home.home',compact('employes','departements','genres'));
+            $postes = $this->fonct->findAll("postes");
+            return view('admin.home.home', compact('employes', 'departements', 'genres','postes'));
         }
 
-        if (Gate::allows('isAdmin')) {
+       else if (Gate::allows('isEmployer')) {
+            return view('employer.fiche_de_paie');
+        }
+
+       else if (Gate::allows('isSuperAdmin')) {
             $employes = $this->fonct->findAll("employes");
-            dd("tong: ".Auth::user()->role_id);
+            dd("tong: " . Auth::user()->role_id);
 
-        return view('admin.home.home',compact('employes'));
+            return view('admin.home.home', compact('employes'));
         }
-
-        if (Gate::allows('isEmployes')) {
-            $employes = $this->fonct->findAll("employes");
-            dd("tong: ".Auth::user()->role_id);
-
-        return view('admin.home.home',compact('employes'));
-        }
-
-        if (Gate::allows('isSuperAdmin')) {
-            $employes = $this->fonct->findAll("employes");
-            dd("tong: ".Auth::user()->role_id);
-
-        return view('admin.home.home',compact('employes'));
-        }
-
     }
     // public function login(Request $req){
     //     var_dump($req->input());

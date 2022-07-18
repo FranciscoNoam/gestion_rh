@@ -9,6 +9,20 @@ INSERT INTO genres (id,name, created_at, updated_at) VALUES
 (1,'Femme', '2021-10-26 05:45:24', '2021-10-26 05:45:24'),
 (2,'Homme', '2021-10-26 05:45:24', '2021-10-26 05:45:24');
 
+  CREATE TABLE postes (
+  id bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  created_at timestamp NULL DEFAULT current_timestamp(),
+  updated_at timestamp NULL DEFAULT  current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO postes (id,name, created_at, updated_at) VALUES
+(1,'Commerciale', '2021-10-26 05:45:24', '2021-10-26 05:45:24'),
+(2,'Livreur', '2021-10-26 05:45:24', '2021-10-26 05:45:24'),
+(3,'RH', '2021-10-26 05:45:24', '2021-10-26 05:45:24'),
+(4,'Chef de projet informatique', '2021-10-26 05:45:24', '2021-10-26 05:45:24'),
+(5,'Développeur', '2021-10-26 05:45:24', '2021-10-26 05:45:24');
+
 CREATE TABLE congers (
   id bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
   total_day INT NOT NULL DEFAULT 31,
@@ -71,7 +85,7 @@ INSERT INTO departements (id,name, created_at, updated_at) VALUES
   cin varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE,
   email varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE,
   phone varchar(255) COLLATE utf8mb4_unicode_ci,
-  poste varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL default 'XXXXXXX',
+  poste_id bigint(20) UNSIGNED NOT NULL DEFAULT 1 REFERENCES postes(id) ON DELETE CASCADE,
   debut_job DATE NOT NULL,
   fin_job DATE DEFAULT NULL,
   departement_id bigint(20) UNSIGNED  REFERENCES entreprises(id) ON DELETE CASCADE,

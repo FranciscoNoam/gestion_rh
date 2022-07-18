@@ -3,43 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employe;
-use Illuminate\Http\Request;
 use App\Models\generique\FonctionGenerique;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 
-class EmployerController extends Controller
+class NouveauCompteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            if (Auth::user()->exists == false) return redirect()->route('connection');
-            return $next($request);
-        });
 
         $this->fonct = new FonctionGenerique();
     }
 
-    public function index()
-    {
-    }
-
-    public function filtre(Request $req)
-    {
-        $employes =  DB::select("SELECT * FROM v_employe WHERE name LIKE '%" . $req->search_name . "%' OR username LIKE '%" . $req->search_name . "%'");
+    public function nouveau(){
         $departements = $this->fonct->findAll("departements");
         $genres = $this->fonct->findAll("genres");
         $postes = $this->fonct->findAll("postes");
-
-        return view('admin.home.home', compact('employes', 'departements', 'genres','postes'));
+        return view('admin.nouveau', compact('departements', 'genres','postes'));
     }
+
+
+    public function index()
+    {
+        //
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -59,7 +47,7 @@ class EmployerController extends Controller
     public function store(Request $request)
     {
         $emp = new Employe();
-        return  $emp->insert($request);
+        return  $emp->nouveau_compte_client($request);
     }
 
     /**
@@ -82,7 +70,6 @@ class EmployerController extends Controller
     public function edit($id)
     {
         //
-
     }
 
     /**
@@ -94,8 +81,7 @@ class EmployerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $emp = new Employe();
-        return $emp->modification($request, $id);
+        //
     }
 
     /**
@@ -106,10 +92,6 @@ class EmployerController extends Controller
      */
     public function destroy($id)
     {
-        $fonct = new FonctionGenerique();
-        $emp =  $fonct->findById("employes", $id);
-        DB::delete("DELETE FROM users WHERE id=?", [$emp->user_id]);
-        DB::delete("DELETE FROM employes WHERE id=?", [$id]);
-        return back();
+        //
     }
 }

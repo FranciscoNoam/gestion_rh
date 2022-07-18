@@ -3,19 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\generique\FonctionGenerique;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
-
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if (Auth::user()->exists == false) return redirect()->route('connection');
+            return $next($request);
+        });
+
+        $this->fonct = new FonctionGenerique();
+    }
+
+
     public function index()
     {
         return view("login_admin.index");
@@ -50,60 +57,25 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function login(Request $req)
+    public function global()
     {
-        $rules = [
-            'identifiant.required' => "l'identifiant ne doît pas être null",
-            'password.required' => 'la confirmation du nouveau mot de passe ne doit pas etre null'
-        ];
-        $critereForm = [
-            'identifiant' => 'required|string',
-            'password' => 'required'
-        ];
-        $req->validate($critereForm, $rules);
+        $user_id = Auth::user()->id;
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
+            $departements = $this->fonct->findAll("departements");
+            $genres = $this->fonct->findAll("genres");
+            $postes = $this->fonct->findAll("postes");
 
-        
-   /*     $credentials = $req->validate([
-            'identifiant' => ['required'],
-            'password' => ['required'],
-        ]);
- 
-        if (Auth::attempt($credentials)) {
-            $req->session()->regenerate();
- 
-            return redirect()->intended('home.index');
+            return view('admin.home.global.global', compact('departements', 'genres','postes'));
+        } else{
+            return back()->with('error','les Administrateurs seulement on le droit d\'y entrer');
         }
- 
-        return back()->withErrors([
-            'identifiant' => 'The provided credentials do not match our records.',
-        ])->onlyInput('identifiant'); */
-  /*      $credentials = $req->only('identifiant', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('home')
-                        ->withSuccess('Signed in');
-        } else {
-            return back()->with('error','email ou mot de passse est incorrect ');
-        }
-*/
-        $user=DB::select("SELECT * FROM users WHERE email=? or identifiant=?",[$req->identifiant,$req->identifiant]);
-        if($user!=null){
-            $connected= $user[0];
 
-            if(Hash::check($req->password, $connected->password)){
-            
-            dd(Auth::user());
-                if ($req->session()->exists('users')) {
-                    //
-                } else {
-                    session(['user' => $connected]);
-                }
-                redirect()->route('home');
-            } else {
-                return back()->with('error','email ou identifiant ou mot de passse est incorrect ');
-            }
-        } else {
-            return back()->with('error','email ou identifiant ou mot de passse est incorrect ');
-        } 
+        // if (Gate::allows('isAdmin')) {
+        //     $employes = $this->fonct->findAll("v_employe");
+        //     dd("tong: " . Auth::user()->role_id);
+
+        //     return view('admin.home.home', compact('employes'));
+        // }
 
     }
 

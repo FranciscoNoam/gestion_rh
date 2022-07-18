@@ -3,9 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\PosteController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\NouveauCompteController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,12 +30,21 @@ Route::post('login', [LoginController::class,'login'])->name('login');
 });
 
  Route::group(['middleware' => ['auth']], function() {
-        Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
+        Route::get('/logout', [LogoutController::class,'perform'])->name('logout');
     });
 
 Route::get('/', function () {
     return view('admin.index');
 });
+
+Route::get('connection', function(){
+    return view('admin.index');
+})->name('connection');
+
+// =================== URL Nouveau Employer ===================================
+
+Route::resource('nouveau',  NouveauCompteController::class);
+Route::get('nouveau',  [NouveauCompteController::class,'nouveau'])->name('nouveau');
 
 
 // ================== URL SuperAdmin ==================================
@@ -40,8 +54,25 @@ Route::post('admin.store.super.admin', [AdminController::class,'store_nouveau_su
 // =============== URL ADMIN ===============================
 Route::resource('admin', AdminController::class);
 Route::get('admin.nouveau', [AdminController::class,'nouveau'])->name('admin.nouveau');
+Route::get('admin.generale', [AdminController::class,'global'])->name('admin.generale');
 Route::post('admin.login', [AdminController::class,'login'])->name('admin.login');
 
 Route::get('home', [HomeController::class,'index'])->name('home');
 // =============== URL EMPLOYER ==================================
-Route::resource('employe',EmployerController::class);
+Route::resource('employe',EmployerController::class)->except(['update','destroy']);
+Route::post('employe.update/{id}',[EmployerController::class,'update'])->name('employe.update');
+Route::get('employe.destroy/{id}',[EmployerController::class,'destroy'])->name('employe.destroy');
+Route::post('employe.filtre',[EmployerController::class,'filtre'])->name('employe.filtre');
+
+// =============== URL DEPARTEMENT ==================================
+Route::resource('departement',DepartementController::class)->except(['update','destroy']);
+Route::post('departement.update/{id}',[DepartementController::class,'update'])->name('departement.update');
+Route::get('departement.destroy/{id}',[DepartementController::class,'destroy'])->name('departement.destroy');
+// =============== URL GENRE ==================================
+Route::resource('genre',GenreController::class)->except(['update','destroy']);
+Route::post('genre.update/{id}',[GenreController::class,'update'])->name('genre.update');
+Route::get('genre.destroy/{id}',[GenreController::class,'destroy'])->name('genre.destroy');
+// =============== URL POSTE ==================================
+Route::resource('poste',PosteController::class)->except(['update','destroy']);
+Route::post('poste.update/{id}',[PosteController::class,'update'])->name('poste.update');
+Route::get('poste.destroy/{id}',[PosteController::class,'destroy'])->name('poste.destroy');

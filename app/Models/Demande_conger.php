@@ -8,4 +8,79 @@ use Illuminate\Database\Eloquent\Model;
 class Demande_conger extends Model
 {
     use HasFactory;
+
+    protected $table = "demande_congers";
+    protected $fillable = [
+        'id', 'object','description','date_debut','date_fin','hour_debut','hour_fin','validation','refus','employe_id'
+    ];
+
+    public function insert($imput)
+    {
+        $rules = [
+            'object.required' => 'la objectif ne doît pas être null',
+            'description.required' => 'la description ne doît pas être null',
+            'date_debut.required' => 'la date debut ne doît pas être null',
+            'date_fin.required' => 'la date fin ne doît pas être null',
+            'hour_debut.required' => 'la heure debut ne doît pas être null',
+            'hour_fin.required' => 'la heure fin ne doît pas être null'
+        ];
+        $critereForm = [
+            'object' => 'required|string',
+            'description' => 'required|string',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date',
+            'hour_debut' => 'required|hour',
+            'hour_fin' => 'required|hour'
+        ];
+        $imput->validate($critereForm, $rules);
+        Demande_conger::create([
+            "object" => "" . $imput->object,
+            "description" => "" . $imput->description,
+            "date_debut" => "" . $imput->date_debut,
+            "date_fin" => "" . $imput->date_fin,
+            "hour_debut" => "" . $imput->hour_debut,
+            "hour_fin" => "" . $imput->hour_fin
+        ])->save();
+
+        return back()->with('success', 'demande de conger a été ajouté');
+    }
+
+    public function modification($imput, $id)
+    {
+        $rules = [
+            'object.required' => 'la objectif ne doît pas être null',
+            'description.required' => 'la description ne doît pas être null',
+            'date_debut.required' => 'la date debut ne doît pas être null',
+            'date_fin.required' => 'la date fin ne doît pas être null',
+            'hour_debut.required' => 'la heure debut ne doît pas être null',
+            'hour_fin.required' => 'la heure fin ne doît pas être null'
+        ];
+        $critereForm = [
+            'object' => 'required|string',
+            'description' => 'required|string',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date',
+            'hour_debut' => 'required|hour',
+            'hour_fin' => 'required|hour'
+        ];
+        $imput->validate($critereForm, $rules);
+
+        $update = [
+            "object" => "" . $imput->object,
+            "description" => "" . $imput->description,
+            "date_debut" => "" . $imput->date_debut,
+            "date_fin" => "" . $imput->date_fin,
+            "hour_debut" => "" . $imput->hour_debut,
+            "hour_fin" => "" . $imput->hour_fin
+        ];
+        $tmp =  Departement::where('id', $id)->update($update);
+
+        if ($tmp) {
+            return back()->with('success', 'la demande de conger a été modifier');
+        } else {
+            return back()->with('error', 'une erreur est survenue lors de la modification du donnée');
+        }
+    }
+
+
 }

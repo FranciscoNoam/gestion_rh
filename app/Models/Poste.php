@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Departement extends Model
+class Poste extends Model
 {
     use HasFactory;
 
-    protected $table = "departements";
+    protected $table = "postes";
     protected $fillable = [
         'id', 'name'
     ];
@@ -23,11 +23,11 @@ class Departement extends Model
             'nom' => 'required|string'
         ];
         $imput->validate($critereForm, $rules);
-        Departement::create([
+        Poste::create([
             "name" => "" . $imput->nom
         ])->save();
 
-        return back()->with('success', 'nouveau departement  a été ajouté');
+        return back()->with('success', 'nouveau poste  a été ajouté');
     }
 
     public function modification($imput, $id)
@@ -43,12 +43,13 @@ class Departement extends Model
         $update = [
             "name" => "" . $imput->nom
         ];
-        $tmp =  Departement::where('id', $id)->update($update);
+        $tmp =  Poste::where('id', $id)->update($update);
 
         if ($tmp) {
-            return back()->with('success', 'le departement a été modifier');
+            return back()->with('success', 'le poste a été modifier');
         } else {
             return back()->with('error', 'une erreur est survenue lors de la modification du donnée');
         }
     }
+
 }

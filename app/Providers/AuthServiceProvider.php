@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-   
+
         Gate::define('isSuperAdmin',function($users_roles){
             $rqt =  DB::select('select * from users  where id = ?  and activiter=true limit 1',[Auth::id()]);
             if($rqt!=null)
