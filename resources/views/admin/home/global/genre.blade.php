@@ -26,11 +26,11 @@
         <div class="col-5">
             <div class="shadow p-3 bg-body  rounded">
                 <h4>Liste</h4>
-                <table class="table table-hover">
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col" colspan="2">Action</th>
-                            <th scope="col">description</th>
+                            <td scope="col" colspan="2" class="text-center">Action</td>
+                            <td scope="col">description</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,10 +104,10 @@
 
                         <tr>
                             <td> <a data-bs-toggle="modal" href="#dropDataGenre{{ $ge->id }}" role="button"
-                                    class="btn btn-link" style="color:red;"><i class="material-icons">&#xE872;</i></a>
+                                    class="btn btn-danger" ><i class="material-icons">&#xE872;</i></a>
                             </td>
                             <td> <a data-bs-toggle="modal" href="#NewDataGenre{{ $ge->id }}" role="button"
-                                    class="btn btn-link" style="color:green;"><i class="material-icons">&#xE254;</i></a>
+                                    class="btn btn-success" ><i class="material-icons">&#xE254;</i></a>
                             </td>
 
                             <td>

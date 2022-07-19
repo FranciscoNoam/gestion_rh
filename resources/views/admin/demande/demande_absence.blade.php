@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title')Demande Conger
+@section('title')Demande Absence
 @endsection
 @section('content')
 <div class="row">
@@ -68,7 +68,7 @@
                             <div class="row mx-3 my-1 text-success">
                                 <div class="col">
                                     <span class="mt-0 d-flex justify-content-start text-center text-success"
-                                        style="font-size: 20px;">Conger en attente</span>
+                                        style="font-size: 20px;">Absence en attente</span>
                                 </div>
                                 <div class="col">
                                     <div class="d-flex justify-content-end">
@@ -83,7 +83,9 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col mx-2">
+
+
                                     <span class="mt-0 d-flex justify-content-end text-center" style="font-size: 20px;">
                                         <span style="position: relative; bottom: -0.2rem; ">
                                             1-0 sur 0
@@ -138,6 +140,7 @@
                                     <td>je vais faire mon mariage et je ne peux pas travailler </td>
                                     <td>
                                         <h6>date: <span class="text-muted">2022-01-01</span> à <span class="text-muted">2022-01-02</span></h6>
+                                        <p>heure: <span class="text-muted">08:00</span> à <span class="text-muted">10:00</span></p>
                                     </td>
                                     <td> 9 jr</td>
 
@@ -168,7 +171,7 @@
                             <div class="row mx-3 my-1 text-success">
                                 <div class="col">
                                     <span class="mt-0 d-flex justify-content-start text-center text-success"
-                                        style="font-size: 20px;">Conger accepté</span>
+                                        style="font-size: 20px;">Absence accepté</span>
                                 </div>
                                 <div class="col">
                                     <div class="d-flex justify-content-end">
@@ -227,6 +230,7 @@
                                     <td>je vais faire mon mariage et je ne peux pas travailler </td>
                                     <td>
                                         <h6>date: <span class="text-muted">2022-01-01</span> à <span class="text-muted">2022-01-02</span></h6>
+                                        <p>heure: <span class="text-muted">08:00</span> à <span class="text-muted">10:00</span></p>
                                     </td>
                                     <td> 9 jr</td>
 
@@ -256,7 +260,7 @@
                             <div class="row mx-3 my-1 text-success">
                                 <div class="col">
                                     <span class="mt-0 d-flex justify-content-start text-center text-success"
-                                        style="font-size: 20px;">Conger refusé</span>
+                                        style="font-size: 20px;">Absence refusé</span>
                                 </div>
                                 <div class="col">
                                     <div class="d-flex justify-content-end">
@@ -315,7 +319,9 @@
                                     <th>Mariage </th>
                                     <td>je vais faire mon mariage et je ne peux pas travailler </td>
                                     <td>
-                                         <h6>date: <span class="text-muted">2022-01-01</span> à <span class="text-muted">2022-01-02</span></h6>
+                                        <h6>date: <span class="text-muted">2022-01-01</span> à <span class="text-muted">2022-01-02</span></h6>
+                                        <p>heure: <span class="text-muted">08:00</span> à <span class="text-muted">10:00</span></p>
+
                                     </td>
                                     <td> 9 jr</td>
 

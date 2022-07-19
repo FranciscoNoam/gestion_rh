@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title')OIG-RH/ Demande d'absence
+@section('title') Demande d'absence
 @endsection
 @section('content')
 

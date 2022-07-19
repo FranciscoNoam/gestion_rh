@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title')OIG-RH/ Employers
+@section('title') Employers
 @endsection
 @section('content')
 <div class="row">
@@ -8,11 +8,12 @@
         <div class="mb-5">
 
             <ul class="nav nav-tabs d-flex flex-row navigation_module" id="myTab">
+
                 <li class="nav-item">
                     <a href="#" class="nav-link active" id="nav-brouilon-tab" data-bs-toggle="tab"
                         data-bs-target="#nav-brouilon" type="button" role="tab" aria-controls="nav-brouilon"
                         aria-selected="true">
-                        Employers
+                        Employers ({{ count($employes) }})
                     </a>
                 </li>
                 <li class="nav-item">
@@ -21,9 +22,11 @@
                         Nouveau
                     </a>
                 </li>
-                <li class="nav-item">
-                      <form action="{{ route('employe.filtre') }}" class="formulaire_new d-flex" id="msform_facture"
-                            method="POST" enctype="multipart/form-data">
+
+                <li class="nav-item  d-flex justify-content-end" align="right">
+                    <div class="">
+                        <form action="{{ route('employe.filtre') }}" class="formulaire_new d-flex justify-content-end"
+                            id="msform_facture" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="text" name="search_name" id="search_name" placeholder="Nom ou Prénom"
                                 class="form-control-label me-2">
@@ -31,8 +34,8 @@
                                 <button type="submit" class="btn btn-outline-success me-2">chercher</button>
                             </div>
                         </form>
+                    </div>
                 </li>
-
             </ul>
 
 
@@ -49,24 +52,55 @@
                 {{Session::get('error')}}
             </div>
             @endif
-            <div class="tab-pane fade show active" id="nav-brouilon" role="tabpanel" aria-labelledby="nav-brouilon-tab">
-                {{-- <h6 style="color: #AA076B">Facture En Brouillon</h6> --}}
-                <table class="table table-hover">
+            <div class="tab-pane fade show active shadow rounded px-2 mx-3 py-3" id="nav-brouilon" role="tabpanel"
+                aria-labelledby="nav-brouilon-tab">
+
+                <h5 class=" mx-0">
+                    <div class="row mx-3 my-1 text-success">
+                        <div class="col">
+                            <span class="mt-0 d-flex justify-content-start text-center text-success"
+                                style="font-size: 20px;">Liste employer</span>
+                        </div>
+                        <div class="col">
+                            <span class="mt-0 d-flex justify-content-end text-center" style="font-size: 20px;">
+                                <span style="position: relative; bottom: -0.2rem; ">
+                                    1-0 sur 0
+                                </span>
+                                <a href="#" role="button" class="mx-1"
+                                    style=" pointer-events: none;cursor: default;"><i
+                                        class='fa fa-angle-left'></i></a>
+                                <a href="#" role="button" class="mx-1"
+                                    style="  pointer-events: none;cursor: default;"><i
+                                        class="fa fa-angle-right"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </h5>
+
+                <table class="table  table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col" colspan="2">Action</th>
-                            <th scope="col">Nom Complet</th>
-                            <th scope="col">Genre</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Téléphone</th>
-                            <th scope="col">CIN</th>
-                            <th scope="col">Département</th>
-                            <th scope="col">Poste</th>
-                            <th scope="col">Salaire</th>
-                            <th scope="col">Début</th>
-                            <th scope="col">Fin</th>
-                            <th scope="col">Naissance</th>
-                            <th scope="col">Adresse</th>
+                            <td scope="col" colspan="2" class="text-center">Action</td>
+                            <td scope="col">Nom Complet &nbsp; <a href="#" style="color: blue"> <button
+                                        class="btn btn_creer_trie num_fact_trie" value="0"><i
+                                            class="fa icon_trie fa-arrow-down"></i></button></td>
+                            <td scope="col">Genre</td>
+                            <td scope="col">CIN</td>
+                            <td scope="col">Département &nbsp; <a href="#" style="color: blue"> <button
+                                        class="btn btn_creer_trie num_fact_trie" value="0"><i
+                                            class="fa icon_trie fa-arrow-down"></i></button></td>
+                            <td scope="col">Poste</td>
+                            <td scope="col">Salaire &nbsp; <a href="#" style="color: blue"> <button
+                                        class="btn btn_creer_trie num_fact_trie" value="0"><i
+                                            class="fa icon_trie fa-arrow-down"></i></button></td>
+                            <td scope="col">Début &nbsp; <a href="#" style="color: blue"> <button
+                                        class="btn btn_creer_trie num_fact_trie" value="0"><i
+                                            class="fa icon_trie fa-arrow-down"></i></button></td>
+                            <td scope="col">Fin</td>
+                            <td scope="col">Naissance &nbsp; <a href="#" style="color: blue"> <button
+                                        class="btn btn_creer_trie num_fact_trie" value="0"><i
+                                            class="fa icon_trie fa-arrow-down"></i></button></td>
+                            <td scope="col">Adresse</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,18 +111,20 @@
 
                         <tr>
                             <td> <a data-bs-toggle="modal" href="#dropdataBoot{{ $emp->id }}" role="button"
-                                    class="btn btn-link" style="color:red;"><i class="material-icons">&#xE872;</i></a>
+                                    class="btn btn-outline-danger"><i class="material-icons">&#xE872;</i></a>
                             </td>
                             <td> <a data-bs-toggle="modal" href="#staticBackdrop{{ $emp->id }}" role="button"
-                                    class="btn btn-link" style="color:green;"><i class="material-icons">&#xE254;</i></a>
+                                    class="btn btn-outline-success"><i class="material-icons">&#xE254;</i></a>
                             </td>
 
-                            <th>
-                                {{ $emp->name." ".$emp->username }}
-                            </th>
+                            <td>
+                                <div>
+                                    <h6>{{ $emp->name." ".$emp->username }}</h6>
+                                    <p><a href="#">{{ $emp->email}}</a>/ {{ $emp->phone }}</p>
+                                </div>
+
+                            </td>
                             <td>{{ $emp->name_genre }}</td>
-                            <td>{{ $emp->email }}</td>
-                            <td>{{ $emp->phone }}</td>
                             <td>{{ $emp->cin }} </td>
                             <td>{{ $emp->name_departement}}</td>
 
@@ -127,7 +163,7 @@
             </div>
 
 
-            <div class="tab-pane fade " id="nav-valide" role="tabpanel" aria-labelledby="nav-valide-tab">
+            <div class="tab-pane fade shadow rounded px-2 mx-3 py-3" id="nav-valide" role="tabpanel" aria-labelledby="nav-valide-tab">
 
                 @include('admin.home.nouveau_employer')
 

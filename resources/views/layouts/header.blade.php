@@ -31,12 +31,12 @@
         <div class="row">
             <div class="col-md-12">
 
-                <nav class="navbar navbar-expand-lg navbar-dark bg-success justify-content-text-center">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-success justify-content-text-center" style="overflow-x: autp;">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#">
                             <img src="{{ asset('logo/zaha.jpg') }}" width="50" height="50"
                                 class="d-inline-block align-text-top" alt="" srcset="">
-                            @yield('title')
+                                OIG-RH/ <span>@yield('title')</span>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

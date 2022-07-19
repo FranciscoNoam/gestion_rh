@@ -25,11 +25,15 @@ class DemandeAbsenceController extends Controller
 
     public function index()
     {
-        $employe_id = $this->fonct->findWhereMultiOne("employes",["user_id"],[Auth::user()->id])->id;
-        $demande_absence = $this->fonct->findWhere("demande_absences",["employe_id"],[$employe_id],["id"],"DESC");
-        return view("employer.demande_absence",compact('demande_absence'));
+        if (Gate::allows('isEmployer')) {
+            $employe_id = $this->fonct->findWhereMultiOne("employes", ["user_id"], [Auth::user()->id])->id;
+            $demande_absence = $this->fonct->findWhere("demande_absences", ["employe_id"], [$employe_id], ["id"], "DESC");
+            return view("employer.demande_absence", compact('demande_absence'));
+        }
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
+            return view("admin.demande.demande_absence");
+        }
     }
-
 
     public function create()
     {
@@ -40,8 +44,8 @@ class DemandeAbsenceController extends Controller
     public function store(Request $request)
     {
         if (Gate::allows('isEmployer')) {
-            $employe_id = $this->fonct->findWhereMultiOne("employes",["user_id"],[Auth::user()->id])->id;
-            return  $this->demande->insert($request,$employe_id);
+            $employe_id = $this->fonct->findWhereMultiOne("employes", ["user_id"], [Auth::user()->id])->id;
+            return  $this->demande->insert($request, $employe_id);
         } else {
             return back()->with('error', 'les employers seulement ont le droit d\'y entrer');
         }

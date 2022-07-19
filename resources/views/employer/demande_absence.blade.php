@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title')OIG-RH/ Demande d'absence
+@section('title') Demande d'absence
 @endsection
 @section('content')
 
@@ -123,7 +123,6 @@
                     <tbody>
                         @if (count($demande_absence)>0)
                         @foreach ($demande_absence as $demand)
-                        {{-- {{ dd($demand) }} --}}
 
                         <div class="modal fade " id="dropDatapost{{ $demand->id }}" aria-hidden="true"
                             aria-labelledby="exampleModalToggleLabel" tabindex="-1">
