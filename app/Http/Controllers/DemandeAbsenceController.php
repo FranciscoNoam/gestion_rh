@@ -26,7 +26,7 @@ class DemandeAbsenceController extends Controller
     public function index()
     {
         $employe_id = $this->fonct->findWhereMultiOne("employes",["user_id"],[Auth::user()->id])->id;
-        $demande_absence = $this->fonct->findWhere("demande_absences",["employe_id"],[$employe_id]);
+        $demande_absence = $this->fonct->findWhere("demande_absences",["employe_id"],[$employe_id],["id"],"DESC");
         return view("employer.demande_absence",compact('demande_absence'));
     }
 

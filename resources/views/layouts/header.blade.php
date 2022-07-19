@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>ASA-RH</title>
+    <title>OIG-RH</title>
 
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet">
@@ -19,12 +19,15 @@
     <link rel="stylesheet" href="{{asset('css/styleGenerale.css')}}">
     <link rel="shortcut icon" href="{{  asset('logo/zaha.jpg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
 
 </head>
 
 <body>
 
-    <div class="container-fluid ms-3">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
 
@@ -44,20 +47,20 @@
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 @canany(['isAdmin','isSuperAdmin'])
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page"
+                                    <a class="nav-link {{Route::currentRouteNamed('home') ? 'active' : '' }}" aria-current="page"
                                         href="{{ route('home') }}">Employers</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.generale') }}"><p> Génerales</p></a>
+                                    <a class="nav-link {{Route::currentRouteNamed('admin.generale') ? 'active' : '' }}" href="{{ route('admin.generale') }}"><p> Génerales</p></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" style="color:red;">Demande des congers</a>
+                                    <a class="nav-link {{Route::currentRouteNamed('demandeconger.index') ? 'active' : '' }}" href="{{ route('demandeconger.index')}}">Demande des congers </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" style="color:red;">Demande des absences</a>
+                                    <a class="nav-link {{Route::currentRouteNamed('demandeabsence.index') ? 'active' : '' }}" href="{{ route('demandeabsence.index')}}">Demande des absences</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" style="color:red;">Fiche de paie</a>
+                                    <a class="nav-link" href="#">Fiche de paie</a>
                                 </li>
                                 @endcanany
 
@@ -120,6 +123,9 @@
     <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/fontawesome.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>

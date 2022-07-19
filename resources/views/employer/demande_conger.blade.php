@@ -1,12 +1,13 @@
 @extends('layouts.header')
-@section('title')ASA-RH/ Demande d'absence
+@section('title')OIG-RH/ Demande d'absence
 @endsection
 @section('content')
 
 <div class="container-fluid">
     <div class="row mb-3">
         <div class="col">
-            <h3 class="text-center " style="color:#198754;">Demande de conger: {{ " ".$totale_conger->rest_conger_year." jr restant en ".$totale_conger->year_date_fin  }} </h3>
+            <h3 class="text-center " style="color:#198754;">Demande de conger: {{ " ".$reste_conger." jr restant en
+                ".date('Y') }} </h3>
 
         </div>
     </div>
@@ -16,7 +17,7 @@
         <div class="col-md-4">
             <div class="shadow p-3 bg-body  rounded">
                 <h4 class="text-center">Formulaire</h4>
-                <form action="{{route('demandeconger.store')}}" class="formulaire_new mt-5" id="msform_facture"
+                <form action="{{route('demandeconger.store')}}" class="formulaire_conger mt-5" id="msform_facture"
                     method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -39,8 +40,10 @@
                             <div class="form-group my-1">
                                 <label for="date_debut" class="mb-1 form-control-placeholder">Date début
                                     de conger<strong style="color:#ff0000;">*</strong></label>
-                                <input type="date" name="date_debut" class="form-control input_inscription"
+
+                                <input type="date" name="date_debut" class="form-control input_inscription date_debut"
                                     id="date_debut" required />
+
                                 @error('date_debut')
                                 <span style="color:#ff0000;"> {{$message}} </span>
                                 @enderror
@@ -50,8 +53,8 @@
                             <div class="form-group my-1">
                                 <label for="date_fin" class="mb-1 form-control-placeholder">Date fin de conger<strong
                                         style="color:#ff0000;">*</strong></label>
-                                <input type="date" name="date_fin" class="form-control input_inscription" id="date_fin"
-                                    required />
+                                <input type="date" name="date_fin" class="form-control input_inscription date_fin"
+                                    id="date_fin" required />
                                 @error('date_fin')
                                 <span style="color:#ff0000;"> {{$message}} </span>
                                 @enderror
@@ -59,7 +62,7 @@
                         </div>
                     </div>
 
-                
+
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea name="description" class="form-control" id="description" rows="4"
@@ -67,7 +70,7 @@
                     </div>
 
                     <div class="modal-footer  justify-content-center">
-                        <button type="submit" name="next" class=" my-2 btn btn-success nouveau_admin ">Créer</button>
+                        <button type="submit" name="next" class=" my-2 btn btn-success create_conger ">Créer</button>
                     </div>
                 </form>
             </div>
@@ -139,7 +142,8 @@
                             <div class="modal-dialog   shadow p-3 lg-body  rounded">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modification du demande de conger "{{ $demand->object }}"
+                                        <h5 class="modal-title" id="exampleModalLabel">Modification du demande de conger
+                                            "{{ $demand->object }}"
                                         </h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -173,7 +177,7 @@
                                                             class="mb-1 form-control-placeholder">Date début
                                                             d'absence<strong style="color:#ff0000;">*</strong></label>
                                                         <input type="date" name="date_debut"
-                                                            class="form-control input_inscription"
+                                                            class="form-control input_inscription date_debut"
                                                             value="{{ $demand->date_debut }}" id="date_debut"
                                                             required />
                                                         @error('date_debut')
@@ -183,11 +187,12 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group my-1">
-                                                        <label for="date_fin" class="mb-1 form-control-placeholder">Date
+                                                        <label for="date_fin"
+                                                            class="mb-1 form-control-placeholder ">Date
                                                             fin d'absence<strong
                                                                 style="color:#ff0000;">*</strong></label>
                                                         <input type="date" name="date_fin"
-                                                            class="form-control input_inscription"
+                                                            class="form-control input_inscription date_fin"
                                                             value="{{ $demand->date_fin }}" id="date_fin" required />
                                                         @error('date_fin')
                                                         <span style="color:#ff0000;"> {{$message}} </span>
@@ -196,7 +201,7 @@
                                                 </div>
                                             </div>
 
-                                          
+
 
                                             <div class="mb-3">
                                                 <label for="description" class="form-label">Description</label>
@@ -214,20 +219,33 @@
                             </div>
                         </div>
                         <tr>
-                            <td> <a data-bs-toggle="modal" href="#dropDatapost{{ $demand->id }}" role="button"
+                            @if ($demand->validation==true || $demand->refus==true)
+                            <td>
+                                <button role="button"  class="btn btn-link disabled" style="color:red;"><i class="material-icons">&#xE872;</i></button>
+                            </td>
+                            <td> <button role="button" class="btn btn-link disabled" style="color:green;"><i class="material-icons">&#xE254;</i></button>
+                            </td>
+                            @else
+                            <td>
+                                <a data-bs-toggle="modal" href="#dropDatapost{{ $demand->id }}" role="button"
                                     class="btn btn-link" style="color:red;"><i class="material-icons">&#xE872;</i></a>
                             </td>
                             <td> <a data-bs-toggle="modal" href="#NewDatapost{{ $demand->id }}" role="button"
                                     class="btn btn-link" style="color:green;"><i class="material-icons">&#xE254;</i></a>
                             </td>
+                            @endif
+
+
                             <td>
                                 <div>
-                                    <h6>date: <span class="text-muted">{{$demand->date_debut}}</span> à <span class="text-muted">{{$demand->date_fin }}</span></h6>
+                                    <h6>date: <span class="text-muted">{{$demand->date_debut}}</span> à <span
+                                            class="text-muted">{{$demand->date_fin }}</span></h6>
+                                    <input type="hidden" value="{{ $dernier_conger->date_fin }}" id="dernier_conger">
                                 </div>
 
                             </td>
                             <td>
-                                <h6>{{ $demand->object }}</h6>
+                                <h6>{{ $demand->object ." ( ".$demand->totale_day_conger." jr)"}}</h6>
                                 <p>{{ $demand->description }}</p>
                             </td>
                             <td>
@@ -265,12 +283,27 @@
 <script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        var tmp = document.getElementById("dernier_conger").value;
+      if(tmp!=null && tmp!=""){
+        document.getElementById("date_debut").setAttribute("min", tmp);
+      }
 
-$(document).ready(function() {
-    // document.getElementById("due_date").setAttribute("min", $(this).val());
-});
 
-$(document).on("keyup change", "#date_debut", function() {
+    $('.create_conger').prop('disabled', true);
+
+        $('.formulaire_conger input').keyup(function() {
+                if ($('#date_debut').val().length > 5 && $('#object').val().length > 1 && $('#description').val().length > 1 &&
+                    $('#date_fin').val().length > 3) {
+                        $('.create_conger').prop('disabled', false);
+                } else {
+                    $('.create_conger').prop('disabled', true);
+                }
+            });
+        });
+
+
+$(document).on("keyup change", ".date_debut", function() {
     document.getElementById("date_fin").setAttribute("min", $(this).val());
 });
 </script>

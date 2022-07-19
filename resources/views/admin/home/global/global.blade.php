@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title')ASA-RH/ Génerale
+@section('title')OIG-RH/ Génerale
 @endsection
 @section('content')
 <div class="row">

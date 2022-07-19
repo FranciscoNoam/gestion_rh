@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title')ASA-RH/ Demande d'absence
+@section('title')OIG-RH/ Demande d'absence
 @endsection
 @section('content')
 
@@ -277,7 +277,7 @@
                                     <h6>date: <span class="text-muted">{{$demand->date_debut}}</span> à <span class="text-muted">{{$demand->date_fin }}</span></h6>
                                     <p>heure: <span class="text-muted">{{$demand->hour_debut}}</span> à <span class="text-muted">{{$demand->hour_fin }}</span></p>
                                 </div>
-                              
+
                             </td>
                             <td>
                                 <h6>{{ $demand->object }}</h6>

@@ -26,12 +26,24 @@ class DemandeCongerController extends Controller
 
     public function index()
     {
-        $employe_id = $this->fonct->findWhereMultiOne("employes",["user_id"],[Auth::user()->id])->id;
-        $demande_conger = $this->fonct->findWhere("demande_congers",["employe_id"],[$employe_id]);
-        $totale_conger = $this->fonct->findWhereMultiOne("v_totale_conger",["employe_id"],[$employe_id]);
-        return view("employer.demande_conger",compact('demande_conger','totale_conger'));
-    }
+        if (Gate::allows('isEmployer')) {
+            $reste_conger = 0;
+            $emp = $this->fonct->findWhereMultiOne("v_employe", ["user_id"], [Auth::user()->id]);
+            $demande_conger = $this->fonct->findWhere("v_demande_conger", ["employe_id"], [$emp->id], ["id"], "DESC");
+            $totale_conger = $this->fonct->findWhereMultiOne("v_totale_conger", ["employe_id"], [$emp->id]);
+            $dernier_conger = $this->fonct->findWhereMultiOne("v_dernier_demande_conger", ["employe_id"], [$emp->id]);
+            if ($totale_conger != null) {
+                $reste_conger = $totale_conger->rest_conger_year;
+            } else {
+                $reste_conger = $emp->total_day;
+            }
 
+            return view("employer.demande_conger", compact('demande_conger', 'reste_conger', 'dernier_conger'));
+        }
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
+             return view("admin.demande.demande_conger");
+        }
+    }
 
     public function create()
     {
@@ -42,8 +54,8 @@ class DemandeCongerController extends Controller
     public function store(Request $request)
     {
         if (Gate::allows('isEmployer')) {
-            $employe_id = $this->fonct->findWhereMultiOne("employes",["user_id"],[Auth::user()->id])->id;
-            return  $this->demande->insert($request,$employe_id);
+            $employe_id = $this->fonct->findWhereMultiOne("employes", ["user_id"], [Auth::user()->id])->id;
+            return  $this->demande->insert($request, $employe_id);
         } else {
             return back()->with('error', 'les employers seulement ont le droit d\'y entrer');
         }

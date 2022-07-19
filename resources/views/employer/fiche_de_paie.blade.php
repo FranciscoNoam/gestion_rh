@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title')ASA-RH/ Fiche de paie
+@section('title')OIG-RH/ Fiche de paie
 @endsection
 @section('content')
 <div class="row">
