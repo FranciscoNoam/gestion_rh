@@ -23,19 +23,18 @@
                     </a>
                 </li>
 
-                <li class="nav-item  d-flex justify-content-end" align="right">
-                    <div class="">
-                        <form action="{{ route('employe.filtre') }}" class="formulaire_new d-flex justify-content-end"
-                            id="msform_facture" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <input type="text" name="search_name" id="search_name" placeholder="Nom ou Prénom"
-                                class="form-control-label me-2">
-                            <div class="text-end">
-                                <button type="submit" class="btn btn-outline-success me-2">chercher</button>
-                            </div>
-                        </form>
-                    </div>
-                </li>
+                {{-- <div class="justify-content-end d-flex align-self-end">
+                    <form action="{{ route('employe.filtre') }}" class="formulaire_new d-flex justify-content-end"
+                        id="msform_facture" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="text" name="search_name" id="search_name" placeholder="Nom ou Prénom"
+                            class="form-control-label me-2">
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-outline-success me-2">chercher</button>
+                        </div>
+                    </form>
+                </div> --}}
+
             </ul>
 
 
@@ -62,12 +61,25 @@
                                 style="font-size: 20px;">Liste employer</span>
                         </div>
                         <div class="col">
+                            <div class="d-flex justify-content-end">
+                                <form action="{{ route('employe.filtre') }}"
+                                    class="formulaire_new d-flex justify-content-end" id="msform_facture" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="text" name="search_name" id="search_name" placeholder="Nom ou Prénom"
+                                        class="form-control-label me-2">
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-outline-success me-2">chercher</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col mx-2">
                             <span class="mt-0 d-flex justify-content-end text-center" style="font-size: 20px;">
                                 <span style="position: relative; bottom: -0.2rem; ">
                                     1-0 sur 0
                                 </span>
-                                <a href="#" role="button" class="mx-1"
-                                    style=" pointer-events: none;cursor: default;"><i
+                                <a href="#" role="button" class="mx-1" style=" pointer-events: none;cursor: default;"><i
                                         class='fa fa-angle-left'></i></a>
                                 <a href="#" role="button" class="mx-1"
                                     style="  pointer-events: none;cursor: default;"><i
@@ -80,7 +92,7 @@
                 <table class="table  table-hover table-bordered">
                     <thead>
                         <tr>
-                            <td scope="col" colspan="2" class="text-center">Action</td>
+                            <td scope="col" class="text-center">Action</td>
                             <td scope="col">Nom Complet &nbsp; <a href="#" style="color: blue"> <button
                                         class="btn btn_creer_trie num_fact_trie" value="0"><i
                                             class="fa icon_trie fa-arrow-down"></i></button></td>
@@ -110,17 +122,17 @@
                         @include('admin.home.edit_delete_modal')
 
                         <tr>
-                            <td> <a data-bs-toggle="modal" href="#dropdataBoot{{ $emp->id }}" role="button"
+                            <td class="justify-content-center d-flex align-self-center">
+                                <a data-bs-toggle="modal" href="#dropdataBoot{{ $emp->id }}" role="button"
                                     class="btn btn-outline-danger"><i class="material-icons">&#xE872;</i></a>
-                            </td>
-                            <td> <a data-bs-toggle="modal" href="#staticBackdrop{{ $emp->id }}" role="button"
-                                    class="btn btn-outline-success"><i class="material-icons">&#xE254;</i></a>
-                            </td>
-
+                                    &nbsp;&nbsp;
+                                    <a data-bs-toggle="modal" href="#staticBackdrop{{ $emp->id }}" role="button"
+                                        class="btn btn-outline-success"><i class="material-icons">&#xE254;</i></a>
+                                </td>
                             <td>
                                 <div>
                                     <h6>{{ $emp->name." ".$emp->username }}</h6>
-                                    <p><a href="#">{{ $emp->email}}</a>/ {{ $emp->phone }}</p>
+                                    <p><a href="#">{{ $emp->email}}</a> / {{ $emp->phone }}</p>
                                 </div>
 
                             </td>
@@ -155,7 +167,7 @@
                         @endforeach
                         @else
                         <tr>
-                            <td colspan="13" class="text-center" style="color:red;">Aucun Résultat</td>
+                            <td colspan="12" class="text-center" style="color:red;">Aucun Résultat</td>
                         </tr>
                         @endif
                     </tbody>
@@ -163,7 +175,8 @@
             </div>
 
 
-            <div class="tab-pane fade shadow rounded px-2 mx-3 py-3" id="nav-valide" role="tabpanel" aria-labelledby="nav-valide-tab">
+            <div class="tab-pane fade shadow rounded px-2 mx-3 py-3" id="nav-valide" role="tabpanel"
+                aria-labelledby="nav-valide-tab">
 
                 @include('admin.home.nouveau_employer')
 

@@ -17,7 +17,9 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success">Créer</button>
+                    <div class="justify-content-center d-flex align-self-center">
+                        <button type="submit" class="btn btn-outline-success">Créer</button>
+                    </div>
                 </form>
             </div>
 
@@ -29,7 +31,7 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <td scope="col" colspan="2" class="text-center">Action</td>
+                            <td scope="col"  class="text-center">Action</td>
                             <td scope="col">description</td>
                         </tr>
                     </thead>
@@ -56,10 +58,10 @@
                                                 retiré</p>
                                             <p>Voulez vous continuer <span style="color:red;"> ?</span></p>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Non,
+                                        <div class="modal-footer justify-content-center d-flex align-self-center">
+                                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Non,
                                                 j'annule</button>
-                                            <button type="submit" class="btn btn-success">Oui, je le
+                                            <button type="submit" class="btn btn-outline-success">Oui, je le
                                                 veux</button>
                                         </div>
                                     </form>
@@ -92,10 +94,10 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary"
+                                        <div class="modal-footer justify-content-center d-flex align-self-center">
+                                            <button type="button" class="btn btn-outline-primary"
                                                 data-bs-dismiss="modal">Annuler</button>
-                                            <button type="submit" class="btn btn-success">Modifier</button>
+                                            <button type="submit" class="btn btn-outline-success">Modifier</button>
                                         </div>
                                     </form>
                                 </div>
@@ -103,23 +105,21 @@
                         </div>
 
                         <tr>
-                            <td> <a data-bs-toggle="modal" href="#dropDataGenre{{ $ge->id }}" role="button"
-                                    class="btn btn-danger" ><i class="material-icons">&#xE872;</i></a>
+                         <td class="justify-content-center d-flex align-self-center">
+                            <a data-bs-toggle="modal" href="#dropDataGenre{{ $ge->id }}" role="button"
+                                class="btn btn-outline-danger" ><i class="material-icons">&#xE872;</i></a>
+                                &nbsp;&nbsp;
+                                <a data-bs-toggle="modal" href="#NewDataGenre{{ $ge->id }}" role="button"
+                                    class="btn btn-outline-success" ><i class="material-icons">&#xE254;</i></a>
                             </td>
-                            <td> <a data-bs-toggle="modal" href="#NewDataGenre{{ $ge->id }}" role="button"
-                                    class="btn btn-success" ><i class="material-icons">&#xE254;</i></a>
-                            </td>
-
-                            <td>
-                                {{ $ge->name}}
-                            </td>
+                            <td> {{ $ge->name}} </td>
 
                         </tr>
 
                         @endforeach
                         @else
                         <tr>
-                            <td colspan="3" class="text-center" style="color:red;">Aucun Résultat</td>
+                            <td colspan="2" class="text-center" style="color:red;">Aucun Résultat</td>
                         </tr>
                         @endif
                     </tbody>

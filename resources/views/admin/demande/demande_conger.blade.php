@@ -61,8 +61,8 @@
                         {{Session::get('error')}}
                     </div>
                     @endif
-                    <div class="tab-pane fade show active shadow rounded px-2 mx-3 py-3" id="nav-brouilon" role="tabpanel"
-                        aria-labelledby="nav-brouilon-tab">
+                    <div class="tab-pane fade show active shadow rounded px-2 mx-3 py-3" id="nav-brouilon"
+                        role="tabpanel" aria-labelledby="nav-brouilon-tab">
 
                         <h5 class=" mx-0">
                             <div class="row mx-3 my-1 text-success">
@@ -75,10 +75,11 @@
                                         <form action="#" class="formulaire_new d-flex justify-content-end"
                                             id="msform_facture" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="text" name="search_name" id="search_name" placeholder="employer"
-                                                class="form-control-label me-2">
+                                            <input type="text" name="search_name" id="search_name"
+                                                placeholder="employer" class="form-control-label me-2">
                                             <div class="text-end">
-                                                <button type="submit" class="btn btn-outline-success me-2">chercher</button>
+                                                <button type="submit"
+                                                    class="btn btn-outline-success me-2">chercher</button>
                                             </div>
                                         </form>
                                     </div>
@@ -102,7 +103,7 @@
                         <table class="table  table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <td colspan="2" class="text-center">Action</td>
+                                    <td class="text-center">Action</td>
                                     <td>Motif &nbsp; <a href="#" style="color: blue"> <button
                                                 class="btn btn_creer_trie num_fact_trie" value="0"><i
                                                     class="fa icon_trie fa-arrow-down"></i></button>
@@ -121,23 +122,22 @@
                             <tbody id="list_data_trie_payer">
 
                                 <tr>
-                                    <td>
-                                        <div class="justify-content-center">
-                                            <a data-bs-toggle="modal" href="#dropDatapost" role="button"
-                                                class="btn btn-outline-danger btn_admin"><i class="fa fa-xmark"></i></a>
-                                        </div>
+                                    <td class="justify-content-center d-flex align-self-center">
+                                        <a data-bs-toggle="modal" href="#dropDatapost" role="button"
+                                            class="btn btn-outline-danger btn_admin"><i class="fa fa-xmark"></i></a>
+                                        &nbsp;&nbsp;
+                                        <a data-bs-toggle="modal" href="#NewDatapost" role="button"
+                                            class="btn btn-outline-success btn_admin"><i class="fa  fa-check"></i></a>
                                     </td>
-                                    <td>
-                                        <div class="justify-content-center"><a data-bs-toggle="modal"
-                                                href="#NewDatapost" role="button"
-                                                class="btn btn-outline-success btn_admin"><i
-                                                    class="fa  fa-check"></i></a>
-                                        </div>
-                                    </td>
+
                                     <th>Mariage </th>
-                                    <td>je vais faire mon mariage et je ne peux pas travailler </td>
                                     <td>
-                                        <h6>date: <span class="text-muted">2022-01-01</span> à <span class="text-muted">2022-01-02</span></h6>
+                                        <p class="text-muted"> je vais faire mon mariage et je ne peux pas travailler
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <h6>date: <span class="text-muted">2022-01-01</span> à <span
+                                                class="text-muted">2022-01-02</span></h6>
                                     </td>
                                     <td> 9 jr</td>
 
@@ -175,10 +175,11 @@
                                         <form action="#" class="formulaire_new d-flex justify-content-end"
                                             id="msform_facture" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="text" name="search_name" id="search_name" placeholder="employer"
-                                                class="form-control-label me-2">
+                                            <input type="text" name="search_name" id="search_name"
+                                                placeholder="employer" class="form-control-label me-2">
                                             <div class="text-end">
-                                                <button type="submit" class="btn btn-outline-success me-2">chercher</button>
+                                                <button type="submit"
+                                                    class="btn btn-outline-success me-2">chercher</button>
                                             </div>
                                         </form>
                                     </div>
@@ -202,7 +203,6 @@
                         <table class="table  table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <td class="text-center">#</td>
                                     <td>Motif &nbsp; <a href="#" style="color: blue"> <button
                                                 class="btn btn_creer_trie num_fact_trie" value="0"><i
                                                     class="fa icon_trie fa-arrow-down"></i></button>
@@ -221,12 +221,14 @@
                             <tbody id="list_data_trie_payer">
 
                                 <tr>
-                                     <td><i class="fa  fa-check text-success"></i>
-                                    </td>
-                                    <th>Mariage </th>
-                                    <td>je vais faire mon mariage et je ne peux pas travailler </td>
+                                    <th><i class="fa fa-check text-success"></i>&nbsp; Mariage </th>
                                     <td>
-                                        <h6>date: <span class="text-muted">2022-01-01</span> à <span class="text-muted">2022-01-02</span></h6>
+                                        <p class="text-muted"> je vais faire mon mariage et je ne peux pas travailler
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <h6>date: <span class="text-muted">2022-01-01</span> à <span
+                                                class="text-muted">2022-01-02</span></h6>
                                     </td>
                                     <td> 9 jr</td>
 
@@ -263,10 +265,11 @@
                                         <form action="#" class="formulaire_new d-flex justify-content-end"
                                             id="msform_facture" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="text" name="search_name" id="search_name" placeholder="employer"
-                                                class="form-control-label me-2">
+                                            <input type="text" name="search_name" id="search_name"
+                                                placeholder="employer" class="form-control-label me-2">
                                             <div class="text-end">
-                                                <button type="submit" class="btn btn-outline-success me-2">chercher</button>
+                                                <button type="submit"
+                                                    class="btn btn-outline-success me-2">chercher</button>
                                             </div>
                                         </form>
                                     </div>
@@ -290,7 +293,6 @@
                         <table class="table  table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <td class="text-center">#</td>
                                     <td>Motif &nbsp; <a href="#" style="color: blue"> <button
                                                 class="btn btn_creer_trie num_fact_trie" value="0"><i
                                                     class="fa icon_trie fa-arrow-down"></i></button>
@@ -309,13 +311,14 @@
                             <tbody id="list_data_trie_payer">
 
                                 <tr>
+                                    <th> <i class="fa fa-xmark text-danger"></i>&nbsp; Mariage </th>
                                     <td>
-                                        <i class="fa fa-xmark text-danger"></i>
+                                        <p class="text-muted"> je vais faire mon mariage et je ne peux pas travailler
+                                        </p>
                                     </td>
-                                    <th>Mariage </th>
-                                    <td>je vais faire mon mariage et je ne peux pas travailler </td>
                                     <td>
-                                         <h6>date: <span class="text-muted">2022-01-01</span> à <span class="text-muted">2022-01-02</span></h6>
+                                        <h6>date: <span class="text-muted">2022-01-01</span> à <span
+                                                class="text-muted">2022-01-02</span></h6>
                                     </td>
                                     <td> 9 jr</td>
 

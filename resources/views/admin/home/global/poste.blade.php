@@ -17,7 +17,9 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success">Créer</button>
+                    <div class="justify-content-center d-flex align-self-center">
+                        <button type="submit" class="btn btn-outline-success">Créer</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -29,7 +31,7 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <td scope="col" colspan="2" class="text-center">Action</td>
+                            <td scope="col" class="text-center">Action</td>
                             <td scope="col">description</td>
                         </tr>
                     </thead>
@@ -59,10 +61,11 @@
                                                 retiré</p>
                                             <p>Voulez vous continuer <span style="color:red;"> ?</span></p>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Non,
+
+                                        <div class="modal-footer justify-content-center d-flex align-self-center">
+                                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Non,
                                                 j'annule</button>
-                                            <button type="submit" class="btn btn-success">Oui, je le
+                                            <button type="submit" class="btn btn-outline-success">Oui, je le
                                                 veux</button>
                                         </div>
                                     </form>
@@ -72,7 +75,7 @@
 
                         <div class="modal fade " id="NewDatapost{{ $post->id }}" aria-hidden="true"
                             aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                            <h4>Liste départements</h4>
+                            <h4>Liste poste</h4>
                             <div class="modal-dialog   shadow p-3 lg-body  rounded">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -98,10 +101,10 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary"
+                                        <div class="modal-footer justify-content-center d-flex align-self-center">
+                                            <button type="button" class="btn btn-outline-primary"
                                                 data-bs-dismiss="modal">Annuler</button>
-                                            <button type="submit" class="btn btn-success">Modifier</button>
+                                            <button type="submit" class="btn btn-outline-success">Modifier</button>
                                         </div>
                                     </form>
                                 </div>
@@ -109,16 +112,15 @@
                         </div>
 
                         <tr>
-                            <td> <a data-bs-toggle="modal" href="#dropDatapost{{ $post->id }}" role="button"
-                                    class="btn btn-danger" ><i class="material-icons">&#xE872;</i></a>
-                            </td>
-                            <td> <a data-bs-toggle="modal" href="#NewDatapost{{ $post->id }}" role="button"
-                                    class="btn btn-success" ><i class="material-icons">&#xE254;</i></a>
-                            </td>
+                            <td class="justify-content-center d-flex align-self-center">
+                                <a data-bs-toggle="modal" href="#dropDatapost{{ $post->id }}" role="button"
+                                    class="btn btn-outline-danger" ><i class="material-icons">&#xE872;</i></a>
+                                    &nbsp;&nbsp;
+                                    <a data-bs-toggle="modal" href="#NewDatapost{{ $post->id }}" role="button"
+                                        class="btn btn-outline-success" ><i class="material-icons">&#xE254;</i></a>
+                                </td>
 
-                            <td>
-                                {{ $post->name}}
-                            </td>
+                        <td> {{ $post->name}} </td>
 
                         </tr>
 

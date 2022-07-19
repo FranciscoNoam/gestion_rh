@@ -33,7 +33,7 @@
 
                 <nav class="navbar navbar-expand-lg navbar-dark bg-success justify-content-text-center" style="overflow-x: autp;">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="{{ route('home') }}">
                             <img src="{{ asset('logo/zaha.jpg') }}" width="50" height="50"
                                 class="d-inline-block align-text-top" alt="" srcset="">
                                 OIG-RH/ <span>@yield('title')</span>
@@ -88,7 +88,7 @@
                                 <label style="color:white;" class=" form-control-label me-2"> {{auth()->user()->name}}</label>
                                 @auth
                                 <div class="text-end">
-                                    <a href="{{ route('logout') }}" class="btn btn-dark me-2">Déconnexion</a>
+                                    <a href="{{ route('logout') }}" class="btn btn-dark me-2"><i class="fa fa-right-from-bracket"></i> Sortir</a>
                                 </div>
                                 @endauth
                             </div>
