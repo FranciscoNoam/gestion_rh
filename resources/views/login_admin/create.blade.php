@@ -9,37 +9,37 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>ASA-RH</title>
-
+    <title>OIGASA</title>
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{asset('assets/css/styleGeneral.css')}}">
-    <link rel="shortcut icon" href="{{  asset('logo/zaha.jpg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{asset('css/styleGenerale.css')}}">
+    <link rel="shortcut icon" href="{{  asset('logo/oig_violet.jpg') }}" type="image/x-icon">
 </head>
 
 <body>
 
-   <style>
-        body{
-            background-color: rgb(238, 230, 230);
-        }
-       .teste {
-          border-radius: 2.50rem 2.50rem 1rem 1rem !important;
-        }
-    </style>
 
-    <div class="container-fluid ms-3">
+
+    <div class="container-fluid ">
         <div class="row">
             <div class="col-md-12">
 
-                <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-text-center"
-                    style="background-color: rgb(23, 199, 23);">
+                <nav class="navbar navbar-expand-lg navbar-dark header_menu justify-content-text-center"
+                    style="overflow-x: auto">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#">
-                            <img src="{{ asset('logo/zaha.jpg') }}" width="50" height="50"
-                                class="d-inline-block align-text-top" alt="" srcset="">
-                            ASA.RH
+                            <div class="row">
+                                <div class="col"> <img src="{{ asset('logo/oig_violet.jpg') }}" width="50" height="50"
+                                        class="d-inline-block align-text-top" alt="" srcset=""></div>
+                                <div class="col">
+                                    <p>OIGASA </p>
+                                    <p> <span style="color: yellow; font-family:bold">O</span>utils <span
+                                            style="color: yellow; font-family:bold">I</span>nformatique pour la <span
+                                            style="color: yellow; font-family:bold">G</span>estion de l'entreprise <span
+                                            style="color: yellow; font-family:bold">ASA</span></p>
+                                </div>
+                            </div>
+
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -48,14 +48,15 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="#">A propos</a>
-                                </li>
+                                </li> --}}
 
                             </ul>
                             <div class="d-flex">
-                                <a class="nav-link active" aria-current="page" href="#">Se connecter</a>
-                                <a class="nav-link active" aria-current="page" href="#">S'inscrire</a>
+                                <a href="{{ route('connection') }}"><button role="button"
+                                        class=" me-2 btn btn-primary {{Route::currentRouteNamed('connection') ? 'active' : '' }}"
+                                        aria-current="page">Se connecter</button></a>
                             </div>
                         </div>
                     </div>
@@ -65,48 +66,55 @@
                     <div class="row justify-content-center">
                         <div class="col-md-4">
                             <div class="shadow p-3 bg-body  rounded">
-                                <div  class=" row" >
-                                    <div class="col"></div>
-                                    <div class="col-5  justify-content-center align-center" >
-                                        <img src="{{ asset('logo/zaha.jpg') }}" width="80" height="80"
+                                <div class="d-flex justify-content-center align-center">
+                                    <img src="{{ asset('logo/oig_violet.jpg') }}" width="80" height="80"
                                         class="d-inline-block align-text-top" alt="" srcset="">
-                                        <h4> Nouveau Admin</h4>
-                                    </div>
-                                    <div class="col"></div>
-
                                 </div>
-                                <form action="{{route('admin.login')}}" class="formulaire_new mt-5" id="msform_facture" method="POST" enctype="multipart/form-data">
+                                <h4 class="text-center title">Nouveau Admin</h4>
+                                <form action="{{route('admin.store.admin')}}" class="formulaire_new_admin mt-5"
+                                    id="msform_facture" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group my-1">
-                                        <label for="nom" class="mb-1 form-control-placeholder">Nom Complet<strong style="color:#ff0000;">*</strong></label>
-                                        <input type="text" name="nom" class="form-control input_inscription" placeholder="Nom complet" id="nom" required />
+                                        <label for="nom" class="mb-1 form-control-placeholder">Nom Complet<strong
+                                                style="color:#ff0000;">*</strong></label>
+                                        <input type="text" name="nom" class="form-control input_inscription"
+                                            placeholder="Nom complet" id="nom" required />
                                     </div>
                                     <div class="form-group my-1">
-                                        <label for="email" class="mb-1 form-control-placeholder">Email<strong style="color:#ff0000;">*</strong></label>
-                                        <input type="email" name="email" class="form-control input_inscription" placeholder="email" id="email" required />
+                                        <label for="email" class="mb-1 form-control-placeholder">Email<strong
+                                                style="color:#ff0000;">*</strong></label>
+                                        <input type="email" name="email" class="form-control input_inscription"
+                                            placeholder="email" id="email" required />
                                     </div>
                                     <div class="form-group my-1">
-                                        <label for="identifiant" class="mb-1 form-control-placeholder">Identifiant<strong style="color:#ff0000;">*</strong></label>
-                                        <input type="text" name="identifiant" class="form-control input_inscription" placeholder="identifiant" id="identifiant" required />
+                                        <label for="new_password" class="mb-1 form-control-placeholder">Nouveau mot de
+                                            passe<strong style="color:#ff0000;">*</strong></label>
+                                        <input type="password" name="new_password"
+                                            class="form-control input_inscription" placeholder="nouveau mot de passe"
+                                            id="new_password" required />
                                     </div>
                                     <div class="form-group my-1">
-                                        <label for="new_password" class="mb-1 form-control-placeholder">Nouveau mot de passe<strong style="color:#ff0000;">*</strong></label>
-                                        <input type="password" name="new_password" class="form-control input_inscription" placeholder="nouveau mot de passe" id="new_password" required />
+                                        <label for="confirm_password" class="mb-1 form-control-placeholder">Confirmer
+                                            Nouveau mot de passe<strong style="color:#ff0000;">*</strong></label>
+                                        <input type="password" name="confirm_password"
+                                            class="form-control input_inscription"
+                                            placeholder="confirmer Nouveau mot de passe" id="confirm_password"
+                                            required />
                                     </div>
-                                    <div class="form-group my-1">
-                                        <label for="confirm_password" class="mb-1 form-control-placeholder">Confirmer Nouveau mot de passe<strong style="color:#ff0000;">*</strong></label>
-                                        <input type="password" name="confirm_password" class="form-control input_inscription" placeholder="confirmer Nouveau mot de passe" id="confirm_password" required />
+                                    @if(Session::has('success'))
+                                    <div class="alert alert-success">
+                                        {{Session::get('success')}}
                                     </div>
-
-                                    <div  class=" row" >
-                                        <div class="col"></div>
-                                        <div class="col-4  justify-content-center align-center" >
-                                            <input type="submit" name="next" class=" my-2 btn btn-success nouveau_admin " value="S'identifier" />
-                                        </div>
-                                        <div class="col"></div>
-
-                                </div>
-
+                                    @endif
+                                    @if(Session::has('error'))
+                                    <div class="alert alert-danger">
+                                        {{Session::get('error')}}
+                                    </div>
+                                    @endif
+                                    <div class="d-flex justify-content-center align-center">
+                                        <input type="submit" name="next"
+                                            class=" my-2 btn btn_connection nouveau_admin_xy " value="S'identifier" />
+                                    </div>
 
                                 </form>
                             </div>
@@ -120,26 +128,23 @@
 
 
 
-
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 
     <script type="text/javascript">
-  $(document).ready(function() {
+        $(document).ready(function() {
 
-    $('.nouveau_admin').prop('disabled', true);
+    $('.nouveau_admin_xy').prop('disabled', true);
 
-    $('.formulaire_new input').keyup(function() {
+    $('.formulaire_new_admin input').keyup(function() {
             if ($('#nom').val().length > 2 &&
                 $('#email').val().length > 5 &&
-                $('#identifiant').val().length > 5 &&
                 $('#new_password').val().length > 3 &&
                 $('#new_password').val().length == $('#confirm_password').val().length) {
-                    $('.nouveau_admin').prop('disabled', false);
+                    $('.nouveau_admin_xy').prop('disabled', false);
             } else {
-                $('.nouveau_admin').prop('disabled', true);
+                $('.nouveau_admin_xy').prop('disabled', true);
             }
         });
   });

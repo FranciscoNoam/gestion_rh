@@ -5,3 +5,27 @@ body {
 .teste {
     border-radius: 2.50rem 2.50rem 1rem 1rem !important;
 }
+.header_menu{
+    background-color:rgb(136, 0, 255);
+}
+.footer_menu{
+    background-color:rgb(136, 0, 255);
+}
+
+.btn_connection{
+    background-color:white;
+    border: 3px solid rgb(136, 0, 255);
+    color:rgb(136, 0, 255);
+    font-family:bold;
+}
+.btn_connection:hover{
+    background-color:rgb(136, 0, 255);
+    color:white;
+    font-family:bold;
+}
+
+
+.title{
+    color:rgb(136, 0, 255);
+}
+

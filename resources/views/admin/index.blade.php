@@ -5,10 +5,10 @@
     <div class="col-md-4">
         <div class="shadow p-3 bg-body  rounded">
             <div class="d-flex justify-content-center align-center">
-                <img src="{{ asset('logo/zaha.jpg') }}" width="80" height="80" class="d-inline-block align-text-top"
+                <img src="{{ asset('logo/oig_violet.jpg') }}" width="80" height="80" class="d-inline-block align-text-top"
                     alt="" srcset="">
             </div>
-            <h4 class="text-center text-success">Connexion</h4>
+            <h4 class="text-center title">Connexion</h4>
 
             <form action="{{route('login')}}" class="formulaire mt-5" id="msform_facture" method="POST"
                 enctype="multipart/form-data">
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center">
-                    <input type="submit" name="next" class=" my-2 btn btn-success sidentifier " value="S'identifier" />
+                    <input type="submit" name="next" class=" my-2 btn btn_connection sidentifier " value="S'identifier" />
                 </div>
 
 

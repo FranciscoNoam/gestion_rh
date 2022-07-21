@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>OIG-RH</title>
+    <title>OIGASA</title>
 
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet">
@@ -17,10 +17,10 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     --}}
     <link rel="stylesheet" href="{{asset('css/styleGenerale.css')}}">
-    <link rel="shortcut icon" href="{{  asset('logo/zaha.jpg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{  asset('logo/oig_violet.jpg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css">
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 
 </head>
@@ -31,12 +31,23 @@
         <div class="row">
             <div class="col-md-12">
 
-                <nav class="navbar navbar-expand-lg navbar-dark bg-success justify-content-text-center" style="overflow-x: auto;">
-                    <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-dark header_menu " style="overflow-x: auto;">
+                    <div class="container-fluid ">
                         <a class="navbar-brand" href="{{ route('home') }}">
-                            <img src="{{ asset('logo/zaha.jpg') }}" width="50" height="50"
-                                class="d-inline-block align-text-top" alt="" srcset="">
-                                OIG-RH/ <span>@yield('title')</span>
+                            <div class="row">
+                                <div class="col"> <img src="{{ asset('logo/oig_violet.jpg') }}" width="80" height="80"
+                                        class="d-inline-block align-text-top" alt="" srcset="">
+                                </div>
+                                <div class="col">
+                                    <p>OIGASA </p>
+                                    <p style="font-size: 60%;"> <span
+                                            style="color: yellow; font-family:bold">O</span>utils <span
+                                            style="color: yellow; font-family:bold">I</span>nformatique pour la <span
+                                            style="color: yellow; font-family:bold">G</span>estion de l'entreprise <span
+                                            style="color: yellow; font-family:bold">ASA</span></p>
+                                </div>
+
+                            </div>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -45,19 +56,25 @@
                         </button>
                         <div class="collapse  navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                                 @canany(['isAdmin','isSuperAdmin'])
                                 <li class="nav-item">
-                                    <a class="nav-link {{Route::currentRouteNamed('home') ? 'active' : '' }}" aria-current="page"
-                                        href="{{ route('home') }}">Employers</a>
+                                    <a class="nav-link {{Route::currentRouteNamed('home') ? 'active' : '' }}"
+                                        aria-current="page" href="{{ route('home') }}">Employers</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{Route::currentRouteNamed('admin.generale') ? 'active' : '' }}" href="{{ route('admin.generale') }}"><p> Génerales</p></a>
+                                    <a class="nav-link {{Route::currentRouteNamed('admin.generale') ? 'active' : '' }}"
+                                        href="{{ route('admin.generale') }}">
+                                        <p> Génerales</p>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{Route::currentRouteNamed('demandeconger.index') ? 'active' : '' }}" href="{{ route('demandeconger.index')}}">Demande des congers </a>
+                                    <a class="nav-link {{Route::currentRouteNamed('demandeconger.index') ? 'active' : '' }}"
+                                        href="{{ route('demandeconger.index')}}">Demande de conger </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{Route::currentRouteNamed('demandeabsence.index') ? 'active' : '' }}" href="{{ route('demandeabsence.index')}}">Demande des absences</a>
+                                    <a class="nav-link {{Route::currentRouteNamed('demandeabsence.index') ? 'active' : '' }}"
+                                        href="{{ route('demandeabsence.index')}}">Demande d' absence</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Fiche de paie</a>
@@ -65,18 +82,21 @@
                                 @endcanany
 
                                 @canany(['isEmployer'])
-                                 <li class="nav-item">
-                                    <a class="nav-link {{Route::currentRouteNamed('home') ? 'active' : '' }}" href="{{ route('home') }}" >Mes Fiches de paie</a>
+                                <li class="nav-item">
+                                    <a class="nav-link {{Route::currentRouteNamed('home') ? 'active' : '' }}"
+                                        href="{{ route('home') }}">Fiche de paie</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{Route::currentRouteNamed('demandeconger.index') ? 'active' : '' }}" href="{{ route('demandeconger.index') }}" >Mes Demandes de conger</a>
+                                    <a class="nav-link {{Route::currentRouteNamed('demandeconger.index') ? 'active' : '' }}"
+                                        href="{{ route('demandeconger.index') }}">Demande de conger</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{Route::currentRouteNamed('demandeabsence.index') ? 'active' : '' }}" href="{{ route('demandeabsence.index') }}" >Mes Demandes d' absence</a>
+                                    <a class="nav-link {{Route::currentRouteNamed('demandeabsence.index') ? 'active' : '' }}"
+                                        href="{{ route('demandeabsence.index') }}">Demande d' absence</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" >Mon Compte</a>
+                                    <a class="nav-link" href="#"><i class="fa fa-solid fa-gear"></i> Réglage</a>
                                 </li>
                                 @endcanany
 
@@ -85,10 +105,12 @@
 
                             <div class="d-flex justify-content-end">
 
-                                <label style="color:white;" class=" form-control-label me-2"> {{auth()->user()->name}}</label>
+                                <label style="color:white;" class=" form-control-label me-2">
+                                    {{auth()->user()->name}}</label>
                                 @auth
                                 <div class="text-end">
-                                    <a href="{{ route('logout') }}" class="btn btn-dark me-2"><i class="fa fa-right-from-bracket"></i> Sortir</a>
+                                    <a href="{{ route('logout') }}" class="btn btn-dark me-2"><i
+                                            class="fa fa-right-from-bracket"></i> Déconnexion</a>
                                 </div>
                                 @endauth
                             </div>
@@ -97,6 +119,16 @@
                 </nav>
 
                 <div class="row">
+                    @canany(['isAdmin'])
+                    <h4>OIGASA > Admin ><span class="title">@yield('title')</span></h4>
+                    @endcanany
+                    @canany(['isSuperAdmin'])
+                    <h4>OIGASA > Super Admin ><span class="title">@yield('title')</span></h4>
+                    @endcanany
+                    @canany(['isEmployer'])
+                    <h4>OIGASA > Employer ><span class="title">@yield('title')</span></h4>
+                    @endcanany
+
                     <div class="col-md-12">
                         <div class="container-fluid content_body px-0 "
                             style="padding-bottom: 1rem; padding-top: 4.5rem;">
@@ -108,12 +140,12 @@
             </div>
         </div>
 
-        <footer class="mt-4 py-3 bg-success">
+        <footer class="mt-4 py-3 footer_menu">
             <div class="container">
-              <p class="m-0 text-center text-white">Copyright &copy; OIG-RH {{ date('Y') }}</p>
+                <p class="m-0 text-center text-white">Copyright &copy; OIG-RH {{ date('Y') }}</p>
             </div>
             <!-- /.container -->
-          </footer>
+        </footer>
     </div>
 
 

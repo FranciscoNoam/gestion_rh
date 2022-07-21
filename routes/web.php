@@ -24,6 +24,13 @@ use App\Http\Controllers\NouveauCompteController;
 |
 */
 
+// =================== URL Secret ===================================
+
+Route::get('superadmin.nouveau.secret', [AdminController::class,'nouveau_super_admin'])->name('superadmin.nouveau.secret');
+Route::post('admin.store.super.admin', [AdminController::class,'store_nouveau_super_admin'])->name('admin.store.super.admin');
+Route::post('admin.store.admin', [AdminController::class,'store_nouveau_admin'])->name('admin.store.admin');
+Route::get('admin.nouveau', [AdminController::class,'nouveau'])->name('admin.nouveau');
+
 Route::group(['middleware' => ['guest']], function() {
 
 Route::post('admin.store.super.admin', [AdminController::class,'store_nouveau_super_admin'])->name('admin.store.super.admin');
@@ -51,11 +58,9 @@ Route::get('nouveau',  [NouveauCompteController::class,'nouveau'])->name('nouvea
 
 // ================== URL SuperAdmin ==================================
 
-Route::get('superadmin.nouveau.secret', [AdminController::class,'nouveau_super_admin'])->name('superadmin.nouveau.secret');
-Route::post('admin.store.super.admin', [AdminController::class,'store_nouveau_super_admin'])->name('admin.store.super.admin');
 // =============== URL ADMIN ===============================
 Route::resource('admin', AdminController::class);
-Route::get('admin.nouveau', [AdminController::class,'nouveau'])->name('admin.nouveau');
+
 Route::get('admin.generale', [AdminController::class,'global'])->name('admin.generale');
 Route::post('admin.login', [AdminController::class,'login'])->name('admin.login');
 

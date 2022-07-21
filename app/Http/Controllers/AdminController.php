@@ -79,37 +79,75 @@ class AdminController extends Controller
 
     }
 
+    public function store_nouveau_admin(Request $req){
+        $rules = [
+            'nom.required' => 'le Nom du super Admin ne doît pas être null',
+            'nom.string' => 'le texte seulement est autorisé',
+            'email.required' => 'le mail ne doît pas être null',
+            'email.email' => 'le mail doît contenir "@",merci de bien le suivre',
+             'new_password.required' => 'le nouveau mot de passe ne doît pas être null',
+            'confirm_password.required' => 'la confirmation du nouveau mot de passe ne doit pas etre null'
+        ];
+        $critereForm = [
+            'nom' => 'required|string',
+            'email' => 'required|email',
+            'confirm_password' => 'required',
+            'new_password' => 'required'
+        ];
+        $req->validate($critereForm, $rules);
+
+        $verify =  $this->fonct->findWhereMultiOne("users",["email"],[$req->email]);
+        if($verify!=null){
+            if($verify->activiter==true){
+                return back()->with('error','désolé, cette identification existe déjà');
+            }
+            else if($verify->activiter==false){
+                return back()->with('success','vous avez déjà une invitation en attente de l\'aprobation par super admin');
+            } else {
+                return back()->with('error','une erreur est survenue lors de l\'éxécution de la rêquete');
+            }
+        } else {
+            User::create([
+                "name"=>"".$req->nom,
+                "email"=>"".$req->email,
+                'password' => "".Hash::make($req->confirm_password),
+                "activiter"=>false,
+                "role_id"=>2
+               ])->save();
+               return back()->with('success','votre demande a été envoyer, veuillez contactez votre super admin pour votre aprobation confirmation');
+        }   
+    }
+
     public function store_nouveau_super_admin(Request $req){
         $rules = [
             'nom.required' => 'le Nom du super Admin ne doît pas être null',
             'nom.string' => 'le texte seulement est autorisé',
             'email.required' => 'le mail ne doît pas être null',
             'email.email' => 'le mail doît contenir "@",merci de bien le suivre',
-            'identifiant.required' => "l'identifiant ne doît pas être null",
-            'identifiant.string' => 'le texte seulement est autorisé',
             'new_password.required' => 'le nouveau mot de passe ne doît pas être null',
             'confirm_password.required' => 'la confirmation du nouveau mot de passe ne doit pas etre null'
         ];
         $critereForm = [
             'nom' => 'required|string',
             'email' => 'required|email',
-            'identifiant' => 'required|string',
             'confirm_password' => 'required',
             'new_password' => 'required'
         ];
         $req->validate($critereForm, $rules);
 
-         User::create([
-            "name"=>"".$req->nom,
-            "email"=>"".$req->email,
-            "identifiant"=>"".$req->identifiant,
-            'password' => "".Hash::make($req->confirm_password),
-            "activiter"=>True,
-            "role_id"=>1
-           ])->save();
-
-           session()->flash('message','super admin a été créer');
-        return redirect()->route('admin');
+        $verify =  $this->fonct->findWhere("users",["role_id"],[1],["id"],"ASC");
+        if(count($verify)>0){
+            return back()->with('error','une erreur est survenue lors de l\'éxécution de la rêquete');
+        } else {
+            User::create([
+                "name"=>"".$req->nom,
+                "email"=>"".$req->email,
+                'password' => "".Hash::make($req->confirm_password),
+                "activiter"=>True,
+                "role_id"=>1
+               ])->save();
+            return redirect()->route('connection');
+        }    
     }
 
 

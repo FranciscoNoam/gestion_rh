@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title')Demande Absence
+@section('title')Demande d'Absence
 @endsection
 @section('content')
 <div class="row">

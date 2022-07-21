@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title')Demande Conger
+@section('title')Demande de Conger
 @endsection
 @section('content')
 <div class="row">

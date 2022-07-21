@@ -22,13 +22,17 @@
     <div class="row">
         <div class="col-md-12">
 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-success justify-content-text-center"
-                style="overflow-x: auto;">
+            <nav class="navbar navbar-expand-lg navbar-dark header_menu justify-content-text-center"
+                style="overflow-x: auto">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        <img src="{{ asset('logo/zaha.jpg') }}" width="50" height="50"
-                            class="d-inline-block align-text-top" alt="" srcset="">
-                        OIG.RH
+                        <div class="row">
+                            <div class="col">  <img src="{{ asset('logo/oig_violet.jpg') }}" width="50" height="50"
+                                class="d-inline-block align-text-top" alt="" srcset=""></div>
+                            <div class="col"> <p>OIGASA </p>
+                                <p> <span  style="color: yellow; font-family:bold">O</span>utils <span  style="color: yellow; font-family:bold">I</span>nformatique pour la <span  style="color: yellow; font-family:bold">G</span>estion de l'entreprise <span style="color: yellow; font-family:bold">ASA</span></p> </div>
+                        </div>
+                         
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -88,8 +92,8 @@
         });
 
          $('.formulaire_new input').keyup(function() {
-            if ($('#nom').val().length > 0 && $('#phone').val().length > 9  && $('#email').val().length > 4 && 
-            $('#cin').val().length > 11 && $('#debut_job').val().length > 1 && 
+            if ($('#nom').val().length > 0 && $('#phone').val().length > 9  && $('#email').val().length > 4 &&
+            $('#cin').val().length > 11 && $('#debut_job').val().length > 1 &&
             $('#naissance').val().length > 1  && $('#adresse').val().length > 4 ) {
                     $('.btn_inscription').prop('disabled', false);
             } else {

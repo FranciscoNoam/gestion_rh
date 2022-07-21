@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title') Demande d'absence
+@section('title') Demande de Conger
 @endsection
 @section('content')
 
@@ -221,9 +221,11 @@
                         <tr>
                             @if ($demand->validation==true || $demand->refus==true)
                             <td>
-                                <button role="button"  class="btn btn-link disabled" style="color:red;"><i class="material-icons">&#xE872;</i></button>
+                                <button role="button" class="btn btn-link disabled" style="color:red;"><i
+                                        class="material-icons">&#xE872;</i></button>
                             </td>
-                            <td> <button role="button" class="btn btn-link disabled" style="color:green;"><i class="material-icons">&#xE254;</i></button>
+                            <td> <button role="button" class="btn btn-link disabled" style="color:green;"><i
+                                        class="material-icons">&#xE254;</i></button>
                             </td>
                             @else
                             <td>
