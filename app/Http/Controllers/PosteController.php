@@ -14,7 +14,8 @@ class PosteController extends Controller
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if (Auth::user()->exists == false) return redirect()->route('connection');
+            // if (Auth::user()->exists == false) return redirect()->route('connection');
+             if (Auth::user()->exists == false) return redirect('/');
             return $next($request);
         });
 

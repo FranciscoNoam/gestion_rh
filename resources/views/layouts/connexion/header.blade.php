@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>OIG-RH</title>
+    <title>OIGASA</title>
 
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet">
@@ -32,7 +32,7 @@
                             <div class="col"> <p>OIGASA </p>
                                 <p> <span  style="color: yellow; font-family:bold">O</span>utils <span  style="color: yellow; font-family:bold">I</span>nformatique pour la <span  style="color: yellow; font-family:bold">G</span>estion de l'entreprise <span style="color: yellow; font-family:bold">ASA</span></p> </div>
                         </div>
-                         
+
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -47,12 +47,19 @@
 
                         </ul>
                         <div class="d-flex">
-                            <a href="{{ route('connection') }}"><button role="button"
-                                    class=" me-2 btn btn-primary {{Route::currentRouteNamed('connection') ? 'active' : '' }}"
-                                    aria-current="page">Se connecter</button></a>
-                            <a href="{{ route('nouveau') }}"><button role="button"
-                                    class=" ms-2 btn btn-primary {{Route::currentRouteNamed('nouveau') ? 'active' : '' }}"
-                                    aria-current="page">S'inscrire</button></a>
+                            @guest
+                            <div class="text-end">
+                              {{-- <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2">Login</a>
+                              <a href="{{ route('register.perform') }}" class="btn btn-warning">Sign-up</a> --}}
+                              <a href="{{ route('login.perform') }}"><button role="button"
+                                class=" me-2 btn btn-primary {{Route::currentRouteNamed('login') ? 'active' : '' }}"
+                                aria-current="page">Se connecter</button></a>
+                        <a href="{{ route('nouveau') }}"><button role="button"
+                                class=" ms-2 btn btn-primary {{Route::currentRouteNamed('nouveau') ? 'active' : '' }}"
+                                aria-current="page">S'inscrire</button></a>
+                            </div>
+                          @endguest
+
 
                         </div>
                     </div>
@@ -79,17 +86,17 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-    $('.sidentifier').prop('disabled', true);
+    // $('.sidentifier').prop('disabled', true);
     $('.btn_inscription').prop('disabled', true);
 
-    $('.formulaire input').keyup(function() {
-            if ($('#identifiant').val().length > 5 &&
+  /*  $('.formulaire input').keyup(function() {
+            if ($('#username').val().length > 5 &&
                 $('#password').val().length > 3) {
                     $('.sidentifier').prop('disabled', false);
             } else {
                 $('.sidentifier').prop('disabled', true);
             }
-        });
+        }); */
 
          $('.formulaire_new input').keyup(function() {
             if ($('#nom').val().length > 0 && $('#phone').val().length > 9  && $('#email').val().length > 4 &&

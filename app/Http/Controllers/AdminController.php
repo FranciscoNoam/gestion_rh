@@ -15,7 +15,8 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if (Auth::user()->exists == false) return redirect()->route('connection');
+            // if (Auth::user()->exists == false) return redirect()->route('connection');
+            if (Auth::user()->exists == false) return redirect('/');
             return $next($request);
         });
 
@@ -115,7 +116,7 @@ class AdminController extends Controller
                 "role_id"=>2
                ])->save();
                return back()->with('success','votre demande a été envoyer, veuillez contactez votre super admin pour votre aprobation confirmation');
-        }   
+        }
     }
 
     public function store_nouveau_super_admin(Request $req){
@@ -147,7 +148,7 @@ class AdminController extends Controller
                 "role_id"=>1
                ])->save();
             return redirect()->route('connection');
-        }    
+        }
     }
 
 

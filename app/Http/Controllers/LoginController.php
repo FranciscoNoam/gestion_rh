@@ -8,7 +8,28 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    public function show()
+    {
+        return view('auth.login');
+    }
+
     public function login(LoginRequest $request)
+    {
+        $credentials = $request->getCredentials();
+
+        if(!Auth::validate($credentials)):
+            return back()->with('error','email ou mot de passe est incorrect');
+            // return redirect()->to('login')
+            //     ->withErrors(trans('auth.failed'));
+        endif;
+
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        Auth::login($user);
+
+        return $this->authenticated($request, $user);
+    }
+
+/*    public function login(LoginRequest $request)
     {
         $credentials = $request->getCredentials();
 
@@ -22,21 +43,16 @@ class LoginController extends Controller
         ];
         $request->validate($critereForm, $rules);
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
-        Auth::login($user);
-       return redirect()->route('home');
-        // return $this->authenticated($request, $user);
-    }
 
-    /**
-     * Handle response after user authenticated
-     * 
-     * @param Request $request
-     * @param Auth $user
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    protected function authenticated(Request $request, $user) 
+        Auth::login($user);
+
+    //    return redirect()->route('home');
+        return $this->authenticated($request, $user);
+    } */
+
+    protected function authenticated(Request $request, $user)
     {
         return redirect()->intended();
     }
+
 }
