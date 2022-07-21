@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>ASA-RH</title>
+    <title>OIG-RH</title>
 
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet">

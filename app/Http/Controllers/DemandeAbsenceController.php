@@ -35,6 +35,21 @@ class DemandeAbsenceController extends Controller
         }
     }
 
+    public function accept(Request $req,$id){
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
+            return  $this->demande->accept($id);
+        } else {
+            return back()->with('error', 'les administrateurs seulement ont le droit d\'y entrer');
+        }
+    }
+    public function refus(Request $req,$id){
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
+            return  $this->demande->refus($id);
+        } else {
+            return back()->with('error', 'les administrateurs seulement ont le droit d\'y entrer');
+        }
+    }
+
     public function create()
     {
         //

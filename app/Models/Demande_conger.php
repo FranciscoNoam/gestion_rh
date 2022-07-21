@@ -73,5 +73,35 @@ class Demande_conger extends Model
         }
     }
 
+    public function accept($id)
+    {
+        $update = [
+            "validation" => true,
+            "refus" => false
+        ];
+        $tmp =  Demande_conger ::where('id', $id)->update($update);
+
+        if ($tmp) {
+            return back()->with('success', 'la demande de conger a été accepter');
+        } else {
+            return back()->with('error', 'une erreur est survenue lors de la modification du donnée');
+        }
+    }
+
+    public function refus($id)
+    {
+        $update = [
+            "validation" => false,
+            "refus" => true
+        ];
+        $tmp =  Demande_conger ::where('id', $id)->update($update);
+
+        if ($tmp) {
+            return back()->with('success', 'la demande de conger a été refuser');
+        } else {
+            return back()->with('error', 'une erreur est survenue lors de la modification du donnée');
+        }
+    }
+
 
 }

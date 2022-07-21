@@ -11,10 +11,10 @@ class Demande_absence extends Model
 
     protected $table = "demande_absences";
     protected $fillable = [
-        'id', 'object','description','date_debut','date_fin','hour_debut','hour_fin','validation','refus','employe_id'
+        'id', 'object', 'description', 'date_debut', 'date_fin', 'hour_debut', 'hour_fin', 'validation', 'refus', 'employe_id'
     ];
 
-     public function insert($imput,$emp_id)
+    public function insert($imput, $emp_id)
     {
         $rules = [
             'object.required' => 'la objectif ne doît pas être null',
@@ -40,8 +40,8 @@ class Demande_absence extends Model
             "date_fin" => "" . $imput->date_fin,
             "hour_debut" => "" . $imput->hour_debut,
             "hour_fin" => "" . $imput->hour_fin,
-            "validation" =>false,
-            "refus" =>false,
+            "validation" => false,
+            "refus" => false,
             "employe_id" => $emp_id
         ])->save();
 
@@ -85,4 +85,33 @@ class Demande_absence extends Model
         }
     }
 
+    public function accept($id)
+    {
+        $update = [
+            "validation" => true,
+            "refus" => false
+        ];
+        $tmp =  Demande_absence::where('id', $id)->update($update);
+
+        if ($tmp) {
+            return back()->with('success', 'la demande d\'absence a été accepter');
+        } else {
+            return back()->with('error', 'une erreur est survenue lors de la modification du donnée');
+        }
+    }
+
+    public function refus($id)
+    {
+        $update = [
+            "validation" => false,
+            "refus" => true
+        ];
+        $tmp =  Demande_absence::where('id', $id)->update($update);
+
+        if ($tmp) {
+            return back()->with('success', 'la demande d\'absence a été refuser');
+        } else {
+            return back()->with('error', 'une erreur est survenue lors de la modification du donnée');
+        }
+    }
 }

@@ -41,7 +41,28 @@ class DemandeCongerController extends Controller
             return view("employer.demande_conger", compact('demande_conger', 'reste_conger', 'dernier_conger'));
         }
         if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
-             return view("admin.demande.demande_conger");
+
+            $demande_conger_attente = $this->fonct->findWhere("v_demande_conger_attente",[],[],["id"],"ASC");
+            $demande_conger_accepter = $this->fonct->findWhere("v_demande_conger_accepter",[],[],["id"],"ASC");
+            $demande_conger_refuser = $this->fonct->findWhere("v_demande_conger_refuser",[],[],["id"],"ASC");
+
+            // dd($demande_conger_refuser);
+             return view("admin.demande.demande_conger",compact('demande_conger_attente','demande_conger_accepter','demande_conger_refuser'));
+        }
+    }
+
+    public function accept(Request $req,$id){
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
+            return  $this->demande->accept($id);
+        } else {
+            return back()->with('error', 'les administrateurs seulement ont le droit d\'y entrer');
+        }
+    }
+    public function refus(Request $req,$id){
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
+            return  $this->demande->refus($id);
+        } else {
+            return back()->with('error', 'les administrateurs seulement ont le droit d\'y entrer');
         }
     }
 

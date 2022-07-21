@@ -60,16 +60,23 @@ class FonctionGenerique extends Model
 
     public function queryWhere($nomTab, $para = [], $val = [],$order=[],$constraint)
     {
-        $query = "SELECT * FROM " . $nomTab . " WHERE ";
+        $query = "SELECT * FROM " . $nomTab;
         if (count($para) != count($val)) {
             return "ERROR: tail des onnees parametre et value est different";
         } else {
-            for ($i = 0; $i < count($para); $i++) {
-                $query .= "" . $para[$i] . "= ?";
-                if ($i + 1 < count($para)) {
-                    $query .= " AND ";
+            if(count($para)>0 && count($val)>0){
+                $query .= " WHERE ";
+
+                for ($i = 0; $i < count($para); $i++) {
+                    $query .= "" . $para[$i] . "= ?";
+                    if ($i + 1 < count($para)) {
+                        $query .= " AND ";
+                    }
                 }
             }
+
+        }
+        if(count($order)>0){
             $query .= " ORDER BY ";
             for ($ii = 0; $ii < count($order); $ii++) {
                 $query .= "" . $order[$ii] ;
@@ -78,8 +85,8 @@ class FonctionGenerique extends Model
                 }
             }
             $query .= " ".$constraint;
-            return $query;
         }
+        return $query;
     }
 
     public function queryWhereMultiOne($nomTab, $para = [], $val = [])

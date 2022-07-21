@@ -81,8 +81,12 @@ Route::get('poste.destroy/{id}',[PosteController::class,'destroy'])->name('poste
 // =============== URL DEMMANDE CONGER ==================================
 Route::resource('demandeconger',DemandeCongerController::class)->except(['update','destroy']);
 Route::post('demandeconger.update/{id}',[DemandeCongerController::class,'update'])->name('demandeconger.update');
+Route::post('demandeconger.accept/{id}',[DemandeCongerController::class,'accept'])->name('demandeconger.accept');
+Route::post('demandeconger.refus/{id}',[DemandeCongerController::class,'refus'])->name('demandeconger.refus');
 Route::get('demandeconger.destroy/{id}',[DemandeCongerController::class,'destroy'])->name('demandeconger.destroy');
 // =============== URL DEMMANDE ABSENCE ==================================
 Route::resource('demandeabsence',DemandeAbsenceController::class)->except(['update','destroy']);
 Route::post('demandeabsence.update/{id}',[DemandeAbsenceController::class,'update'])->name('demandeabsence.update');
+Route::post('demandeabsence.accept/{id}',[DemandeAbsenceController::class,'accept'])->name('demandeabsence.accept');
+Route::post('demandeabsence.refus/{id}',[DemandeAbsenceController::class,'accept'])->name('demandeabsence.refus');
 Route::get('demandeabsence.destroy/{id}',[DemandeAbsenceController::class,'destroy'])->name('demandeabsence.destroy');
