@@ -41,8 +41,8 @@ class Employe extends Model
         $imput->validate($critereForm, $rules);
         // $imput->validate($critereForm);
 
-        $verify = $fonct->findWhere("users", ["email"], [$imput->email]);
-        $verify2 = $fonct->findWhere("employes", ["email"], [$imput->cin]);
+        $verify = $fonct->findWhere("users", ["email"], [$imput->email],[],"ASC");
+        $verify2 = $fonct->findWhere("employes", ["email"], [$imput->cin],[],"ASC");
 
         if (count($verify) <= 0) {
             if (count($verify2) <= 0) {
@@ -53,7 +53,7 @@ class Employe extends Model
                 "activiter" => True,
                 "role_id" => 3
             ])->save();
-            $user_id = $fonct->findWhereMulitOne("users", ["email"], [$imput->email])->id;
+            $user_id = $fonct->findWhereMultiOne("users", ["email"], [$imput->email])->id;
             $conger_id = $fonct->findAll("congers")[0]->id;
 
             Employe::create([
@@ -145,14 +145,13 @@ class Employe extends Model
             'phone' => 'required',
             'cin' => 'required',
             'naissance' => 'required|date',
-            'debut_job' => 'required|date',
-            'salaire' => 'required'
+            'debut_job' => 'required|date'
         ];
         $imput->validate($critereForm, $rules);
         // $imput->validate($critereForm);
 
-        $verify = $fonct->findWhere("users", ["email"], [$imput->email]);
-        $verify2 = $fonct->findWhere("employes", ["email"], [$imput->cin]);
+        $verify = $fonct->findWhere("users", ["email"], [$imput->email],[],"ASC");
+        $verify2 = $fonct->findWhere("employes", ["email"], [$imput->cin],[],"ASC");
 
         if (count($verify) <= 0) {
             if (count($verify2) <= 0) {
@@ -163,7 +162,7 @@ class Employe extends Model
                 "activiter" => True,
                 "role_id" => 3
             ])->save();
-            $user_id = $fonct->findWhereMulitOne("users", ["email"], [$imput->email])->id;
+            $user_id = $fonct->findWhereMultiOne("users", ["email"], [$imput->email])->id;
             $conger_id = $fonct->findAll("congers")[0]->id;
 
             Employe::create([
@@ -176,7 +175,7 @@ class Employe extends Model
                 "debut_job" => "" . $imput->debut_job,
                 "departement_id" => "" . $imput->departement_id,
                 "naissance" => "" . $imput->naissance,
-                "salaire" => "" . $imput->salaire,
+                "salaire" => 0,
                 "adresse" => "" . $imput->adresse,
                 "conger_id" => $conger_id,
                 "user_id" => $user_id,

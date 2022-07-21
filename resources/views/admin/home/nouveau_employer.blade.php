@@ -146,15 +146,6 @@
                     </div>
                     <div class="col">
                         <div class="form-group my-1">
-                            <label for="email" class="mb-1 form-control-placeholder">Fin poste</label>
-                            <input type="date" name="fin_job" class="form-control input_inscription" id="fin_job" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group my-1">
                             <label for="salaire" class="mb-1 form-control-placeholder">Adresse<strong
                                     style="color:#ff0000;">*</strong></label>
                             <input type="text" name="adresse" class="form-control input_inscription"
@@ -164,7 +155,11 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col">
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                   
+                    <div class="col-3">
                         <div class="form-group my-1">
                             <label for="salaire" class="mb-1 form-control-placeholder">Salaire<strong
                                     style="color:#ff0000;">*</strong></label>

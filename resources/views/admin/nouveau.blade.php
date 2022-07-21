@@ -4,9 +4,11 @@
 <div class="row justify-content-center">
     <div class="col-md-7">
         <div class="shadow p-3 bg-body  rounded">
-                    <img src="{{ asset('logo/zaha.jpg') }}" width="80" height="80" class="d-inline-block align-text-top"
-                        alt="" srcset="">
-                    <h4>Inscription des employers</h4>
+            <div class="d-flex justify-content-center align-center">
+                <img src="{{ asset('logo/zaha.jpg') }}" width="80" height="80" class="d-inline-block align-text-top"
+                    alt="" srcset="">
+            </div>
+            <h4 class="text-center text-success">Inscription d'employer</h4>
 
                     <form action="{{route('nouveau.store')}}" class="formulaire_new mt-5" id="msform_facture"
                     method="POST" enctype="multipart/form-data">
@@ -141,16 +143,6 @@
                         </div>
                         <div class="col">
                             <div class="form-group my-1">
-                                <label for="email" class="mb-1 form-control-placeholder">Fin poste</label>
-                                <input type="date" name="fin_job" class="form-control input_inscription"
-                                    id="fin_job" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group my-1">
                                 <label for="salaire" class="mb-1 form-control-placeholder">Adresse<strong
                                         style="color:#ff0000;">*</strong></label>
                                 <input type="text" name="adresse" class="form-control input_inscription"
@@ -160,9 +152,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col">
+                    </div>
+
+                    {{-- <div class="row d-flex  justify-content-center">
+
+                        <div class="col-3">
                             <div class="form-group my-1">
-                                <label for="salaire" class="mb-1 form-control-placeholder">Salaire<strong
+                                <label for="salaire" class="mb-1 form-control-placeholder">Entrer votre salaire<strong
                                         style="color:#ff0000;">*</strong></label>
                                 <input type="number" name="salaire" class="form-control input_inscription"
                                     placeholder="salaire" id="salaire" required />
@@ -171,19 +167,13 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
 
-                    <div class=" row">
-                        <div class="col"></div>
-                        <div class="col  justify-content-center align-center">
-                            <input type="submit" name="next" class=" my-2 btn btn-success nouveau_admin "
-                                value="Créer" />
+                          <div class="d-flex  justify-content-center">
+                            <input type="submit" name="next" class=" my-2 btn btn-success btn_inscription "
+                                value="S'inscrire" />
                         </div>
-                        <div class="col"></div>
-
-                    </div>
-
 
                 </form>
 

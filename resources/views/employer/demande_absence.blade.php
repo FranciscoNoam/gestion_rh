@@ -162,7 +162,8 @@
                             <div class="modal-dialog   shadow p-3 lg-body  rounded">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modification du demande d'absence "{{ $demand->object }}"
+                                        <h5 class="modal-title" id="exampleModalLabel">Modification du demande d'absence
+                                            "{{ $demand->object }}"
                                         </h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -265,16 +266,29 @@
                             </div>
                         </div>
                         <tr>
+                            @if ($demand->validation==true || $demand->refus==true)
+                            <td>
+                                <button role="button" class="btn btn-link disabled" style="color:red;"><i
+                                        class="material-icons">&#xE872;</i></button>
+                            </td>
+                            <td> <button role="button" class="btn btn-link disabled" style="color:green;"><i
+                                        class="material-icons">&#xE254;</i></button>
+                            </td>
+                            @else
                             <td> <a data-bs-toggle="modal" href="#dropDatapost{{ $demand->id }}" role="button"
                                     class="btn btn-link" style="color:red;"><i class="material-icons">&#xE872;</i></a>
                             </td>
                             <td> <a data-bs-toggle="modal" href="#NewDatapost{{ $demand->id }}" role="button"
                                     class="btn btn-link" style="color:green;"><i class="material-icons">&#xE254;</i></a>
                             </td>
+                            @endif
+
                             <td>
                                 <div>
-                                    <h6>date: <span class="text-muted">{{$demand->date_debut}}</span> à <span class="text-muted">{{$demand->date_fin }}</span></h6>
-                                    <p>heure: <span class="text-muted">{{$demand->hour_debut}}</span> à <span class="text-muted">{{$demand->hour_fin }}</span></p>
+                                    <h6>date: <span class="text-muted">{{$demand->date_debut}}</span> à <span
+                                            class="text-muted">{{$demand->date_fin }}</span></h6>
+                                    <p>heure: <span class="text-muted">{{$demand->hour_debut}}</span> à <span
+                                            class="text-muted">{{$demand->hour_fin }}</span></p>
                                 </div>
 
                             </td>

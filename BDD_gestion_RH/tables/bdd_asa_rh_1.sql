@@ -89,7 +89,7 @@ INSERT INTO departements (id,name, created_at, updated_at) VALUES
   debut_job DATE NOT NULL,
   fin_job DATE DEFAULT NULL,
   departement_id bigint(20) UNSIGNED  REFERENCES entreprises(id) ON DELETE CASCADE,
-  salaire INT NOT NULL default 1000,
+  salaire INT NOT NULL default 0,
   adresse varchar(255) COLLATE utf8mb4_unicode_ci  default 'XXXXXXX',
   user_id bigint(20) UNSIGNED NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   genre_id bigint(20) unsigned NOT NULL  REFERENCES genres(id),

@@ -31,7 +31,11 @@ class DemandeAbsenceController extends Controller
             return view("employer.demande_absence", compact('demande_absence'));
         }
         if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
-            return view("admin.demande.demande_absence");
+            $demande_absence_attente = $this->fonct->findWhere("v_demande_absence_attente",[],[],["id"],"ASC");
+            $demande_absence_accepter = $this->fonct->findWhere("v_demande_absence_accepter",[],[],["id"],"ASC");
+            $demande_absence_refuser = $this->fonct->findWhere("v_demande_absence_refuser",[],[],["id"],"ASC");
+
+            return view("admin.demande.demande_absence",compact('demande_absence_attente','demande_absence_accepter','demande_absence_refuser'));
         }
     }
 
