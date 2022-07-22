@@ -14,7 +14,7 @@ body {
 
 .btn_connection{
     background-color:white;
-    border: 3px solid rgb(136, 0, 255);
+    border: 2px solid rgb(136, 0, 255);
     color:rgb(136, 0, 255);
     font-family:bold;
 }
@@ -24,6 +24,22 @@ body {
     font-family:bold;
 }
 
+.filtre_activer{
+    background-color:white;
+    border: 1px solid rgb(136, 0, 255);
+    color:rgb(136, 0, 255);
+    border-radius: 20px; text-align: center;
+    text-decoration: none !important;
+    padding: 0px 10px 0px 10px;
+}
+
+.filtre_activer:hover{
+    background-color:rgb(136, 0, 255);
+   color:white;
+    border-radius: 20px; text-align: center;
+    text-decoration: none !important;
+    padding: 0px 10px 0px 10px;
+}
 
 .title{
     color:rgb(136, 0, 255);

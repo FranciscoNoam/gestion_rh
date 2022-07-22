@@ -13,7 +13,8 @@
                     <a href="#" class="nav-link active" id="nav-brouilon-tab" data-bs-toggle="tab"
                         data-bs-target="#nav-brouilon" type="button" role="tab" aria-controls="nav-brouilon"
                         aria-selected="true">
-                        Employers ({{ count($employes) }})
+                        {{-- Employers ({{ count($employes) }}) --}}
+                        Employers 
                     </a>
                 </li>
                 <li class="nav-item">
