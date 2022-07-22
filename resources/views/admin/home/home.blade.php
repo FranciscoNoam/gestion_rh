@@ -22,19 +22,6 @@
                         Nouveau
                     </a>
                 </li>
-
-                {{-- <div class="justify-content-end d-flex align-self-end">
-                    <form action="{{ route('employe.filtre') }}" class="formulaire_new d-flex justify-content-end"
-                        id="msform_facture" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="text" name="search_name" id="search_name" placeholder="Nom ou Prénom"
-                            class="form-control-label me-2">
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-outline-success me-2">chercher</button>
-                        </div>
-                    </form>
-                </div> --}}
-
             </ul>
 
 
@@ -55,38 +42,10 @@
                 aria-labelledby="nav-brouilon-tab">
 
                 <h5 class=" mx-0">
-                    <div class="row mx-3 my-1 text-success">
-                        <div class="col">
-                            <span class="mt-0 d-flex justify-content-start text-center text-success"
-                                style="font-size: 20px;">Liste employer</span>
-                        </div>
-                        <div class="col">
-                            <div class="d-flex justify-content-end">
-                                <form action="{{ route('employe.filtre') }}"
-                                    class="formulaire_new d-flex justify-content-end" id="msform_facture" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="text" name="search_name" id="search_name" placeholder="Nom ou Prénom"
-                                        class="form-control-label me-2">
-                                    <div class="text-end">
-                                        <button type="submit" class="btn btn-outline-success me-2">chercher</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col mx-2">
-                            <span class="mt-0 d-flex justify-content-end text-center" style="font-size: 20px;">
-                                <span style="position: relative; bottom: -0.2rem; ">
-                                    1-0 sur 0
-                                </span>
-                                <a href="#" role="button" class="mx-1" style=" pointer-events: none;cursor: default;"><i
-                                        class='fa fa-angle-left'></i></a>
-                                <a href="#" role="button" class="mx-1"
-                                    style="  pointer-events: none;cursor: default;"><i
-                                        class="fa fa-angle-right"></i></a>
-                            </span>
-                        </div>
-                    </div>
+
+                    {{-- pagination liste des employes --}}
+                    @include('admin.home.pagination_admin.pagination_liste_employer')
+
                 </h5>
 
                 <table class="table  table-hover table-bordered">
@@ -125,10 +84,10 @@
                             <td class="justify-content-center d-flex align-self-center">
                                 <a data-bs-toggle="modal" href="#dropdataBoot{{ $emp->id }}" role="button"
                                     class="btn btn-outline-danger"><i class="material-icons">&#xE872;</i></a>
-                                    &nbsp;&nbsp;
-                                    <a data-bs-toggle="modal" href="#staticBackdrop{{ $emp->id }}" role="button"
-                                        class="btn btn-outline-success"><i class="material-icons">&#xE254;</i></a>
-                                </td>
+                                &nbsp;&nbsp;
+                                <a data-bs-toggle="modal" href="#staticBackdrop{{ $emp->id }}" role="button"
+                                    class="btn btn-outline-success"><i class="material-icons">&#xE254;</i></a>
+                            </td>
                             <td>
                                 <div>
                                     <h6>{{ $emp->name." ".$emp->username }}</h6>
@@ -155,7 +114,7 @@
 
                                 @endif
                             </td>
-                            <td> {{ $emp->naissance }}</td>
+                            <td> {{ $emp->naissance." (".(date('Y')-date('Y', strtotime($emp->naissance)))." ans)" }}</td>
                             <td> {{ $emp->adresse }}</td>
 
                         </tr>

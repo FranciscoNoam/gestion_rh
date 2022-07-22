@@ -16,7 +16,7 @@ class HomeController extends Controller
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             // if (Auth::user()->exists == false) return redirect()->route('connection');
-            if (Auth::user()->exists == false) return redirect('/');
+            if (Auth::user()->exists == false) return redirect('login');
             return $next($request);
         });
 
@@ -24,41 +24,38 @@ class HomeController extends Controller
     }
 
 
-    public function index()
+    public function index($nbPag_para = null)
     {
         $user_id = Auth::user()->id;
+        $nb_limit = 2;
+        $nbPag = 0;
 
         if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
-            $employes = $this->fonct->findAll("v_employe");
+
+            if ($nbPag_para <= 0 || $nbPag_para == null) {
+                $nbPag = 1;
+            } else {
+                $nbPag = $nbPag_para;
+            }
+            $nbreTotal_emp = $this->fonct->getNbrePagination("employes", "id", [], [], [], "AND");
+            $employes = $this->fonct->findWhereTrieOrderBy(
+                "v_employe",
+                [],
+                [],
+                [],
+                ["id"],
+                "AND",
+                "ASC",
+                $nbPag,
+                $nb_limit
+            );
+            $pagination = $this->fonct->nb_liste_pagination($nbreTotal_emp, $nbPag, $nb_limit);
             $departements = $this->fonct->findAll("departements");
             $genres = $this->fonct->findAll("genres");
             $postes = $this->fonct->findAll("postes");
-            return view('admin.home.home', compact('employes', 'departements', 'genres','postes'));
-        }
-
-       else if (Gate::allows('isEmployer')) {
+            return view('admin.home.home', compact('employes', 'departements', 'genres', 'postes', 'pagination'));
+        } else if (Gate::allows('isEmployer')) {
             return view('employer.fiche_de_paie');
         }
-
-       else if (Gate::allows('isSuperAdmin')) {
-            $employes = $this->fonct->findAll("employes");
-            dd("tong: " . Auth::user()->role_id);
-
-            return view('admin.home.home', compact('employes'));
-        }
     }
-    // public function login(Request $req){
-    //     var_dump($req->input());
-    //     $user=DB::select("SELECT * FROM users WHERE email=? or identifiant=?",[$req->identifiant,$req->identifiant]);
-    //     if($user!=null){
-    //         $connected= $user[0];
-    //         if(Hash::check($req->password, $connected->password)){
-    //             redirect()->route('home');
-    //         } else {
-    //             return back()->with('error','email ou identifiant ou mot de passse est incorrect ');
-    //         }
-    //     } else {
-    //         return back()->with('error','email ou identifiant ou mot de passse est incorrect ');
-    //     }
-    // }
 }

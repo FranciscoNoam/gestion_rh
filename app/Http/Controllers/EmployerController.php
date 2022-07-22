@@ -21,7 +21,7 @@ class EmployerController extends Controller
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             // if (Auth::user()->exists == false) return redirect()->route('connection');
-            if (Auth::user()->exists == false) return redirect('/');
+            if (Auth::user()->exists == false) return redirect('login');
             return $next($request);
         });
 
@@ -32,15 +32,43 @@ class EmployerController extends Controller
     {
     }
 
-    public function filtre(Request $req)
+    public function filtre(Request $req, $nbPag_para = null, $search_name_para = null)
     {
-        $employes =  DB::select("SELECT * FROM v_employe WHERE name LIKE '%" . $req->search_name . "%' OR username LIKE '%" . $req->search_name . "%'");
+        $nb_limit = 2;
+        $nbPag = 0;
+        $search_name = "";
+
+        if ($nbPag_para <= 0 || $nbPag_para == null) {
+            $nbPag = 1;
+        } else {
+            $nbPag = $nbPag_para;
+        }
+        if ($search_name_para <= 0 || $search_name_para == null) {
+            $search_name = $req->search_name;
+        } else {
+            $search_name = $search_name_para;
+        }
+        $nbreTotal_emp = $this->fonct->getNbrePagination("v_employe", "id", ["name", "username"], ["LIKE", "LIKE"], ["%" . $search_name . "%", "%" . $search_name . "%"], "OR");
+        $employes = $this->fonct->findWhereTrieOrderBy(
+            "v_employe",
+            ["name", "username"],
+            ["LIKE", "LIKE"],
+            ["%" . $search_name . "%", "%" . $search_name . "%"],
+            ["id"],
+            "OR",
+            "ASC",
+            $nbPag,
+            $nb_limit
+        );
+        $pagination = $this->fonct->nb_liste_pagination($nbreTotal_emp, $nbPag, $nb_limit);
+
         $departements = $this->fonct->findAll("departements");
         $genres = $this->fonct->findAll("genres");
         $postes = $this->fonct->findAll("postes");
 
-        return view('admin.home.home', compact('employes', 'departements', 'genres','postes'));
+        return view('admin.home.home', compact('search_name', 'pagination', 'employes', 'departements', 'genres', 'postes'));
     }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -58,6 +58,46 @@ class FonctionGenerique extends Model
         }
     }
 
+    public function queryWhereTrieOrderBy($nomTab, $para = [], $opt = [], $val = [], $tabOrderBy = [],$constraint, $order, $nbPag, $nb_limit)
+    {
+        if ($nbPag == null) {
+            $nbPag = 1;
+        }
+        $query="";
+        $query1="SELECT * FROM ";
+        $query2 = "(SELECT * FROM " . $nomTab;
+        if (count($para) != count($val)) {
+            return "ERROR: tail des onnees parametre et value est different";
+        } else {
+
+            if(count($para)>0 && count($val)>0){
+                $query2 .= " WHERE ";
+                for ($i = 0; $i < count($para); $i++) {
+                    $query2 .= "" . $para[$i] . " " . $opt[$i] . " ? ";
+                    if ($i + 1 < count($para)) {
+                        $query2 .= " ".$constraint." ";
+                    }
+                }
+            }
+
+            $query2 .= " LIMIT ".$nb_limit." OFFSET ".($nbPag-1).") AS t2";
+            $query = $query1." ".$query2;
+
+            if(count($tabOrderBy)>0){
+                $query .= "  ORDER BY ";
+
+                for ($j1 = 0; $j1 < count($tabOrderBy); $j1++) {
+                    $query .= " " . $tabOrderBy[$j1];
+                    if ($j1 + 1 < count($tabOrderBy)) {
+                        $query .= " , ";
+                    }
+                }
+                $query.=" ".$order;
+            }
+            return $query;
+        }
+    }
+
     public function queryWhere($nomTab, $para = [], $val = [],$order=[],$constraint)
     {
         $query = "SELECT * FROM " . $nomTab;
@@ -210,7 +250,6 @@ class FonctionGenerique extends Model
             $nbDebutPagination = $nbDebutPagination - 1;
         }
         $query = $query . " LIMIT " . $nbPage . " OFFSET " . $nbDebutPagination;
-    //    dd($query);
         $data =  DB::select($query);
         return $data;
     }
@@ -254,7 +293,7 @@ class FonctionGenerique extends Model
         return $tab;
     }
 
-
+/*
 	public function queryWhereTrieOrderBy($nomTab, $para = [], $opt = [], $val = [], $tabOrderBy = [], $order, $nbPag, $nb_limit)
     {
         if ($nbPag == null) {
@@ -291,11 +330,11 @@ class FonctionGenerique extends Model
             $query.=" ".$order;
             return $query;
         }
-    }
+    } */
 
-    public function findWhereTrieOrderBy($nomTab, $para = [], $opt = [], $val = [], $tabOrderBy = [], $order, $nbPag, $nb_limit)
+    public function findWhereTrieOrderBy($nomTab, $para = [], $opt = [], $val = [], $tabOrderBy = [],$constraint, $order, $nbPag, $nb_limit)
     {
-	    $data =  DB::select($this->queryWhereVerify($nomTab, $para, $opt, $val, $tabOrderBy, $order, $nbPag, $nb_limit), $val);
+        $data =  DB::select($this->queryWhereTrieOrderBy($nomTab, $para, $opt, $val, $tabOrderBy,$constraint, $order, $nbPag, $nb_limit), $val);
 		return $data;
     }
 
@@ -308,7 +347,7 @@ class FonctionGenerique extends Model
             return "ERROR: tail des onnees parametre et value est different";
         } else {
 
-            if(count($para)>0 && count($val)>0){
+            if(count($para)>0 && count($val)>0 && count($opt)>0){
                 $query .= " WHERE ";
                 for ($i = 0; $i < count($para); $i++) {
                     $query .= "" . $para[$i] . " ".$opt[$i]." ?";
@@ -326,7 +365,7 @@ class FonctionGenerique extends Model
 
         $data =  DB::select($this->queryPagination($nomTab, $col_para, $para, $opt, $val,$constraint), $val);
 
-	  return $data['totale'];
+	  return $data[0]->totale;
     }
 
     public function nb_liste_pagination($totaleDataList, $nb_debut_pag,$nb_limit)
