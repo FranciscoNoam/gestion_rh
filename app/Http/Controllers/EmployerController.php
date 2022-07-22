@@ -69,6 +69,79 @@ class EmployerController extends Controller
         return view('admin.home.home', compact('search_name', 'pagination', 'employes', 'departements', 'genres', 'postes'));
     }
 
+    public function trie(Request $req)
+    {
+        $nb_limit = 2;
+        $nbPag = $req->debut_aff;
+        $search_name = "";
+        $order = "ASC";
+        $colone_trie = [];
+        $employes = [];
+        $query = "";
+        if ($req->data_value == 0) { // order by ASC
+            $order = "ASC";
+        }
+        if ($req->data_value == 1) { // order by DESC
+            $order = "DESC";
+        }
+        if ($req->colone == "NAME_EMP") {
+            $colone_trie = ["name"];
+        }
+
+        if (isset($req->search_name)) {
+            $search_name = $req->search_name;
+            $query = $this->fonct->queryWhereTrieOrderBy(
+                "v_employe",
+                ["name", "username"],
+                ["LIKE", "LIKE"],
+                ["%" . $search_name . "%", "%" . $search_name . "%"],
+                $colone_trie,
+                "OR",
+                $order,
+                $nbPag,
+                $nb_limit
+            );
+            $employes = $this->fonct->findWhereTrieOrderBy(
+                "v_employe",
+                ["name", "username"],
+                ["LIKE", "LIKE"],
+                ["%" . $search_name . "%", "%" . $search_name . "%"],
+                $colone_trie,
+                "OR",
+                $order,
+                $nbPag,
+                $nb_limit
+            );
+        } else {
+
+            $query = $this->fonct->queryWhereTrieOrderBy(
+                "v_employe",
+                [],
+                [],
+                [],
+                $colone_trie,
+                "OR",
+                $order,
+                $nbPag,
+                $nb_limit
+            );
+            $employes = $this->fonct->findWhereTrieOrderBy(
+                "v_employe",
+                [],
+                [],
+                [],
+                $colone_trie,
+                "OR",
+                $order,
+                $nbPag,
+                $nb_limit
+            );
+        }
+        return response()->json([
+            "employes" => $employes
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

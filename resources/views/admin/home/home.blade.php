@@ -14,7 +14,7 @@
                         data-bs-target="#nav-brouilon" type="button" role="tab" aria-controls="nav-brouilon"
                         aria-selected="true">
                         {{-- Employers ({{ count($employes) }}) --}}
-                        Employers 
+                        Employers
                     </a>
                 </li>
                 <li class="nav-item">
@@ -53,29 +53,25 @@
                     <thead>
                         <tr>
                             <td scope="col" class="text-center">Action</td>
-                            <td scope="col">Nom Complet &nbsp; <a href="#" style="color: blue"> <button
-                                        class="btn btn_creer_trie num_fact_trie" value="0"><i
+                            <td scope="col">Nom Complet &nbsp;<button
+                                        class="btn btn_creer_trie name_trie" value="0"><i
+                                            class="fa name_trie_f icon_trie fa-arrow-down"></i></button></td>
+                            <td scope="col">Genre&nbsp;<button class="btn "></button></td>
+                            <td scope="col">CIN&nbsp;<button class="btn "></button></td>
+                            <td scope="col">Département&nbsp;<button class="btn "></button></td>
+                            <td scope="col">Poste&nbsp;<button class="btn "></button></td>
+                            <td scope="col">Salaire &nbsp;  <button
+                                        class="btn btn_creer_trie salaire_trie" value="0"><i
                                             class="fa icon_trie fa-arrow-down"></i></button></td>
-                            <td scope="col">Genre</td>
-                            <td scope="col">CIN</td>
-                            <td scope="col">Département &nbsp; <a href="#" style="color: blue"> <button
-                                        class="btn btn_creer_trie num_fact_trie" value="0"><i
+                            <td scope="col">Début &nbsp; <button
+                                        class="btn btn_creer_trie debut_job_trie" value="0"><i
                                             class="fa icon_trie fa-arrow-down"></i></button></td>
-                            <td scope="col">Poste</td>
-                            <td scope="col">Salaire &nbsp; <a href="#" style="color: blue"> <button
-                                        class="btn btn_creer_trie num_fact_trie" value="0"><i
-                                            class="fa icon_trie fa-arrow-down"></i></button></td>
-                            <td scope="col">Début &nbsp; <a href="#" style="color: blue"> <button
-                                        class="btn btn_creer_trie num_fact_trie" value="0"><i
-                                            class="fa icon_trie fa-arrow-down"></i></button></td>
-                            <td scope="col">Fin</td>
-                            <td scope="col">Naissance &nbsp; <a href="#" style="color: blue"> <button
-                                        class="btn btn_creer_trie num_fact_trie" value="0"><i
-                                            class="fa icon_trie fa-arrow-down"></i></button></td>
-                            <td scope="col">Adresse</td>
+                            <td scope="col">Fin&nbsp;<button class="btn "></button></td>
+                            <td scope="col">Naissance&nbsp;<button class="btn "></button> </td>
+                            <td scope="col">Adresse&nbsp;<button class="btn "></button></td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="list_data_trie_employes">
                         @if (count($employes) > 0)
                         @foreach ($employes as $emp)
 
@@ -145,6 +141,7 @@
         </div>
     </div>
 
+    @include('admin.home.function_js_trie_admin.js_employer')
 </div>
 </div>
 @endsection

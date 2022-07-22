@@ -95,6 +95,7 @@ Route::resource('employe', EmployerController::class)->except(['update', 'destro
 Route::post('employe.update/{id}', [EmployerController::class, 'update'])->name('employe.update');
 Route::get('employe.destroy/{id}', [EmployerController::class, 'destroy'])->name('employe.destroy');
 Route::get('employe.filtre/{nbpag?}/{search_name?}', [EmployerController::class, 'filtre'])->name('employe.filtre');
+Route::get('employe.trie', [EmployerController::class, 'trie'])->name('employe.trie');
 
 // =============== URL DEPARTEMENT ==================================
 Route::resource('departement', DepartementController::class)->except(['update', 'destroy']);

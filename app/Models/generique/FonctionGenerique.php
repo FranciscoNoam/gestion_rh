@@ -89,7 +89,7 @@ class FonctionGenerique extends Model
                 for ($j1 = 0; $j1 < count($tabOrderBy); $j1++) {
                     $query .= " " . $tabOrderBy[$j1];
                     if ($j1 + 1 < count($tabOrderBy)) {
-                        $query .= " , ";
+                        $query .= " ,";
                     }
                 }
                 $query.=" ".$order;
