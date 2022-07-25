@@ -37,13 +37,12 @@
         }
         return html;
 }
-    function getDataEmployer(response) {
+  /*  function getDataEmployer(response) {
         var valiny = JSON.parse(response);
             var employe = valiny["employes"];
            var html = HTML_employer(employe);
 
-
-    }
+    } */
 
     function getDataRequetTrie(value,col_trie) {
         var dataValiny = {
@@ -62,66 +61,9 @@
 
         return dataValiny;
     }
-
-   /*   $(".name_trie").on('click', function(e) {
-        if (
-            $(".name_trie")
-            .find(".icon_trie")
-            .hasClass("fa-arrow-down")
-        ) {
-            $(".name_trie")
-                .find(".icon_trie")
-                .removeClass("fa-arrow-down")
-                .addClass("fa-arrow-up");
-        } else {
-            $(".name_trie")
-                .find(".icon_trie")
-                .removeClass("fa-arrow-up")
-                .addClass("fa-arrow-down");
-        }
-
-        $('.salaire_trie')
-            .find(".icon_trie")
-            .removeClass("fa-arrow-up")
-            .removeClass("color-text-trie")
-            .addClass("fa-arrow-down");
-
-            $('.debut_job_trie')
-            .find(".icon_trie")
-            .removeClass("fa-arrow-up")
-            .removeClass("color-text-trie")
-            .addClass("fa-arrow-down");
-    }); */
-
-
-    $(".name_trie").on('click', function(e) {
-        var valiny = $(this).val();
-        if (
-            $(this)
-            .find(".icon_trie")
-            .hasClass("fa-arrow-down")
-        ) {
-            $(this)
-                .find(".icon_trie")
-                .removeClass("fa-arrow-down")
-                .addClass("fa-arrow-up");
-        } else {
-            $(this)
-                .find(".icon_trie")
-                .removeClass("fa-arrow-up")
-                .addClass("fa-arrow-down");
-        }
-
-        if ($(".name_trie").val() == 0) {
-            $(".name_trie").val(1);
-        } else {
-            $(".name_trie").val(0);
-        }
-
-            // $('.icon_trie').remove();
-            var dataValue = getDataRequetTrie(valiny,"NAME_EMP");
-
-        $.ajax({
+    // ===================== GET Request in Server =========================
+function start_request(dataValue){
+    $.ajax({
             method: "GET"
             , url: "{{route('employe.trie')}}"
             , data: dataValue
@@ -136,5 +78,138 @@
                 console.log(error)
             }
         });
+}
+// ============================================================
+    $(".name_trie").on('click', function(e) {
+        var valiny = $(this).val();
+        $(this)
+                .find(".icon_trie")
+                .addClass("text-primary");
+        if (
+            $(this)
+            .find(".icon_trie")
+            .hasClass("fa-arrow-down")
+        ) {
+            $(this)
+                .find(".icon_trie")
+                .removeClass("fa-arrow-down")
+                .addClass("fa-arrow-up");
+        } else {
+            $(this)
+                .find(".icon_trie")
+                .removeClass("fa-arrow-up")
+                .addClass("fa-arrow-down");
+        }
+
+        $('.salaire_trie')
+            .find(".icon_trie")
+            .removeClass("text-primary")
+            .removeClass("fa-arrow-up")
+            .removeClass("color-text-trie")
+            .addClass("fa-arrow-down");
+
+            $('.debut_job_trie')
+            .find(".icon_trie")
+            .removeClass("text-primary")
+            .removeClass("fa-arrow-up")
+            .removeClass("color-text-trie")
+            .addClass("fa-arrow-down");
+
+        if ($(".name_trie").val() == 0) {
+            $(".name_trie").val(1);
+        } else {
+            $(".name_trie").val(0);
+        }
+            var dataValue = getDataRequetTrie(valiny,"NAME_EMP");
+            start_request(dataValue);
+       
+    });
+
+    $(".salaire_trie").on('click', function(e) {
+        var valiny = $(this).val();
+        $(this)
+            .find(".icon_trie")
+            .addClass("text-primary");
+        if (
+            $(this)
+            .find(".icon_trie")
+            .hasClass("fa-arrow-down")
+        ) {
+            $(this)
+                .find(".icon_trie")
+                .removeClass("fa-arrow-down")
+                .addClass("fa-arrow-up");
+        } else {
+            $(this)
+                .find(".icon_trie")
+                .removeClass("fa-arrow-up")
+                .addClass("fa-arrow-down");
+        }
+
+        $('.name_trie')
+            .find(".icon_trie")
+            .removeClass("text-primary")
+            .removeClass("fa-arrow-up")
+            .removeClass("color-text-trie")
+            .addClass("fa-arrow-down");
+
+            $('.debut_job_trie')
+            .find(".icon_trie")
+            .removeClass("text-primary")
+            .removeClass("fa-arrow-up")
+            .removeClass("color-text-trie")
+            .addClass("fa-arrow-down");
+
+        if ($(".salaire_trie").val() == 0) {
+            $(".salaire_trie").val(1);
+        } else {
+            $(".salaire_trie").val(0);
+        }
+            var dataValue = getDataRequetTrie(valiny,"SALAIRE_EMP");
+            start_request(dataValue);
+       
+    });
+
+    $(".debut_job_trie").on('click', function(e) {
+        var valiny = $(this).val();
+        $(this)
+            .find(".icon_trie")
+            .addClass("text-primary");
+        if (
+            $(this)
+            .find(".icon_trie")
+            .hasClass("fa-arrow-down")
+        ) {
+            $(this)
+                .find(".icon_trie")
+                .removeClass("fa-arrow-down")
+                .addClass("fa-arrow-up");
+        } else {
+            $(this)
+                .find(".icon_trie")
+                .removeClass("fa-arrow-up")
+                .addClass("fa-arrow-down");
+        }
+
+        $('.name_trie')
+            .find(".icon_trie")
+            .removeClass("fa-arrow-up")
+            .removeClass("color-text-trie text-primary")
+            .addClass("fa-arrow-down");
+
+            $('.salaire_trie')
+            .find(".icon_trie")
+            .removeClass("fa-arrow-up")
+            .removeClass("color-text-trie text-primary")
+            .addClass("fa-arrow-down");
+
+        if ($(".debut_job_trie").val() == 0) {
+            $(".debut_job_trie").val(1);
+        } else {
+            $(".debut_job_trie").val(0);
+        }
+            var dataValue = getDataRequetTrie(valiny,"DEBUT_JOB_EMP");
+            start_request(dataValue);
+       
     });
 </script>

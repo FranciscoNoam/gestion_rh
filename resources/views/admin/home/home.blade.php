@@ -56,19 +56,19 @@
                             <td scope="col">Nom Complet &nbsp;<button
                                         class="btn btn_creer_trie name_trie" value="0"><i
                                             class="fa name_trie_f icon_trie fa-arrow-down"></i></button></td>
-                            <td scope="col">Genre&nbsp;<button class="btn "></button></td>
-                            <td scope="col">CIN&nbsp;<button class="btn "></button></td>
-                            <td scope="col">Département&nbsp;<button class="btn "></button></td>
-                            <td scope="col">Poste&nbsp;<button class="btn "></button></td>
+                            <td scope="col">Genre</td>
+                            <td scope="col">CIN</td>
+                            <td scope="col">Département</td>
+                            <td scope="col">Poste</td>
                             <td scope="col">Salaire &nbsp;  <button
                                         class="btn btn_creer_trie salaire_trie" value="0"><i
                                             class="fa icon_trie fa-arrow-down"></i></button></td>
                             <td scope="col">Début &nbsp; <button
                                         class="btn btn_creer_trie debut_job_trie" value="0"><i
                                             class="fa icon_trie fa-arrow-down"></i></button></td>
-                            <td scope="col">Fin&nbsp;<button class="btn "></button></td>
-                            <td scope="col">Naissance&nbsp;<button class="btn "></button> </td>
-                            <td scope="col">Adresse&nbsp;<button class="btn "></button></td>
+                            <td scope="col">Fin</td>
+                            <td scope="col">Naissance </td>
+                            <td scope="col">Adresse</td>
                         </tr>
                     </thead>
                     <tbody id="list_data_trie_employes">
@@ -83,7 +83,7 @@
                                     class="btn btn-outline-danger"><i class="material-icons">&#xE872;</i></a>
                                 &nbsp;&nbsp;
                                 <a data-bs-toggle="modal" href="#staticBackdrop{{ $emp->id }}" role="button"
-                                    class="btn btn-outline-success"><i class="material-icons">&#xE254;</i></a>
+                                    class="btn btn_connection"><i class="material-icons">&#xE254;</i></a>
                             </td>
                             <td>
                                 <div>

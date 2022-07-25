@@ -50,11 +50,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('home.index/{id?}', 'HomeController@index')->name('home.index');
 
     Route::group(['middleware' => ['guest']], function () {
-      
+
         Route::get('/register', 'RegisterController@show')->name('register.show');
         Route::post('/register', 'RegisterController@register')->name('register.perform');
 
-      
+
         // Route::get('/login', 'LoginController@show')->name('login.show');
         Route::post('/login', 'LoginController@login')->name('login.perform');
     });

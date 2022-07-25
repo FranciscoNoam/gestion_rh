@@ -18,10 +18,8 @@ class EmployerController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            // if (Auth::user()->exists == false) return redirect()->route('connection');
-            if (Auth::user()->exists == false) return redirect('login');
+            if (Auth::check() == false) return redirect('login');
             return $next($request);
         });
 
@@ -34,7 +32,7 @@ class EmployerController extends Controller
 
     public function filtre(Request $req, $nbPag_para = null, $search_name_para = null)
     {
-        $nb_limit = 2;
+        $nb_limit = 20;
         $nbPag = 0;
         $search_name = "";
 
@@ -71,11 +69,11 @@ class EmployerController extends Controller
 
     public function trie(Request $req)
     {
-        $nb_limit = 2;
+        $nb_limit = 20;
         $nbPag = $req->debut_aff;
         $search_name = "";
         $order = "ASC";
-        $colone_trie = [];
+        $colone_trie = ["id"];
         $employes = [];
         $query = "";
         if ($req->data_value == 0) { // order by ASC
@@ -86,6 +84,12 @@ class EmployerController extends Controller
         }
         if ($req->colone == "NAME_EMP") {
             $colone_trie = ["name"];
+        }
+        if ($req->colone == "SALAIRE_EMP") {
+            $colone_trie = ["salaire"];
+        }
+        if ($req->colone == "DEBUT_JOB_EMP") {
+            $colone_trie = ["debut_job"];
         }
 
         if (isset($req->search_name)) {

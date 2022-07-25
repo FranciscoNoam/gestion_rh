@@ -86,17 +86,17 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-    // $('.sidentifier').prop('disabled', true);
+    $('#connexion').prop('disabled', true);
     $('.btn_inscription').prop('disabled', true);
 
-  /*  $('.formulaire input').keyup(function() {
-            if ($('#username').val().length > 5 &&
+    $('.login_user input').keyup(function() {
+            if ($('#identifiant').val().length > 5 &&
                 $('#password').val().length > 3) {
-                    $('.sidentifier').prop('disabled', false);
+                    $('#connexion').prop('disabled', false);
             } else {
-                $('.sidentifier').prop('disabled', true);
+                $('#connexion').prop('disabled', true);
             }
-        }); */
+        }); 
 
          $('.formulaire_new input').keyup(function() {
             if ($('#nom').val().length > 0 && $('#phone').val().length > 9  && $('#email').val().length > 4 &&

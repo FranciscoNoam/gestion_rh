@@ -108,25 +108,11 @@
                                 <label style="color:white;" class=" form-control-label me-2">
                                     {{auth()->user()->name}}</label>
 
-                                    {{-- @auth
-                                    {{auth()->user()->name}}
-                                    <div class="text-end">
-                                      <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
-                                    </div>
-                                  @endauth --}}
-
-                                  {{-- @guest
-                                    <div class="text-end">
-                                      <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2">Login</a>
-                                      <a href="{{ route('register.perform') }}" class="btn btn-warning">Sign-up</a>
-                                    </div>
-                                  @endguest --}}
                                   @auth
                                 <div class="text-end">
                                      <a href="{{ route('logout') }}" class="btn btn-dark me-2"><i
                                             class="fa fa-right-from-bracket"></i> Déconnexion</a>
-                                            {{-- <a href="{{ route('logout.perform') }}" class="btn btn-dark me-2"><i
-                                                class="fa fa-right-from-bracket"></i> Déconnexion</a> --}}
+
                                 </div>
                                 @endauth
 
@@ -150,7 +136,7 @@
 
                     <div class="col-md-12">
                         <div class="container-fluid content_body px-0 "
-                            style="padding-bottom: 1rem; padding-top: 4.5rem;">
+                            style="padding-bottom: 1rem; padding-top: 1.5rem;">
                             @yield('content')
 
                         </div>

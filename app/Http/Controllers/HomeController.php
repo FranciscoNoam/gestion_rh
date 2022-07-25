@@ -13,21 +13,21 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            // if (Auth::user()->exists == false) return redirect()->route('connection');
-            if (Auth::user()->exists == false) return redirect('login');
+            if (Auth::check() == false) return redirect('login');
             return $next($request);
         });
+
 
         $this->fonct = new FonctionGenerique();
     }
 
 
+
     public function index($nbPag_para = null)
     {
         $user_id = Auth::user()->id;
-        $nb_limit = 2;
+        $nb_limit = 20;
         $nbPag = 0;
 
         if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
