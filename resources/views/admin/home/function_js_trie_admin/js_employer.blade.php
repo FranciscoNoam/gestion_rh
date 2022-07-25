@@ -1,6 +1,7 @@
-<script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+{{-- <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script> --}}
 <script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
-<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script type="text/javascript">
     function HTML_employer(listeEmp){
@@ -129,7 +130,7 @@
                 var apl = JSON.parse(response);
                 var resultat = HTML_employer(apl['employes']);
                 $('#list_data_trie_employes').empty().append(resultat);
-                    
+
             }
             , error: function(error) {
                 console.log(error)
