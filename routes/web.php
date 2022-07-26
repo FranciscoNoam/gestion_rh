@@ -121,3 +121,4 @@ Route::post('demandeabsence.update/{id}', [DemandeAbsenceController::class, 'upd
 Route::post('demandeabsence.accept/{id}', [DemandeAbsenceController::class, 'accept'])->name('demandeabsence.accept');
 Route::post('demandeabsence.refus/{id}', [DemandeAbsenceController::class, 'refus'])->name('demandeabsence.refus');
 Route::get('demandeabsence.destroy/{id}', [DemandeAbsenceController::class, 'destroy'])->name('demandeabsence.destroy');
+Route::get('demandeabsence.pagination/{attente}/{accepter}/{refuser}/{page_cible}', [DemandeAbsenceController::class, 'pagination'])->name('demandeabsence.pagination');

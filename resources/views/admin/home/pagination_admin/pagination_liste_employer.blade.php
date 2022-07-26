@@ -27,15 +27,15 @@
 
                 @if(isset($search_name))
                 <a href="{{route('home.index')}}" role="button" class="mx-3 filtre_activer" ><i class='fa fa-close'></i> activer</a>
-                
+
                  @elseif($pagination["debut_aff"]>1)
                  <a href="{{route('home.index')}}" role="button" class="mx-3 filtre_activer" ><i class='fa fa-close'></i> activer</a>
                   @endif
-              
+
                 <span style="position: relative; bottom: -0.2rem; ">
                     {{$pagination['debut_aff']."-".$pagination['fin_aff']." sur ".$pagination['totale_pagination']}}
                 </span>
-               
+
                 {{-- =============== condition pagination ==================== --}}
                 @if ($pagination["nb_limit"] >= $pagination["totale_pagination"])
 
