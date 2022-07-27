@@ -116,9 +116,15 @@ Route::post('demandeconger.accept/{id}', [DemandeCongerController::class, 'accep
 Route::post('demandeconger.refus/{id}', [DemandeCongerController::class, 'refus'])->name('demandeconger.refus');
 Route::get('demandeconger.destroy/{id}', [DemandeCongerController::class, 'destroy'])->name('demandeconger.destroy');
 // =============== URL DEMMANDE ABSENCE ==================================
-Route::resource('demandeabsence', DemandeAbsenceController::class)->except(['update', 'destroy']);
+Route::resource('demandeabsence', DemandeAbsenceController::class)->except(['index','update', 'destroy']);
 Route::post('demandeabsence.update/{id}', [DemandeAbsenceController::class, 'update'])->name('demandeabsence.update');
 Route::post('demandeabsence.accept/{id}', [DemandeAbsenceController::class, 'accept'])->name('demandeabsence.accept');
 Route::post('demandeabsence.refus/{id}', [DemandeAbsenceController::class, 'refus'])->name('demandeabsence.refus');
 Route::get('demandeabsence.destroy/{id}', [DemandeAbsenceController::class, 'destroy'])->name('demandeabsence.destroy');
-Route::get('demandeabsence.pagination/{attente}/{accepter}/{refuser}/{page_cible}', [DemandeAbsenceController::class, 'pagination'])->name('demandeabsence.pagination');
+        // ---------------------------------------- PAGINATION -------------------------------------
+Route::get('demandeabsence.index/{attente?}/{accepter?}/{refuser?}/{page_cible?}', [DemandeAbsenceController::class, 'index'])->name('demandeabsence.index');
+Route::get('demandeabsence.filtre/{attente?}/{accepter?}/{refuser?}/{page_cible?}/{search_name?}', [DemandeAbsenceController::class, 'filtre'])->name('demandeabsence.filtre');
+Route::get('demandeabsence.month/{attente?}/{accepter?}/{refuser?}/{page_cible?}/{search_month?}', [DemandeAbsenceController::class, 'month'])->name('demandeabsence.month');
+// ---------------------------------------- TRIE DEMANDE ABSENCE----------------------------------------------------------
+Route::get('demandeabsence.trie', [DemandeAbsenceController::class, 'trie'])->name('demandeabsence.trie');
+

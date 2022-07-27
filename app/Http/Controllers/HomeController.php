@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index($nbPag_para = null)
     {
         $user_id = Auth::user()->id;
-        $nb_limit = 20;
+        $nb_limit = 15;
         $nbPag = 0;
 
         if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {

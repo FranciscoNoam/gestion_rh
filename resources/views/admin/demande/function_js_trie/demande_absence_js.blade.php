@@ -4,36 +4,74 @@
 <script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script type="text/javascript">
-    function HTML_employer(listeEmp){
+    function HTML_demande_absence_attente(listeAttente){
     var html='';
-    if (listeEmp.length > 0) {
-            for (var id = 0; id < listeEmp.length; id += 1) {
+    if (listeAttente.length > 0) {
+            for (var id = 0; id < listeAttente.length; id += 1) {
                 html+='<tr>';
-                    html+=' <td class="justify-content-center d-flex align-self-center">';
-                html+='<a data-bs-toggle="modal" href="#dropdataBoot'+listeEmp[id].id+'" role="button" class="btn btn-outline-danger"><i class="material-icons">&#xE872;</i></a>';
-                html+=' &nbsp;&nbsp;  <a data-bs-toggle="modal" href="#staticBackdrop'+listeEmp[id].id+'" role="button"   class="btn btn-outline-success"><i class="material-icons">&#xE254;</i></a>';
-                html+='</td><td>';
-                html+='<div><h6>'+listeEmp[id].name+' '+listeEmp[id].username+'</h6> <p><a href="#">'+listeEmp[id].email+'</a> / '+listeEmp[id].phone+'</p> </div> </td>';
-                html+='<td>'+listeEmp[id].name_genre+'</td>';
-                html+='<td>'+listeEmp[id].cin+'</td>';
-                html+='<td>'+listeEmp[id].name_departement+'</td>';
-                html+='<td>'+listeEmp[id].name_poste+'</td>';
-                var tmp = ""+listeEmp[id].salaire;
-                html+=' <td>AR '+tmp.replace(/[^\dA-Z]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, " ").trim()+'</td>';
-                html+='<td> '+listeEmp[id].debut_job+'</td><td>';
-                        if (listeEmp[id].fin_job!=null){
-                html+=' <div style="background-color: red; border-radius: 10px; text-align: center;color: white">'+listeEmp[id].fin_job+'</div>';
-                } else{
-                    html+='<div style="background-color: green; border-radius: 10px; text-align: center;color: white">  Non Défini</div>';
-                }
-                let dte = new Date();
-                let mydte = new Date(""+listeEmp[id].naissance);
-                html+='  </td> <td>'+listeEmp[id].naissance+' ('+(dte.getYear()-mydte.getYear())+' ans)</td>';
-                html+='  <td>'+listeEmp[id].adresse+'</td></tr>';
+                
+             html+=' <td class="justify-content-center d-flex align-self-center"><a data-bs-toggle="modal" href="#refusdemandabsence'+listeAttente[id].id+'"';
+            html+=' role="button" class="btn btn-outline-danger btn_admin"><i class="fa fa-xmark"></i></a>&nbsp;&nbsp;<a data-bs-toggle="modal" href="#acceptdemandabsence'+listeAttente[id].id+'"';
+            html+='  role="button" class="btn btn_connection btn_admin"><i class="fa  fa-check"></i></a> </td>';
+            html+='<th>'+listeAttente[id].object+'</th>';
+            html+='<td> <p style="width: 30rem;" class="lh-sm-4 text-break  text-muted"> '+listeAttente[id].description+'</p></td>';
+            html+='<td> <h6>date: <span class="text-muted">'+listeAttente[id].date_debut+'</span> à <span class="text-muted">'+listeAttente[id].date_fin+'</span></h6>';
+            html+=' <p>heure: <span class="text-muted">'+listeAttente[id].hour_debut+'</span> à <span class="text-muted">'+listeAttente[id].hour_fin+'</span></p>   </td>';
+            html+=' <td> '+listeAttente[id].totale_day_absence+' jr(s)';
+            html+=' <td> <div> <h6>'+listeAttente[id].name+' '+listeAttente[id].username+'</h6> <p><a href="#">'+listeAttente[id].email+'</a> / '+listeAttente[id].phone+'</p>';
+            html+='  </div> </td>';
+            
+            html+='</tr>';
 
             }
         } else {
-            html += '<tr><td colspan="12" class="text-center" style="color:red;">Aucun Résultat</td></tr>';
+            html += '<tr><td colspan="6" class="text-center" style="color:red;">Aucun Résultat</td></tr>';
+        }
+        return html;
+}
+
+ function HTML_demande_absence_accepter(listeAccepter){
+    var html='';
+    if (listeAccepter.length > 0) {
+            for (var id = 0; id < listeAccepter.length; id += 1) {
+                html+='<tr>';
+                
+            html+='<th><i class="fa fa-check text-success"></i>&nbsp; '+listeAccepter[id].object+'</th>';
+            html+='<td> <p style="width: 30rem;" class="lh-sm-4 text-break  text-muted"> '+listeAccepter[id].description+'</p></td>';
+            html+='<td> <h6>date: <span class="text-muted">'+listeAccepter[id].date_debut+'</span> à <span class="text-muted">'+listeAccepter[id].date_fin+'</span></h6>';
+            html+=' <p>heure: <span class="text-muted">'+listeAccepter[id].hour_debut+'</span> à <span class="text-muted">'+listeAccepter[id].hour_fin+'</span></p>   </td>';
+            html+=' <td> '+listeAccepter[id].totale_day_absence+' jr(s)';
+            html+=' <td> <div> <h6>'+listeAccepter[id].name+' '+listeAccepter[id].username+'</h6> <p><a href="#">'+listeAccepter[id].email+'</a> / '+listeAccepter[id].phone+'</p>';
+            html+='  </div> </td>';
+            
+            html+='</tr>';
+
+            }
+        } else {
+            html += '<tr><td colspan="5" class="text-center" style="color:red;">Aucun Résultat</td></tr>';
+        }
+        return html;
+}
+
+ function HTML_demande_absence_refuser(listeRefuser){
+    var html='';
+    if (listeRefuser.length > 0) {
+            for (var id = 0; id < listeRefuser.length; id += 1) {
+                html+='<tr>';
+                
+            html+='<th><i class="fa fa-xmark text-danger"></i>&nbsp; '+listeRefuser[id].object+'</th>';
+            html+='<td> <p style="width: 30rem;" class="lh-sm-4 text-break  text-muted"> '+listeRefuser[id].description+'</p></td>';
+            html+='<td> <h6>date: <span class="text-muted">'+listeRefuser[id].date_debut+'</span> à <span class="text-muted">'+listeRefuser[id].date_fin+'</span></h6>';
+            html+=' <p>heure: <span class="text-muted">'+listeRefuser[id].hour_debut+'</span> à <span class="text-muted">'+listeRefuser[id].hour_fin+'</span></p>   </td>';
+            html+=' <td> '+listeRefuser[id].totale_day_absence+' jr(s)';
+            html+=' <td> <div> <h6>'+listeRefuser[id].name+' '+listeRefuser[id].username+'</h6> <p><a href="#">'+listeRefuser[id].email+'</a> / '+listeRefuser[id].phone+'</p>';
+            html+='  </div> </td>';
+            
+            html+='</tr>';
+
+            }
+        } else {
+            html += '<tr><td colspan="5" class="text-center" style="color:red;">Aucun Résultat</td></tr>';
         }
         return html;
 }
@@ -48,14 +86,29 @@
         var dataValiny = {
             data_value:value
             ,colone: col_trie
-            , debut_aff: @php echo $pagination["debut_aff"];@endphp
+            , debut_aff_attente: @php echo $pagination_attente["debut_aff"];@endphp
+            , debut_aff_accepter: @php echo $pagination_accepter["debut_aff"];@endphp
+            , debut_aff_refuser: @php echo $pagination_refuser["debut_aff"];@endphp
         };
         @php if (isset($search_name)) {  @endphp
             dataValiny = {
                 data_value: value
                 ,colone: col_trie
-                , debut_aff: @php echo $pagination["debut_aff"]; @endphp
+                , debut_aff_attente: @php echo $pagination_attente["debut_aff"];@endphp
+                , debut_aff_accepter: @php echo $pagination_accepter["debut_aff"];@endphp
+                , debut_aff_refuser: @php echo $pagination_refuser["debut_aff"];@endphp
                 , search_name: "@php echo $search_name; @endphp"
+            };
+            @php }   @endphp
+
+             @php if (isset($search_month)) {  @endphp
+            dataValiny = {
+                data_value: value
+                ,colone: col_trie
+                , debut_aff_attente: @php echo $pagination_attente["debut_aff"];@endphp
+                , debut_aff_accepter: @php echo $pagination_accepter["debut_aff"];@endphp
+                , debut_aff_refuser: @php echo $pagination_refuser["debut_aff"];@endphp
+                , search_month: "@php echo $search_month; @endphp"
             };
             @php }   @endphp
 
@@ -65,14 +118,14 @@
 function start_request(dataValue){
     $.ajax({
             method: "GET"
-            , url: "{{route('employe.trie')}}"
+            , url: "{{route('demandeabsence.trie')}}"
             , data: dataValue
             , dataType: "html"
             , success: function(response) {
                 var apl = JSON.parse(response);
-                var resultat = HTML_employer(apl['employes']);
-                $('#list_data_trie_employes').empty().append(resultat);
-
+                $('#list_data_trie_absence_attente').empty().append(HTML_demande_absence_attente(apl['demande_absence_attente']));
+                $('#list_data_trie_absence_accepter').empty().append(HTML_demande_absence_accepter(apl['demande_absence_accepter']));
+                $('#list_data_trie_absence_refuser').empty().append(HTML_demande_absence_refuser(apl['demande_absence_refuser']));
             }
             , error: function(error) {
                 console.log(error)
@@ -80,7 +133,8 @@ function start_request(dataValue){
         });
 }
 // ============================================================
-    $(".name_trie").on('click', function(e) {
+    $(".motif_absence_trie").on('click', function(e) {
+
         var valiny = $(this).val();
         $(this)
                 .find(".icon_trie")
@@ -101,31 +155,31 @@ function start_request(dataValue){
                 .addClass("fa-arrow-down");
         }
 
-        $('.salaire_trie')
+        $('.date_debut_absence_trie')
             .find(".icon_trie")
             .removeClass("text-primary")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie")
             .addClass("fa-arrow-down");
 
-            $('.debut_job_trie')
+            $('.name_emp_absence_trie')
             .find(".icon_trie")
             .removeClass("text-primary")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie")
             .addClass("fa-arrow-down");
 
-        if ($(".name_trie").val() == 0) {
-            $(".name_trie").val(1);
+        if ($(".motif_absence_trie").val() == 0) {
+            $(".motif_absence_trie").val(1);
         } else {
             $(".name_trie").val(0);
         }
-            var dataValue = getDataRequetTrie(valiny,"NAME_EMP");
-            start_request(dataValue);
+            var dataValue = getDataRequetTrie(valiny,"MOTIF_ABSENCE");
+          start_request(dataValue);
 
     });
 
-    $(".salaire_trie").on('click', function(e) {
+    $(".date_debut_absence_trie").on('click', function(e) {
         var valiny = $(this).val();
         $(this)
             .find(".icon_trie")
@@ -146,31 +200,31 @@ function start_request(dataValue){
                 .addClass("fa-arrow-down");
         }
 
-        $('.name_trie')
+        $('.motif_absence_trie')
             .find(".icon_trie")
             .removeClass("text-primary")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie")
             .addClass("fa-arrow-down");
 
-            $('.debut_job_trie')
+            $('.name_emp_absence_trie')
             .find(".icon_trie")
             .removeClass("text-primary")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie")
             .addClass("fa-arrow-down");
 
-        if ($(".salaire_trie").val() == 0) {
-            $(".salaire_trie").val(1);
+        if ($(".date_debut_absence_trie").val() == 0) {
+            $(".date_debut_absence_trie").val(1);
         } else {
-            $(".salaire_trie").val(0);
+            $(".date_debut_absence_trie").val(0);
         }
-            var dataValue = getDataRequetTrie(valiny,"SALAIRE_EMP");
+            var dataValue = getDataRequetTrie(valiny,"DATE_DEBUT_ABSENCE");
             start_request(dataValue);
 
     });
 
-    $(".debut_job_trie").on('click', function(e) {
+    $(".name_emp_absence_trie").on('click', function(e) {
         var valiny = $(this).val();
         $(this)
             .find(".icon_trie")
@@ -191,24 +245,24 @@ function start_request(dataValue){
                 .addClass("fa-arrow-down");
         }
 
-        $('.name_trie')
+        $('.motif_absence_trie')
             .find(".icon_trie")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie text-primary")
             .addClass("fa-arrow-down");
 
-            $('.salaire_trie')
+            $('.date_debut_absence_trie')
             .find(".icon_trie")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie text-primary")
             .addClass("fa-arrow-down");
 
-        if ($(".debut_job_trie").val() == 0) {
-            $(".debut_job_trie").val(1);
+        if ($(".name_emp_absence_trie").val() == 0) {
+            $(".name_emp_absence_trie").val(1);
         } else {
-            $(".debut_job_trie").val(0);
+            $(".name_emp_absence_trie").val(0);
         }
-            var dataValue = getDataRequetTrie(valiny,"DEBUT_JOB_EMP");
+            var dataValue = getDataRequetTrie(valiny,"NAME_EMP_ABSENCE");
             start_request(dataValue);
 
     });

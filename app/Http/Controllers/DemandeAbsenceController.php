@@ -22,9 +22,9 @@ class DemandeAbsenceController extends Controller
         $this->demande = new Demande_absence();
     }
 
-    public function index()
+    public function index2()
     {
-        $nb_limit = 20;
+        $nb_limit = 15;
         $nbPag_attente = 1;
         $nbPag_accepter = 1;
         $nbPag_refuser = 1;
@@ -53,9 +53,9 @@ class DemandeAbsenceController extends Controller
         }
     }
 
-    public function pagination( $nbPag_para_attente = null, $nbPag_para_accepter = null, $nbPag_para_refuser = null,$page_cible=null)
+    public function index( $nbPag_para_attente = null, $nbPag_para_accepter = null, $nbPag_para_refuser = null,$page_cible=null)
     {
-        $nb_limit = 20;
+        $nb_limit = 15;
         $nbPag_attente = 0;
         $nbPag_accepter = 0;
         $nbPag_refuser = 0;
@@ -169,9 +169,9 @@ class DemandeAbsenceController extends Controller
     }
 
 
-    public function filtre(Request $req, $nbPag_para_attente = null, $nbPag_para_accepter = null, $nbPag_para_refuser = null, $search_name_para = null)
+    public function filtre(Request $req, $nbPag_para_attente = null, $nbPag_para_accepter = null, $nbPag_para_refuser = null,$page_cible=null, $search_name_para = null)
     {
-        $nb_limit = 20;
+        $nb_limit = 15;
         $nbPag_attente = 0;
         $nbPag_accepter = 0;
         $nbPag_refuser = 0;
@@ -246,86 +246,198 @@ class DemandeAbsenceController extends Controller
         $pagination_accepter = $this->fonct->nb_liste_pagination($nbreTotal_abs_accepter, $nbPag_accepter, $nb_limit);
         $pagination_refuser = $this->fonct->nb_liste_pagination($nbreTotal_abs_refuser, $nbPag_refuser, $nb_limit);
 
+        return view("admin.demande.demande_absence", compact('search_name','page_cible','pagination_attente','pagination_accepter','pagination_refuser','demande_absence_attente', 'demande_absence_accepter', 'demande_absence_refuser'));
 
-        return view('admin.home.home', compact('search_name', 'pagination', 'employes', 'departements', 'genres', 'postes'));
     }
+
+
+    public function month(Request $req, $nbPag_para_attente = null, $nbPag_para_accepter = null, $nbPag_para_refuser = null,$page_cible_para=null, $search_month_para = null)
+    {
+        $nb_limit = 15;
+        $nbPag_attente = 0;
+        $nbPag_accepter = 0;
+        $nbPag_refuser = 0;
+        $search_month = "";
+        $page_cible="";
+        if($req->page_cible!=null){
+              $page_cible=$req->page_cible;
+            } else {
+                $page_cible=$page_cible_para; 
+            }
+        
+        if ($nbPag_para_attente <= 0 || $nbPag_para_attente == null) {
+            $nbPag_attente = 1;
+        } else {
+            $nbPag_attente = $nbPag_para_attente;
+        }
+        //========accepter
+        if ($nbPag_para_accepter <= 0 || $nbPag_para_accepter == null) {
+            $nbPag_accepter = 1;
+        } else {
+            $nbPag_accepter = $nbPag_para_accepter;
+        }
+        //========refuser
+        if ($nbPag_para_refuser <= 0 || $nbPag_para_refuser == null) {
+            $nbPag_refuser = 1;
+        } else {
+            $nbPag_refuser = $nbPag_para_refuser;
+        }
+
+        if ($search_month_para <= 0 || $search_month_para == null) {
+            $search_month = $req->search_month;
+        } else {
+            $search_month = $search_month_para;
+        }
+
+        $nbreTotal_abs_attente = $this->fonct->getNbrePagination("v_demande_absence_attente", "id", ["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month], "OR");
+        $nbreTotal_abs_accepter = $this->fonct->getNbrePagination("v_demande_absence_accepter", "id", ["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month], "OR");
+        $nbreTotal_abs_refuser = $this->fonct->getNbrePagination("v_demande_absence_refuser", "id", ["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month], "OR");
+
+        $demande_absence_attente = $this->fonct->findWhereTrieOrderBy(
+            "v_demande_absence_attente",
+            ["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month],
+            ["id"],
+            "OR",
+            "ASC",
+            $nbPag_attente,
+            $nb_limit
+        );
+
+        $demande_absence_accepter = $this->fonct->findWhereTrieOrderBy(
+            "v_demande_absence_accepter",
+            ["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month],
+            ["id"],
+            "OR",
+            "ASC",
+            $nbPag_accepter,
+            $nb_limit
+        );
+
+        $demande_absence_refuser = $this->fonct->findWhereTrieOrderBy(
+            "v_demande_absence_refuser",
+            ["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month],
+            ["id"],
+            "OR",
+            "ASC",
+            $nbPag_refuser,
+            $nb_limit
+        );
+
+        $pagination_attente = $this->fonct->nb_liste_pagination($nbreTotal_abs_attente, $nbPag_attente, $nb_limit);
+        $pagination_accepter = $this->fonct->nb_liste_pagination($nbreTotal_abs_accepter, $nbPag_accepter, $nb_limit);
+        $pagination_refuser = $this->fonct->nb_liste_pagination($nbreTotal_abs_refuser, $nbPag_refuser, $nb_limit);
+
+        return view("admin.demande.demande_absence", compact('search_month','page_cible','pagination_attente','pagination_accepter','pagination_refuser','demande_absence_attente', 'demande_absence_accepter', 'demande_absence_refuser'));
+
+    }
+
 
     public function trie(Request $req)
     {
-        $nb_limit = 20;
-        $nbPag = $req->debut_aff;
+        $nb_limit = 15;
+            $nbPag_attente = $req->debut_aff_attente;
+            $nbPag_accepter = $req->debut_aff_accepter;
+            $nbPag_refuser = $req->debut_aff_refuser;
         $search_name = "";
+        $search_month = "";
         $order = "ASC";
         $colone_trie = ["id"];
-        $employes = [];
-        $query = "";
+
+        $demande_absence_attente = [];
+        $demande_absence_accepter = [];
+        $demande_absence_refuser = [];
+      
         if ($req->data_value == 0) { // order by ASC
             $order = "ASC";
         }
         if ($req->data_value == 1) { // order by DESC
             $order = "DESC";
         }
-        if ($req->colone == "NAME_EMP") {
+
+        if ($req->colone == "MOTIF_ABSENCE") {
+            $colone_trie = ["object"];
+        }
+
+        if ($req->colone == "DATE_DEBUT_ABSENCE") {
+            $colone_trie = ["date_debut"];
+        }
+      
+        if ($req->colone == "NAME_EMP_ABSENCE") {
             $colone_trie = ["name"];
         }
-        if ($req->colone == "SALAIRE_EMP") {
-            $colone_trie = ["salaire"];
-        }
-        if ($req->colone == "DEBUT_JOB_EMP") {
-            $colone_trie = ["debut_job"];
-        }
 
-        if (isset($req->search_name)) {
+        if (isset($req->search_name)) { // recherche par Employer
             $search_name = $req->search_name;
-            $query = $this->fonct->queryWhereTrieOrderBy(
-                "v_employe",
-                ["name", "username"],
-                ["LIKE", "LIKE"],
-                ["%" . $search_name . "%", "%" . $search_name . "%"],
+          
+            $demande_absence_attente = $this->fonct->findWhereTrieOrderBy(
+                "v_demande_absence_attente",["name", "username"], ["LIKE", "LIKE"], ["%" . $search_name . "%", "%" . $search_name . "%"],
                 $colone_trie,
                 "OR",
                 $order,
-                $nbPag,
+                $nbPag_attente,
                 $nb_limit
             );
-            $employes = $this->fonct->findWhereTrieOrderBy(
-                "v_employe",
-                ["name", "username"],
-                ["LIKE", "LIKE"],
-                ["%" . $search_name . "%", "%" . $search_name . "%"],
+
+            $demande_absence_accepter = $this->fonct->findWhereTrieOrderBy(
+                "v_demande_absence_accepter",["name", "username"], ["LIKE", "LIKE"], ["%" . $search_name . "%", "%" . $search_name . "%"],
                 $colone_trie,
                 "OR",
                 $order,
-                $nbPag,
+                $nbPag_accepter,
                 $nb_limit
             );
+
+            $demande_absence_refuser = $this->fonct->findWhereTrieOrderBy(
+                "v_demande_absence_refuser",["name", "username"], ["LIKE", "LIKE"], ["%" . $search_name . "%", "%" . $search_name . "%"],
+                $colone_trie,
+                "OR",
+                $order,
+                $nbPag_refuser,
+                $nb_limit
+            );
+
+        } else if (isset($req->search_month)) { // recherche par date(Mois et année)
+                $search_month = $req->search_month;
+             
+                $demande_absence_attente = $this->fonct->findWhereTrieOrderBy(
+                    "v_demande_absence_attente",["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month],
+                    $colone_trie,
+                    "OR",
+                    $order,
+                    $nbPag_attente,
+                    $nb_limit
+                );
+    
+                $demande_absence_accepter = $this->fonct->findWhereTrieOrderBy(
+                    "v_demande_absence_accepter",["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month],
+                    $colone_trie,
+                    "OR",
+                    $order,
+                    $nbPag_accepter,
+                    $nb_limit
+                );
+    
+                $demande_absence_refuser = $this->fonct->findWhereTrieOrderBy(
+                    "v_demande_absence_refuser",["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month],
+                    $colone_trie,
+                    "OR",
+                    $order,
+                    $nbPag_refuser,
+                    $nb_limit
+                );
+           
         } else {
 
-            $query = $this->fonct->queryWhereTrieOrderBy(
-                "v_employe",
-                [],
-                [],
-                [],
-                $colone_trie,
-                "OR",
-                $order,
-                $nbPag,
-                $nb_limit
-            );
-            $employes = $this->fonct->findWhereTrieOrderBy(
-                "v_employe",
-                [],
-                [],
-                [],
-                $colone_trie,
-                "OR",
-                $order,
-                $nbPag,
-                $nb_limit
-            );
+            $demande_absence_attente = $this->fonct->findWhereTrieOrderBy("v_demande_absence_attente",[], [], [], $colone_trie,"OR", $order, $nbPag_attente,$nb_limit );
+
+            $demande_absence_accepter = $this->fonct->findWhereTrieOrderBy("v_demande_absence_accepter",[], [], [], $colone_trie, "OR",$order, $nbPag_accepter, $nb_limit );
+
+            $demande_absence_refuser = $this->fonct->findWhereTrieOrderBy("v_demande_absence_refuser",["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month], $colone_trie,"OR", $order, $nbPag_refuser,$nb_limit );
         }
         return response()->json([
-            "employes" => $employes
+            "demande_absence_attente" => $demande_absence_attente
+            ,"demande_absence_accepter" => $demande_absence_accepter
+            ,"demande_absence_refuser" => $demande_absence_refuser
         ]);
     }
 }

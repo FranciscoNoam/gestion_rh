@@ -18,7 +18,7 @@ v_dernier_demande_conger_tmp.employe_id = demande_congers.employe_id AND v_derni
 
 
 CREATE OR REPLACE VIEW v_demande_conger AS SELECT
-demande_congers.*,DATEDIFF(date_fin,date_debut) AS totale_day_conger,YEAR(date_fin) AS year_date_fin,YEAR(date_debut) AS year_date_debut,
+demande_congers.*,DATEDIFF(date_fin,date_debut) AS totale_day_conger,DATE_FORMAT(date_fin, "%Y-%m") AS month_date_fin,DATE_FORMAT(date_debut, "%Y-%m") AS month_date_debut,YEAR(date_fin) AS year_date_fin,YEAR(date_debut) AS year_date_debut,
 employes.name,employes.username,employes.email,employes.phone
 FROM
 demande_congers,employes WHERE demande_congers.employe_id = employes.id;
@@ -44,6 +44,7 @@ object,
 description,
 date_debut,
 date_fin,
+month_date_fin,month_date_debut,
 year_date_fin,
 year_date_debut,
 employe_id,
@@ -64,6 +65,7 @@ object,
 description,
 date_debut,
 date_fin,
+month_date_fin,month_date_debut,
 year_date_fin,
 year_date_debut,
 employe_id,
@@ -84,6 +86,7 @@ object,
 description,
 date_debut,
 date_fin,
+month_date_fin,month_date_debut,
 year_date_fin,
 year_date_debut,
 employe_id,

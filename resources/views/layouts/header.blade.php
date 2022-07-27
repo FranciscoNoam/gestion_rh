@@ -59,7 +59,7 @@
 
                                 @canany(['isAdmin','isSuperAdmin'])
                                 <li class="nav-item">
-                                    <a class="nav-link {{Route::currentRouteNamed('home') ? 'active' : '' }}"
+                                    <a class="nav-link {{Route::currentRouteNamed('home.index') ? 'active' : '' }}"
                                         aria-current="page" href="{{ route('home') }}">Employers</a>
                                 </li>
                                 <li class="nav-item">

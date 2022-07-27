@@ -63,7 +63,7 @@
 
                 {{-- ======================= condition pagination=================== --}}
 
-                @elseif (($pagination["debut_aff"]+$pagination["nb_limit"]) > $pagination["totale_pagination"])
+                @elseif (($pagination["debut_aff"]+$pagination["nb_limit"]) >= $pagination["totale_pagination"])
 
                 @if(isset($search_name))
 

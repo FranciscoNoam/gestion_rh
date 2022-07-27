@@ -18,7 +18,7 @@ v_dernier_demande_absence_tmp.employe_id = demande_absences.employe_id AND v_der
 
 
 CREATE OR REPLACE VIEW v_demande_absence AS SELECT
-demande_absences.*,DATEDIFF(date_fin,date_debut) AS totale_day_absence,YEAR(date_fin) AS year_date_fin,YEAR(date_debut) AS year_date_debut,
+demande_absences.*,DATEDIFF(date_fin,date_debut) AS totale_day_absence,DATE_FORMAT(date_fin, "%Y-%m") AS month_date_fin,DATE_FORMAT(date_debut, "%Y-%m") AS month_date_debut,YEAR(date_fin) AS year_date_fin,YEAR(date_debut) AS year_date_debut,
 employes.name,employes.username,employes.email,employes.phone
 FROM
 demande_absences,employes WHERE demande_absences.employe_id = employes.id;
@@ -46,6 +46,7 @@ date_debut,
 date_fin,
 hour_debut,
 hour_fin,
+month_date_fin,month_date_debut,
 year_date_fin,
 year_date_debut,
 employe_id,
@@ -68,6 +69,7 @@ date_debut,
 hour_debut,
 hour_fin,
 date_fin,
+month_date_fin,month_date_debut,
 year_date_fin,
 year_date_debut,
 employe_id,
@@ -90,6 +92,7 @@ date_debut,
 hour_debut,
 hour_fin,
 date_fin,
+month_date_fin,month_date_debut,
 year_date_fin,
 year_date_debut,
 employe_id,

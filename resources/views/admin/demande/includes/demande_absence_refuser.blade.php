@@ -1,29 +1,24 @@
 <table class="table  table-hover table-bordered">
     <thead>
         <tr>
-            <td>Motif &nbsp; <a href="#" style="color: blue"> <button
-                        class="btn btn_creer_trie num_fact_trie" value="0"><i
-                            class="fa icon_trie fa-arrow-down"></i></button>
+             <td>Motif &nbsp; <button class="btn btn_creer_trie motif_absence_trie" value="0"><i class="fa icon_trie fa-arrow-down"></i></button>
             </td>
-            <td>Description </td>
-            <td scope="col">Duré du absence</td>
-            <td scope="col">Totale &nbsp; <button class="btn btn_creer_trie nom_entiter_trie"
-                    value="0"><i class="fa icon_trie fa-arrow-down"></i></button></td>
-            <td scope="col">Employer &nbsp; <button
-                    class="btn btn_creer_trie dte_reglement_trie" value="0"><i
-                        class="fa icon_trie fa-arrow-down"></i></button>
+            <td >Description </td>
+            <td scope="col">Duré du absence &nbsp; <button class="btn btn_creer_trie date_debut_absence_trie" value="0"><i class="fa icon_trie fa-arrow-down"></i></button></td>
+            <td scope="col">Totale</td>
+            <td scope="col">Employer &nbsp; <button class="btn btn_creer_trie name_emp_absence_trie" value="0"><i class="fa icon_trie fa-arrow-down"></i></button>
             </td>
 
         </tr>
     </thead>
-    <tbody id="list_data_trie_payer">
+    <tbody id="list_data_trie_absence_refuser">
 
             @if (count($demande_absence_refuser)>0)
         @foreach ($demande_absence_refuser as $refuser)
         <tr>
             <th><i class="fa fa-xmark text-danger"></i>&nbsp; {{ $refuser->object }} </th>
             <td>
-                <p class="text-muted"> {{$refuser->description}}</p>
+                <p style="width: 30rem;" class="lh-sm-4 text-break  text-muted"> {{$refuser->description}}</p>
             </td>
             <td>
                 <h6>date: <span class="text-muted">{{ $refuser->date_debut }}</span> à <span

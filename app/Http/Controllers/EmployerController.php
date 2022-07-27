@@ -32,7 +32,7 @@ class EmployerController extends Controller
 
     public function filtre(Request $req, $nbPag_para = null, $search_name_para = null)
     {
-        $nb_limit = 20;
+        $nb_limit = 15;
         $nbPag = 0;
         $search_name = "";
 
@@ -69,7 +69,7 @@ class EmployerController extends Controller
 
     public function trie(Request $req)
     {
-        $nb_limit = 20;
+        $nb_limit = 15;
         $nbPag = $req->debut_aff;
         $search_name = "";
         $order = "ASC";

@@ -22,6 +22,8 @@
                             aria-selected="false">
 
                             @endif
+
+                          
                             @else
 
                             <a href="#" class="nav-link active" id="nav-brouilon-tab" data-bs-toggle="tab"
@@ -137,12 +139,13 @@
                                             </div>
                                             <div class="col">
                                                 <div class="d-flex justify-content-end">
-                                                    <form action="#" class="formulaire_new d-flex justify-content-end"
-                                                        id="msform_facture" method="POST" enctype="multipart/form-data">
+                                                    <form action="{{ route('demandeabsence.filtre') }}" class="formulaire_new d-flex justify-content-end"
+                                                        id="msform_facture" method="GET" enctype="multipart/form-data">
                                                         @csrf
                                                         <label for="" class="form-control-label me-2">Employer</label>
-                                                        <input type="text" name="search_name" id="search_name"
-                                                            placeholder="Nom ou Prenom" class="form-control-input me-2">
+                                                        <input type="text" name="search_name" id="search_name" placeholder="Nom ou Prenom" required class="form-control-input me-2">
+                                                        <input type="text" name="page_cible" value="&attente" id="page_cible" hidden required class="form-control-input me-2">
+
                                                         <div class="text-end">
                                                             <button type="submit" class="btn btn_connection me-2"><i
                                                                     class="fa fa-magnifying-glass"></i></button>
@@ -152,17 +155,22 @@
                                             </div>
                                             <div class="col">
                                                 <div class="d-flex justify-content-end">
-                                                    <form action="#" class="formulaire_new d-flex justify-content-end"
-                                                        id="msform_facture" method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        <label for="" class="form-control-label me-2">Mois</label>
-                                                        <input type="month" name="search_name" id="search_name"
-                                                            placeholder="employer" class="form-control-input me-2">
-                                                        <div class="text-end">
-                                                            <button type="submit" class="btn btn_connection me-2"><i
-                                                                    class="fa fa-magnifying-glass"></i></button>
-                                                        </div>
-                                                    </form>
+                                                    <form action="{{ route('demandeabsence.month') }}"
+                                                    class="formulaire_new d-flex justify-content-end"
+                                                    id="msform_facture" method="GET"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    <label for=""
+                                                        class="form-control-label me-2">Mois</label>
+                                                    <input type="month" name="search_month" id="search_month" placeholder="employer" required
+                                                        class="form-control-input me-2">
+                                                        <input type="text" name="page_cible" value="&attente" id="page_cible" hidden required class="form-control-input me-2">
+                                                    <div class="text-end">
+                                                        <button type="submit"
+                                                            class="btn btn_connection me-2"><i
+                                                                class="fa fa-magnifying-glass"></i></button>
+                                                    </div>
+                                                </form>
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -210,36 +218,32 @@
                                                         </div>
                                                         <div class="col">
                                                             <div class="d-flex justify-content-end">
-                                                                <form action="#"
-                                                                    class="formulaire_new d-flex justify-content-end"
-                                                                    id="msform_facture" method="POST"
-                                                                    enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    <label for=""
-                                                                        class="form-control-label me-2">Employer</label>
-                                                                    <input type="text" name="search_name"
-                                                                        id="search_name" placeholder="Nom ou Prenom"
-                                                                        class="form-control-input me-2">
-                                                                    <div class="text-end">
-                                                                        <button type="submit"
-                                                                            class="btn btn_connection me-2"><i
-                                                                                class="fa fa-magnifying-glass"></i></button>
-                                                                    </div>
-                                                                </form>
+                                                                <form action="{{ route('demandeabsence.filtre') }}" class="formulaire_new d-flex justify-content-end"
+                                                                id="msform_facture" method="GET" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <label for="" class="form-control-label me-2">Employer</label>
+                                                                <input type="text" name="search_name" id="search_name" placeholder="Nom ou Prenom" required class="form-control-input me-2">
+                                                                <input type="text" name="page_cible" value="&accepter" id="page_cible" hidden required class="form-control-input me-2">
+
+                                                                <div class="text-end">
+                                                                    <button type="submit" class="btn btn_connection me-2"><i
+                                                                            class="fa fa-magnifying-glass"></i></button>
+                                                                </div>
+                                                            </form>
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="d-flex justify-content-end">
-                                                                <form action="#"
+                                                                <form action="{{ route('demandeabsence.month') }}"
                                                                     class="formulaire_new d-flex justify-content-end"
-                                                                    id="msform_facture" method="POST"
+                                                                    id="msform_facture" method="GET"
                                                                     enctype="multipart/form-data">
                                                                     @csrf
                                                                     <label for=""
                                                                         class="form-control-label me-2">Mois</label>
-                                                                    <input type="month" name="search_name"
-                                                                        id="search_name" placeholder="employer"
+                                                                    <input type="month" name="search_month" id="search_month" placeholder="employer" required
                                                                         class="form-control-input me-2">
+                                                                        <input type="text" name="page_cible" value="&accepter" id="page_cible" hidden required class="form-control-input me-2">
                                                                     <div class="text-end">
                                                                         <button type="submit"
                                                                             class="btn btn_connection me-2"><i
@@ -292,36 +296,32 @@
                                                         </div>
                                                         <div class="col">
                                                             <div class="d-flex justify-content-end">
-                                                                <form action="#"
-                                                                    class="formulaire_new d-flex justify-content-end"
-                                                                    id="msform_facture" method="POST"
-                                                                    enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    <label for=""
-                                                                        class="form-control-label me-2">Employer</label>
-                                                                    <input type="text" name="search_name"
-                                                                        id="search_name" placeholder="Nom ou Prenom"
-                                                                        class="form-control-input me-2">
-                                                                    <div class="text-end">
-                                                                        <button type="submit"
-                                                                            class="btn btn_connection me-2"><i
-                                                                                class="fa fa-magnifying-glass"></i></button>
-                                                                    </div>
-                                                                </form>
+                                                                <form action="{{ route('demandeabsence.filtre') }}" class="formulaire_new d-flex justify-content-end"
+                                                                id="msform_facture" method="GET" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <label for="" class="form-control-label me-2">Employer</label>
+                                                                <input type="text" name="search_name" id="search_name" placeholder="Nom ou Prenom" required class="form-control-input me-2">
+                                                                <input type="text" name="page_cible" value="&refuser" id="page_cible" hidden required class="form-control-input me-2">
+
+                                                                <div class="text-end">
+                                                                    <button type="submit" class="btn btn_connection me-2"><i
+                                                                            class="fa fa-magnifying-glass"></i></button>
+                                                                </div>
+                                                            </form>
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="d-flex justify-content-end">
-                                                                <form action="#"
+                                                                <form action="{{ route('demandeabsence.month') }}"
                                                                     class="formulaire_new d-flex justify-content-end"
-                                                                    id="msform_facture" method="POST"
+                                                                    id="msform_facture" method="GET"
                                                                     enctype="multipart/form-data">
                                                                     @csrf
                                                                     <label for=""
                                                                         class="form-control-label me-2">Mois</label>
-                                                                    <input type="month" name="search_name"
-                                                                        id="search_name" placeholder="employer"
+                                                                    <input type="month" name="search_month" id="search_month" placeholder="employer" required
                                                                         class="form-control-input me-2">
+                                                                        <input type="text" name="page_cible" value="&refuser" id="page_cible" hidden required class="form-control-input me-2">
                                                                     <div class="text-end">
                                                                         <button type="submit"
                                                                             class="btn btn_connection me-2"><i
@@ -357,4 +357,7 @@
 
                         </div>
                     </div>
+{{-- =========== importation function JS --}}
+                    @include('admin.demande.function_js_trie.demande_absence_js')
+
                     @endsection
