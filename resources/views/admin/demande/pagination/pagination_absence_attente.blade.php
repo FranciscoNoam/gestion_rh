@@ -25,7 +25,7 @@
     <a href="#" role="button" class="mx-1 text-muted" style=" color:black; pointer-events: none;cursor: default;"><i  class='fa fa-angle-left'></i></a>
     <a href="#"  role="button" class="mx-1 text-muted" style=" color:black; pointer-events: none;cursor: default;"><i class='fa fa-angle-right'></i></a>
 
- 
+
     {{-- ======================= condition pagination_attente=================== --}}
 
     @elseif (($pagination_attente["debut_aff"]+$pagination_attente["nb_limit"]) >=
@@ -34,23 +34,23 @@
     @if(isset($search_name))
 
    <a href="{{ route('demandeabsence.filtre',[($pagination_attente["debut_aff"] - $pagination_attente["nb_limit"]),$pagination_accepter["debut_aff"],$pagination_refuser["debut_aff"],'&attente',$search_name] ) }}" role="button" class="mx-1"><i class='fa fa-angle-left'></i></a>
-  
+
   @elseif(issset($search_month))
   {{--  --}}
      <a href="{{ route('demandeabsence.month',[($pagination_attente["debut_aff"] - $pagination_attente["nb_limit"]),$pagination_accepter["debut_aff"],$pagination_refuser["debut_aff"],'&attente',$search_month] ) }}" role="button" class="mx-1"><i class='fa fa-angle-left'></i></a>
-  
+
     @else
 
     <a href="{{ route('demandeabsence.index',[($pagination_attente["debut_aff"] - $pagination_attente["nb_limit"]),$pagination_accepter["debut_aff"],$pagination_refuser["debut_aff"],'&attente'] ) }}" role="button" class="mx-1"><i class='fa fa-angle-left'></i></a>
-  
+
     @endif
 
   <a href="#"role="button" class="mx-1 text-muted" style=" color:black; pointer-events: none;cursor: default;"><i  class='fa fa-angle-right'></i></a>
 
     {{-- =============== condition pagination_attente ==================== --}}
     @elseif ($pagination_attente["debut_aff"] == 1)
- 
- <a href="#" role="button" class="mx-1 text-muted" style=" color:black; pointer-events: none;cursor: default;"><i class='fa fa-angle-left'></i></a>  
+
+ <a href="#" role="button" class="mx-1 text-muted" style=" color:black; pointer-events: none;cursor: default;"><i class='fa fa-angle-left'></i></a>
 
     @if(isset($search_name))
     {{-- -------- --}}
@@ -76,7 +76,7 @@
     <a href="{{ route('demandeabsence.filtre',[($pagination_attente["debut_aff"] - $pagination_attente["nb_limit"]),$pagination_accepter["debut_aff"],$pagination_refuser["debut_aff"],'&attente',$search_name] ) }}"
         role="button" class="mx-1">
         <i class='fa fa-angle-left'></i></a>
-  
+
   @elseif(issset($search_month))
   {{--  --}}
 
@@ -89,7 +89,7 @@
     <a href="{{ route('demandeabsence.index',[($pagination_attente["debut_aff"] - $pagination_attente["nb_limit"]),$pagination_accepter["debut_aff"],$pagination_refuser["debut_aff"],'&attente'] ) }}"
         role="button" class="mx-1">
         <i class='fa fa-angle-left'></i></a>
- 
+
     @endif
 
    <a href="#"  role="button" class="mx-1 text-muted" style=" color:black; pointer-events: none;cursor: default;"><i class='fa fa-angle-right'></i></a>

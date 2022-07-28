@@ -4,20 +4,19 @@
 <script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script type="text/javascript">
-    function HTML_demande_absence_attente(listeAttente){
+    function HTML_demande_conger_attente(listeAttente){
     var html='';
     if (listeAttente.length > 0) {
             for (var id = 0; id < listeAttente.length; id += 1) {
                 html+='<tr>';
 
-             html+=' <td class="justify-content-center d-flex align-self-center"><a data-bs-toggle="modal" href="#refusdemandabsence'+listeAttente[id].id+'"';
-            html+=' role="button" class="btn btn-outline-danger btn_admin"><i class="fa fa-xmark"></i></a>&nbsp;&nbsp;<a data-bs-toggle="modal" href="#acceptdemandabsence'+listeAttente[id].id+'"';
+            html+=' <td class="justify-content-center d-flex align-self-center"><a data-bs-toggle="modal" href="#refusdemandconger'+listeAttente[id].id+'"';
+            html+=' role="button" class="btn btn-outline-danger btn_admin"><i class="fa fa-xmark"></i></a>&nbsp;&nbsp;<a data-bs-toggle="modal" href="#acceptdemandconger'+listeAttente[id].id+'"';
             html+='  role="button" class="btn btn_connection btn_admin"><i class="fa  fa-check"></i></a> </td>';
             html+='<th>'+listeAttente[id].object+'</th>';
             html+='<td> <p style="width: 30rem;" class="lh-sm-4 text-break  text-muted"> '+listeAttente[id].description+'</p></td>';
-            html+='<td> <h6>date: <span class="text-muted">'+listeAttente[id].date_debut+'</span> à <span class="text-muted">'+listeAttente[id].date_fin+'</span></h6>';
-            html+=' <p>heure: <span class="text-muted">'+listeAttente[id].hour_debut+'</span> à <span class="text-muted">'+listeAttente[id].hour_fin+'</span></p>   </td>';
-            html+=' <td> '+listeAttente[id].totale_day_absence+' jr(s)';
+            html+='<td> <h6>date: <span class="text-muted">'+listeAttente[id].date_debut+'</span> à <span class="text-muted">'+listeAttente[id].date_fin+'</span></h6></td>';
+            html+=' <td> '+listeAttente[id].totale_day_conger+' jr(s)';
             html+=' <td> <div> <h6>'+listeAttente[id].name+' '+listeAttente[id].username+'</h6> <p><a href="#">'+listeAttente[id].email+'</a> / '+listeAttente[id].phone+'</p>';
             html+='  </div> </td>';
 
@@ -30,7 +29,7 @@
         return html;
 }
 
- function HTML_demande_absence_accepter(listeAccepter){
+ function HTML_demande_conger_accepter(listeAccepter){
     var html='';
     if (listeAccepter.length > 0) {
             for (var id = 0; id < listeAccepter.length; id += 1) {
@@ -38,9 +37,8 @@
 
             html+='<th><i class="fa fa-check text-success"></i>&nbsp; '+listeAccepter[id].object+'</th>';
             html+='<td> <p style="width: 30rem;" class="lh-sm-4 text-break  text-muted"> '+listeAccepter[id].description+'</p></td>';
-            html+='<td> <h6>date: <span class="text-muted">'+listeAccepter[id].date_debut+'</span> à <span class="text-muted">'+listeAccepter[id].date_fin+'</span></h6>';
-            html+=' <p>heure: <span class="text-muted">'+listeAccepter[id].hour_debut+'</span> à <span class="text-muted">'+listeAccepter[id].hour_fin+'</span></p>   </td>';
-            html+=' <td> '+listeAccepter[id].totale_day_absence+' jr(s)';
+            html+='<td> <h6>date: <span class="text-muted">'+listeAccepter[id].date_debut+'</span> à <span class="text-muted">'+listeAccepter[id].date_fin+'</span></h6></td>';
+            html+=' <td> '+listeAccepter[id].totale_day_conger+' jr(s)';
             html+=' <td> <div> <h6>'+listeAccepter[id].name+' '+listeAccepter[id].username+'</h6> <p><a href="#">'+listeAccepter[id].email+'</a> / '+listeAccepter[id].phone+'</p>';
             html+='  </div> </td>';
 
@@ -53,7 +51,7 @@
         return html;
 }
 
- function HTML_demande_absence_refuser(listeRefuser){
+ function HTML_demande_conger_refuser(listeRefuser){
     var html='';
     if (listeRefuser.length > 0) {
             for (var id = 0; id < listeRefuser.length; id += 1) {
@@ -61,9 +59,8 @@
 
             html+='<th><i class="fa fa-xmark text-danger"></i>&nbsp; '+listeRefuser[id].object+'</th>';
             html+='<td> <p style="width: 30rem;" class="lh-sm-4 text-break  text-muted"> '+listeRefuser[id].description+'</p></td>';
-            html+='<td> <h6>date: <span class="text-muted">'+listeRefuser[id].date_debut+'</span> à <span class="text-muted">'+listeRefuser[id].date_fin+'</span></h6>';
-            html+=' <p>heure: <span class="text-muted">'+listeRefuser[id].hour_debut+'</span> à <span class="text-muted">'+listeRefuser[id].hour_fin+'</span></p>   </td>';
-            html+=' <td> '+listeRefuser[id].totale_day_absence+' jr(s)';
+            html+='<td> <h6>date: <span class="text-muted">'+listeRefuser[id].date_debut+'</span> à <span class="text-muted">'+listeRefuser[id].date_fin+'</span></h6></td>';
+            html+=' <td> '+listeRefuser[id].totale_day_conger+' jr(s)';
             html+=' <td> <div> <h6>'+listeRefuser[id].name+' '+listeRefuser[id].username+'</h6> <p><a href="#">'+listeRefuser[id].email+'</a> / '+listeRefuser[id].phone+'</p>';
             html+='  </div> </td>';
 
@@ -118,14 +115,16 @@
 function start_request(dataValue){
     $.ajax({
             method: "GET"
-            , url: "{{route('demandeabsence.trie')}}"
+            , url: "{{route('demandeconger.trie')}}"
             , data: dataValue
             , dataType: "html"
             , success: function(response) {
                 var apl = JSON.parse(response);
-                $('#list_data_trie_absence_attente').empty().append(HTML_demande_absence_attente(apl['demande_absence_attente']));
-                $('#list_data_trie_absence_accepter').empty().append(HTML_demande_absence_accepter(apl['demande_absence_accepter']));
-                $('#list_data_trie_absence_refuser').empty().append(HTML_demande_absence_refuser(apl['demande_absence_refuser']));
+
+                $('#list_data_trie_conger_attente').empty().append(HTML_demande_conger_attente(apl['demande_conger_attente']));
+                $('#list_data_trie_conger_accepter').empty().append(HTML_demande_conger_accepter(apl['demande_conger_accepter']));
+                $('#list_data_trie_conger_refuser').empty().append(HTML_demande_conger_refuser(apl['demande_conger_refuser']));
+
             }
             , error: function(error) {
                 console.log(error)
@@ -133,7 +132,7 @@ function start_request(dataValue){
         });
 }
 // ============================================================
-    $(".motif_absence_trie").on('click', function(e) {
+    $(".motif_conger_trie").on('click', function(e) {
 
         $(this)
                 .find(".icon_trie")
@@ -154,32 +153,33 @@ function start_request(dataValue){
                 .addClass("fa-arrow-down");
         }
 
-        $('.date_debut_absence_trie')
+        $('.date_debut_conger_trie')
             .find(".icon_trie")
             .removeClass("text-primary")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie")
             .addClass("fa-arrow-down");
 
-            $('.name_emp_absence_trie')
+            $('.name_emp_conger_trie')
             .find(".icon_trie")
             .removeClass("text-primary")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie")
             .addClass("fa-arrow-down");
 
-        if ($(".motif_absence_trie").val() == 0) {
-            $(".motif_absence_trie").val(1);
+        if ($(".motif_conger_trie").val() == 0) {
+            $(".motif_conger_trie").val(1);
         } else {
-            $(".motif_absence_trie").val(0);
+            $(".motif_conger_trie").val(0);
         }
-        var valiny = $(".motif_absence_trie").val();
-            var dataValue = getDataRequetTrie(valiny,"MOTIF_ABSENCE");
+        var valiny = $(".motif_conger_trie").val();
+
+            var dataValue = getDataRequetTrie(valiny,"MOTIF_CONGER");
           start_request(dataValue);
 
     });
 
-    $(".date_debut_absence_trie").on('click', function(e) {
+    $(".date_debut_conger_trie").on('click', function(e) {
 
         $(this)
             .find(".icon_trie")
@@ -200,32 +200,32 @@ function start_request(dataValue){
                 .addClass("fa-arrow-down");
         }
 
-        $('.motif_absence_trie')
+        $('.motif_conger_trie')
             .find(".icon_trie")
             .removeClass("text-primary")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie")
             .addClass("fa-arrow-down");
 
-            $('.name_emp_absence_trie')
+            $('.name_emp_conger_trie')
             .find(".icon_trie")
             .removeClass("text-primary")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie")
             .addClass("fa-arrow-down");
 
-        if ($(".date_debut_absence_trie").val() == 0) {
-            $(".date_debut_absence_trie").val(1);
+        if ($(".date_debut_conger_trie").val() == 0) {
+            $(".date_debut_conger_trie").val(1);
         } else {
-            $(".date_debut_absence_trie").val(0);
+            $(".date_debut_conger_trie").val(0);
         }
-        var valiny = $(".date_debut_absence_trie").val();
-            var dataValue = getDataRequetTrie(valiny,"DATE_DEBUT_ABSENCE");
+        var valiny = $(".date_debut_conger_trie").val();
+            var dataValue = getDataRequetTrie(valiny,"DATE_DEBUT_CONGER");
             start_request(dataValue);
 
     });
 
-    $(".name_emp_absence_trie").on('click', function(e) {
+    $(".name_emp_conger_trie").on('click', function(e) {
 
         $(this)
             .find(".icon_trie")
@@ -246,25 +246,25 @@ function start_request(dataValue){
                 .addClass("fa-arrow-down");
         }
 
-        $('.motif_absence_trie')
+        $('.motif_conger_trie')
             .find(".icon_trie")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie text-primary")
             .addClass("fa-arrow-down");
 
-            $('.date_debut_absence_trie')
+            $('.date_debut_conger_trie')
             .find(".icon_trie")
             .removeClass("fa-arrow-up")
             .removeClass("color-text-trie text-primary")
             .addClass("fa-arrow-down");
 
-        if ($(".name_emp_absence_trie").val() == 0) {
-            $(".name_emp_absence_trie").val(1);
+        if ($(".name_emp_conger_trie").val() == 0) {
+            $(".name_emp_conger_trie").val(1);
         } else {
-            $(".name_emp_absence_trie").val(0);
+            $(".name_emp_conger_trie").val(0);
         }
-        var valiny = $(".name_emp_absence_trie").val();
-            var dataValue = getDataRequetTrie(valiny,"NAME_EMP_ABSENCE");
+        var valiny = $(".name_emp_conger_trie").val();
+            var dataValue = getDataRequetTrie(valiny,"NAME_EMP_CONGER");
             start_request(dataValue);
 
     });

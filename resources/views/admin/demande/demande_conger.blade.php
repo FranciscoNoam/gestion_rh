@@ -8,44 +8,91 @@
         <div class="mb-5">
             <ul class="nav nav-tabs d-flex flex-row navigation_module" id="myTab">
                 <li class="nav-item">
+                    @if (isset($page_cible))
+                    @if ($page_cible=='&attente')
+
                     <a href="#" class="nav-link active" id="nav-brouilon-tab" data-bs-toggle="tab"
                         data-bs-target="#nav-brouilon" type="button" role="tab" aria-controls="nav-brouilon"
                         aria-selected="true">
-                        En attente ({{ count($demande_conger_attente) }})
-                    </a>
+
+                        @else
+
+                        <a href="#" class="nav-link" id="nav-brouilon-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-brouilon" type="button" role="tab" aria-controls="nav-brouilon"
+                            aria-selected="false">
+
+                            @endif
+
+
+                            @else
+
+                            <a href="#" class="nav-link active" id="nav-brouilon-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-brouilon" type="button" role="tab" aria-controls="nav-brouilon"
+                                aria-selected="true">
+
+                                @endif
+                                En attente ({{ count($demande_conger_attente) }})
+                            </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link" id="nav-valide-tab" data-bs-toggle="tab" data-bs-target="#nav-valide"
-                        type="button" role="tab" aria-controls="nav-valide" aria-selected="false">
-                        Accepté ({{ count($demande_conger_accepter) }})
-                    </a>
+                    @if (isset($page_cible))
+                    @if ($page_cible=='&accepter')
+
+                    <a href="#" class="nav-link active" id="nav-valide-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-valide" type="button" role="tab" aria-controls="nav-valide"
+                        aria-selected="true">
+
+                        @else
+
+                        <a href="#" class="nav-link" id="nav-valide-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-valide" type="button" role="tab" aria-controls="nav-valide"
+                            aria-selected="false">
+
+                            @endif
+                            @else
+
+                            <a href="#" class="nav-link" id="nav-valide-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-valide" type="button" role="tab" aria-controls="nav-valide"
+                                aria-selected="false">
+
+                                @endif
+
+                                Accepté ({{ count($demande_conger_accepter) }})
+                            </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link" id="nav-poste-tab" data-bs-toggle="tab" data-bs-target="#nav-poste"
-                        type="button" role="tab" aria-controls="nav-poste" aria-selected="false">
-                        Réfusé ({{ count($demande_conger_refuser) }})
-                    </a>
+                    @if (isset($page_cible))
+                    @if ($page_cible=='&refuser')
+
+                    <a href="#" class="nav-link active" id="nav-poste-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-poste" type="button" role="tab" aria-controls="nav-poste"
+                        aria-selected="true">
+
+                        @else
+
+                        <a href="#" class="nav-link" id="nav-poste-tab" data-bs-toggle="tab" data-bs-target="#nav-poste"
+                            type="button" role="tab" aria-controls="nav-poste" aria-selected="false">
+
+                            @endif
+                            @else
+
+                            <a href="#" class="nav-link" id="nav-poste-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-poste" type="button" role="tab" aria-controls="nav-poste"
+                                aria-selected="false">
+
+                                @endif
+
+                                Réfusé ({{ count($demande_conger_refuser) }})
+                            </a>
                 </li>
+
 
             </ul>
         </div>
 
-        <style>
-            /* .btn_admin:hover{
-                color:white;
-            } */
-            /* table,
-            th {
-                font-size: 11px;
-            }
 
-            table,
-            td {
-                font-size: 11px;
-            } */
-        </style>
         {{-- <div class="row">
             <div class="col"></div>
             <div class="col"> --}}
@@ -62,399 +109,283 @@
                     </div>
 
                     @endif
+
+                    @if (isset($page_cible))
+                    @if ($page_cible=='&attente')
+
                     <div class="tab-pane fade show active shadow rounded px-2 mx-3 py-3" id="nav-brouilon"
                         role="tabpanel" aria-labelledby="nav-brouilon-tab">
 
-                        <h5 class=" mx-0">
-                            <div class="row mx-3 my-1 text-success">
-                                <div class="col">
-                                    <span class="mt-0 d-flex justify-content-start text-center text-success"
-                                        style="font-size: 20px;">Conger en attente</span>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <form action="#" class="formulaire_new d-flex justify-content-end"
-                                            id="msform_facture" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <label for="" class="form-control-label me-2">Employer</label>
-                                            <input type="text" name="search_name" id="search_name"
-                                                placeholder="Nom ou Prenom" class="form-control-input me-2">
-                                            <div class="text-end">
-                                                <button type="submit" class="btn btn-outline-success me-2"><i
-                                                        class="fa fa-magnifying-glass"></i></button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <form action="#" class="formulaire_new d-flex justify-content-end"
-                                            id="msform_facture" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <label for="" class="form-control-label me-2">Mois</label>
-                                            <input type="month" name="search_name" id="search_name"
-                                                placeholder="employer" class="form-control-input me-2">
-                                            <div class="text-end">
-                                                <button type="submit" class="btn btn-outline-success me-2"><i
-                                                        class="fa fa-magnifying-glass"></i></button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <span class="mt-0 d-flex justify-content-end text-center" style="font-size: 20px;">
-                                        <span style="position: relative; bottom: -0.2rem; ">
-                                            1-0 sur 0
-                                        </span>
-                                        <a href="#" role="button" class="mx-1"
-                                            style=" pointer-events: none;cursor: default;"><i
-                                                class='fa fa-angle-left'></i></a>
-                                        <a href="#" role="button" class="mx-1"
-                                            style="  pointer-events: none;cursor: default;"><i
-                                                class="fa fa-angle-right"></i></a>
-                                    </span>
-                                </div>
-                            </div>
-                        </h5>
+                        @else
 
-                        <table class="table  table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <td class="text-center">Action</td>
-                                    <td>Motif &nbsp; <a href="#" style="color: blue"> <button
-                                                class="btn btn_creer_trie num_fact_trie" value="0"><i
-                                                    class="fa icon_trie fa-arrow-down"></i></button>
-                                    </td>
-                                    <td>Description </td>
-                                    <td scope="col">Duré du conger</td>
-                                    <td scope="col">Totale &nbsp; <button class="btn btn_creer_trie nom_entiter_trie"
-                                            value="0"><i class="fa icon_trie fa-arrow-down"></i></button></td>
-                                    <td scope="col">Employer &nbsp; <button
-                                            class="btn btn_creer_trie dte_reglement_trie" value="0"><i
-                                                class="fa icon_trie fa-arrow-down"></i></button>
-                                    </td>
+                        <div class="tab-pane fade shadow rounded px-2 mx-3 py-3" id="nav-brouilon" role="tabpanel"
+                            aria-labelledby="nav-brouilon-tab">
 
-                                </tr>
-                            </thead>
-                            <tbody id="list_data_trie_payer">
 
-                                @if (count($demande_conger_attente)>0)
-                                @foreach ($demande_conger_attente as $attente)
-                                <div class="modal fade " id="acceptdemandconger{{ $attente->id }}" aria-hidden="true"
-                                    aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                                    <div class="modal-dialog   shadow p-3 lg-body  rounded">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-success text-white">
-                                                <h5 class="modal-title" id="exampleModalLabel">Acceptation du
-                                                    demande de conger "{{$attente->object}}"</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <form action="{{ route('demandeconger.accept',$attente->id) }}" class="mt-5"
-                                                id="msform_facture" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                <div class="modal-body">
-                                                    <p class="text-muted">{{$attente->description}}</p>
-                                                    <p>Voulez vous continuer <span style="color:green;"> ?</span></p>
-                                                </div>
-                                                <div class="modal-footer  justify-content-center">
-                                                    <button type="button" class="btn btn-outline-primary"
-                                                        data-bs-dismiss="modal">Non,
-                                                        j'annule</button>
-                                                    <button type="submit" class="btn btn-outline-success">Oui, j'accepte
-                                                        la
-                                                        demande</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal fade " id="refusdemandconger{{ $attente->id }}" aria-hidden="true"
-                                    aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                                    <div class="modal-dialog   shadow p-3 lg-body  rounded">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-danger text-white">
-                                                <h5 class="modal-title" id="exampleModalLabel">Refus du
-                                                    demande de conger "{{$attente->object}}"</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <form action="{{ route('demandeconger.refus',$attente->id) }}" class="mt-5"
-                                                id="msform_facture" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                <div class="modal-body">
-                                                    <p class="text-muted">{{$attente->description}}</p>
-                                                    <p>Voulez vous continuer <span style="color:red;"> ?</span></p>
-                                                </div>
-                                                <div class="modal-footer  justify-content-center">
-                                                    <button type="button" class="btn btn-outline-primary"
-                                                        data-bs-dismiss="modal">Non,
-                                                        j'annule</button>
-                                                    <button type="submit" class="btn btn-outline-success">Oui, je refuse
-                                                        la
-                                                        demande</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                            @endif
+                            @else
 
-                                <tr>
-                                    <td class="justify-content-center d-flex align-self-center">
-                                        <a data-bs-toggle="modal" href="#refusdemandconger{{ $attente->id }}"
-                                            role="button" class="btn btn-outline-danger btn_admin"><i
-                                                class="fa fa-xmark"></i></a>
-                                        &nbsp;&nbsp;
-                                        <a data-bs-toggle="modal" href="#acceptdemandconger{{ $attente->id }}"
-                                            role="button" class="btn btn-outline-success btn_admin"><i
-                                                class="fa  fa-check"></i></a>
-                                    </td>
+                            <div class="tab-pane fade show active shadow rounded px-2 mx-3 py-3" id="nav-brouilon"
+                                role="tabpanel" aria-labelledby="nav-brouilon-tab">
 
-                                    <th>{{ $attente->object }} </th>
-                                    <td>
-                                        <p class="text-muted"> {{$attente->description}}</p>
-                                    </td>
-                                    <td>
-                                        <h6>date: <span class="text-muted">{{ $attente->date_debut }}</span> à <span
-                                                class="text-muted">{{ $attente->date_fin }}</span></h6>
-                                    </td>
-                                    <td> {{ $attente->totale_day_conger }} jr(s)
-                                    <td>
-                                        <div>
-                                            <h6>{{ $attente->name." ".$attente->username }}</h6>
-                                            <p><a href="#">{{ $attente->email }}</a> / {{ $attente->phone }}</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td colspan="6" class="text-center" style="color:red;">Aucun Résultat</td>
-                                </tr>
                                 @endif
 
-                            </tbody>
-                        </table>
+                                {{-- <div class="tab-pane fade show active shadow rounded px-2 mx-3 py-3"
+                                    id="nav-brouilon" role="tabpanel" aria-labelledby="nav-brouilon-tab"> --}}
 
-                    </div>
-                    {{-- --}}
-
-                    <div class="tab-pane fade shadow rounded px-2 mx-3 py-3" id="nav-valide" role="tabpanel"
-                        aria-labelledby="nav-valide-tab">
-
-                        <h5 class=" mx-0">
-                            <div class="row mx-3 my-1 text-success">
-                                <div class="col">
-                                    <span class="mt-0 d-flex justify-content-start text-center text-success"
-                                        style="font-size: 20px;">Conger accepté</span>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <form action="#" class="formulaire_new d-flex justify-content-end"
-                                            id="msform_facture" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <label for="" class="form-control-label me-2">Employer</label>
-                                            <input type="text" name="search_name" id="search_name"
-                                                placeholder="Nom ou Prenom" class="form-control-input me-2">
-                                            <div class="text-end">
-                                                <button type="submit" class="btn btn-outline-success me-2"><i
-                                                        class="fa fa-magnifying-glass"></i></button>
+                                    <h5 class=" mx-0">
+                                        <div class="row mx-3 my-1 text-success">
+                                            <div class="col">
+                                                <span class="mt-0 d-flex justify-content-start text-center text-success"
+                                                    style="font-size: 20px;">Conger en attente</span>
                                             </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <form action="#" class="formulaire_new d-flex justify-content-end"
-                                            id="msform_facture" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <label for="" class="form-control-label me-2">Mois</label>
-                                            <input type="month" name="search_name" id="search_name"
-                                                placeholder="employer" class="form-control-input me-2">
-                                            <div class="text-end">
-                                                <button type="submit" class="btn btn-outline-success me-2"><i
-                                                        class="fa fa-magnifying-glass"></i></button>
+                                            <div class="col">
+                                                <div class="d-flex justify-content-end">
+                                                    <form action="{{ route('demandeconger.filtre') }}"
+                                                        class="formulaire_new d-flex justify-content-end"
+                                                        id="msform_facture" method="GET" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <label for="" class="form-control-label me-2">Employer</label>
+                                                        <input type="text" name="search_name" id="search_name"
+                                                            placeholder="Nom ou Prenom" required
+                                                            class="form-control-input me-2">
+                                                        <input type="text" name="page_cible" value="&attente"
+                                                            id="page_cible" hidden required
+                                                            class="form-control-input me-2">
+
+                                                        <div class="text-end">
+                                                            <button type="submit" class="btn btn_connection me-2"><i
+                                                                    class="fa fa-magnifying-glass"></i></button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <span class="mt-0 d-flex justify-content-end text-center" style="font-size: 20px;">
-                                        <span style="position: relative; bottom: -0.2rem; ">
-                                            1-0 sur 0
-                                        </span>
-                                        <a href="#" role="button" class="mx-1"
-                                            style=" pointer-events: none;cursor: default;"><i
-                                                class='fa fa-angle-left'></i></a>
-                                        <a href="#" role="button" class="mx-1"
-                                            style="  pointer-events: none;cursor: default;"><i
-                                                class="fa fa-angle-right"></i></a>
-                                    </span>
-                                </div>
-                            </div>
-                        </h5>
+                                            <div class="col">
+                                                <div class="d-flex justify-content-end">
+                                                    <form action="{{ route('demandeconger.month') }}"
+                                                        class="formulaire_new d-flex justify-content-end"
+                                                        id="msform_facture" method="GET" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <label for="" class="form-control-label me-2">Mois</label>
+                                                        <input type="month" name="search_month" id="search_month"
+                                                            placeholder="employer" required
+                                                            class="form-control-input me-2">
+                                                        <input type="text" name="page_cible" value="&attente"
+                                                            id="page_cible" hidden required
+                                                            class="form-control-input me-2">
+                                                        <div class="text-end">
+                                                            <button type="submit" class="btn btn_connection me-2"><i
+                                                                    class="fa fa-magnifying-glass"></i></button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="col">
 
-                        <table class="table  table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <td>Motif &nbsp; <a href="#" style="color: blue"> <button
-                                                class="btn btn_creer_trie num_fact_trie" value="0"><i
-                                                    class="fa icon_trie fa-arrow-down"></i></button>
-                                    </td>
-                                    <td>Description </td>
-                                    <td scope="col">Duré du conger</td>
-                                    <td scope="col">Totale &nbsp; <button class="btn btn_creer_trie nom_entiter_trie"
-                                            value="0"><i class="fa icon_trie fa-arrow-down"></i></button></td>
-                                    <td scope="col">Employer &nbsp; <button
-                                            class="btn btn_creer_trie dte_reglement_trie" value="0"><i
-                                                class="fa icon_trie fa-arrow-down"></i></button>
-                                    </td>
+                                                @include('admin.demande.pagination.pagination_conger_attente')
 
-                                </tr>
-                            </thead>
-                            <tbody id="list_data_trie_payer">
 
-                                @if (count($demande_conger_accepter)>0)
-                                @foreach ($demande_conger_accepter as $accepter)
-                                <tr>
-                                    <th><i class="fa fa-check text-success"></i>&nbsp; {{ $accepter->object }} </th>
-                                    <td>
-                                        <p class="text-muted"> {{$accepter->description}}</p>
-                                    </td>
-                                    <td>
-                                        <h6>date: <span class="text-muted">{{ $accepter->date_debut }}</span> à <span
-                                                class="text-muted">{{ $accepter->date_fin }}</span></h6>
-                                    </td>
-                                    <td> {{ $accepter->totale_day_conger }} jr(s)
-                                    <td>
-                                        <div>
-                                            <h6>{{ $accepter->name." ".$accepter->username }}</h6>
-                                            <p><a href="#">{{ $accepter->email }}</a> / {{ $accepter->phone }}</p>
+                                            </div>
                                         </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td colspan="5" class="text-center" style="color:red;">Aucun Résultat</td>
-                                </tr>
-                                @endif
+                                    </h5>
 
-                            </tbody>
-                        </table>
+                                    @include('admin.demande.includes.demande_conger_en_attente')
 
-                    </div>
-                    {{-- --}}
-                    <div class="tab-pane fade shadow rounded px-2 mx-3 py-3" id="nav-poste" role="tabpanel"
-                        aria-labelledby="nav-poste-tab">
-
-                        <h5 class=" mx-0">
-                            <div class="row mx-3 my-1 text-success">
-                                <div class="col">
-                                    <span class="mt-0 d-flex justify-content-start text-center text-success"
-                                        style="font-size: 20px;">Conger refusé</span>
                                 </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <form action="#" class="formulaire_new d-flex justify-content-end"
-                                            id="msform_facture" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <label for="" class="form-control-label me-2">Employer</label>
-                                            <input type="text" name="search_name" id="search_name"
-                                                placeholder="Nom ou Prenom" class="form-control-input me-2">
-                                            <div class="text-end">
-                                                <button type="submit" class="btn btn-outline-success me-2"><i
-                                                        class="fa fa-magnifying-glass"></i></button>
+                                {{-- --}}
+
+                                @if (isset($page_cible))
+                                @if ($page_cible=='&accepter')
+
+                                <div class="tab-pane fade shadow  show active  px-2 mx-3 py-3" id="nav-valide"
+                                    role="tabpanel" aria-labelledby="nav-valide-tab">
+
+                                    @else
+
+                                    <div class="tab-pane fade shadow rounded px-2 mx-3 py-3" id="nav-valide"
+                                        role="tabpanel" aria-labelledby="nav-valide-tab">
+
+
+                                        @endif
+                                        @else
+                                        <div class="tab-pane fade shadow rounded px-2 mx-3 py-3" id="nav-valide"
+                                            role="tabpanel" aria-labelledby="nav-valide-tab">
+
+                                            @endif
+
+                                            {{-- <div class="tab-pane fade shadow rounded px-2 mx-3 py-3"
+                                                id="nav-valide" role="tabpanel" aria-labelledby="nav-valide-tab"> --}}
+
+                                                <h5 class=" mx-0">
+                                                    <div class="row mx-3 my-1 text-success">
+                                                        <div class="col">
+                                                            <span
+                                                                class="mt-0 d-flex justify-content-start text-center text-success"
+                                                                style="font-size: 20px;">Conger accepté</span>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="d-flex justify-content-end">
+                                                                <form action="{{ route('demandeconger.filtre') }}"
+                                                                    class="formulaire_new d-flex justify-content-end"
+                                                                    id="msform_facture" method="GET"
+                                                                    enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <label for=""
+                                                                        class="form-control-label me-2">Employer</label>
+                                                                    <input type="text" name="search_name"
+                                                                        id="search_name" placeholder="Nom ou Prenom"
+                                                                        required class="form-control-input me-2">
+                                                                    <input type="text" name="page_cible"
+                                                                        value="&accepter" id="page_cible" hidden
+                                                                        required class="form-control-input me-2">
+
+                                                                    <div class="text-end">
+                                                                        <button type="submit"
+                                                                            class="btn btn_connection me-2"><i
+                                                                                class="fa fa-magnifying-glass"></i></button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="d-flex justify-content-end">
+                                                                <form action="{{ route('demandeconger.month') }}"
+                                                                    class="formulaire_new d-flex justify-content-end"
+                                                                    id="msform_facture" method="GET"
+                                                                    enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <label for=""
+                                                                        class="form-control-label me-2">Mois</label>
+                                                                    <input type="month" name="search_month"
+                                                                        id="search_month" placeholder="employer"
+                                                                        required class="form-control-input me-2">
+                                                                    <input type="text" name="page_cible"
+                                                                        value="&accepter" id="page_cible" hidden
+                                                                        required class="form-control-input me-2">
+                                                                    <div class="text-end">
+                                                                        <button type="submit"
+                                                                            class="btn btn_connection me-2"><i
+                                                                                class="fa fa-magnifying-glass"></i></button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+
+
+                                                            @include('admin.demande.pagination.pagination_conger_accepter')
+
+
+                                                        </div>
+                                                    </div>
+                                                </h5>
+
+                                                @include('admin.demande.includes.demande_conger_accepter')
+
                                             </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <form action="#" class="formulaire_new d-flex justify-content-end"
-                                            id="msform_facture" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <label for="" class="form-control-label me-2">Mois</label>
-                                            <input type="month" name="search_name" id="search_name"
-                                                placeholder="employer" class="form-control-input me-2">
-                                            <div class="text-end">
-                                                <button type="submit" class="btn btn-outline-success me-2"><i
-                                                        class="fa fa-magnifying-glass"></i></button>
+                                            {{-- --}}
+
+                                            @if (isset($page_cible))
+                                            @if ($page_cible=='&refuser')
+
+                                            <div class="tab-pane fade shadow show active rounded px-2 mx-3 py-3"
+                                                id="nav-poste" role="tabpanel" aria-labelledby="nav-poste-tab">
+
+                                                @else
+
+                                                <div class="tab-pane fade shadow rounded px-2 mx-3 py-3" id="nav-poste"
+                                                    role="tabpanel" aria-labelledby="nav-poste-tab">
+                                                    @endif
+
+                                                    @else
+                                                    <div class="tab-pane fade shadow rounded px-2 mx-3 py-3"
+                                                        id="nav-poste" role="tabpanel" aria-labelledby="nav-poste-tab">
+
+                                                        @endif
+
+                                                        {{-- <div class="tab-pane fade shadow rounded px-2 mx-3 py-3"
+                                                            id="nav-poste" role="tabpanel"
+                                                            aria-labelledby="nav-poste-tab"> --}}
+
+                                                            <h5 class=" mx-0">
+                                                                <div class="row mx-3 my-1 text-success">
+                                                                    <div class="col">
+                                                                        <span
+                                                                            class="mt-0 d-flex justify-content-start text-center text-success"
+                                                                            style="font-size: 20px;">Conger
+                                                                            refusé</span>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="d-flex justify-content-end">
+                                                                            <form
+                                                                                action="{{ route('demandeconger.filtre') }}"
+                                                                                class="formulaire_new d-flex justify-content-end"
+                                                                                id="msform_facture" method="GET"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <label for=""
+                                                                                    class="form-control-label me-2">Employer</label>
+                                                                                <input type="text" name="search_name"
+                                                                                    id="search_name"
+                                                                                    placeholder="Nom ou Prenom" required
+                                                                                    class="form-control-input me-2">
+                                                                                <input type="text" name="page_cible"
+                                                                                    value="&refuser" id="page_cible"
+                                                                                    hidden required
+                                                                                    class="form-control-input me-2">
+
+                                                                                <div class="text-end">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn_connection me-2"><i
+                                                                                            class="fa fa-magnifying-glass"></i></button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="d-flex justify-content-end">
+                                                                            <form
+                                                                                action="{{ route('demandeconger.month') }}"
+                                                                                class="formulaire_new d-flex justify-content-end"
+                                                                                id="msform_facture" method="GET"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <label for=""
+                                                                                    class="form-control-label me-2">Mois</label>
+                                                                                <input type="month" name="search_month"
+                                                                                    id="search_month"
+                                                                                    placeholder="employer" required
+                                                                                    class="form-control-input me-2">
+                                                                                <input type="text" name="page_cible"
+                                                                                    value="&refuser" id="page_cible"
+                                                                                    hidden required
+                                                                                    class="form-control-input me-2">
+                                                                                <div class="text-end">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn_connection me-2"><i
+                                                                                            class="fa fa-magnifying-glass"></i></button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+
+                                                                        @include('admin.demande.pagination.pagination_conger_refuser')
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </h5>
+
+                                                            @include('admin.demande.includes.demande_conger_refuser')
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
                                             </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <span class="mt-0 d-flex justify-content-end text-center" style="font-size: 20px;">
-                                        <span style="position: relative; bottom: -0.2rem; ">
-                                            1-0 sur 0
-                                        </span>
-                                        <a href="#" role="button" class="mx-1"
-                                            style=" pointer-events: none;cursor: default;"><i
-                                                class='fa fa-angle-left'></i></a>
-                                        <a href="#" role="button" class="mx-1"
-                                            style="  pointer-events: none;cursor: default;"><i
-                                                class="fa fa-angle-right"></i></a>
-                                    </span>
-                                </div>
-                            </div>
-                        </h5>
-
-                        <table class="table  table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <td>Motif &nbsp; <a href="#" style="color: blue"> <button
-                                                class="btn btn_creer_trie num_fact_trie" value="0"><i
-                                                    class="fa icon_trie fa-arrow-down"></i></button>
-                                    </td>
-                                    <td>Description </td>
-                                    <td scope="col">Duré du conger</td>
-                                    <td scope="col">Totale &nbsp; <button class="btn btn_creer_trie nom_entiter_trie"
-                                            value="0"><i class="fa icon_trie fa-arrow-down"></i></button></td>
-                                    <td scope="col">Employer &nbsp; <button
-                                            class="btn btn_creer_trie dte_reglement_trie" value="0"><i
-                                                class="fa icon_trie fa-arrow-down"></i></button>
-                                    </td>
-
-                                </tr>
-                            </thead>
-                            <tbody id="list_data_trie_payer">
-
-                                @if (count($demande_conger_refuser)>0)
-                                @foreach ($demande_conger_refuser as $refuser)
-                                <tr>
-                                    <th><i class="fa fa-xmark text-danger"></i>&nbsp; {{ $refuser->object }} </th>
-                                    <td>
-                                        <p class="text-muted"> {{$refuser->description}}</p>
-                                    </td>
-                                    <td>
-                                        <h6>date: <span class="text-muted">{{ $refuser->date_debut }}</span> à <span
-                                                class="text-muted">{{ $refuser->date_fin }}</span></h6>
-                                    </td>
-                                    <td> {{ $refuser->totale_day_conger }} jr(s)
-                                    <td>
-                                        <div>
-                                            <h6>{{ $refuser->name." ".$refuser->username }}</h6>
-                                            <p><a href="#">{{ $refuser->email }}</a> / {{ $refuser->phone }}</p>
                                         </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td colspan="5" class="text-center" style="color:red;">Aucun Résultat</td>
-                                </tr>
-                                @endif
 
-
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-    @endsection
+                                        @include('admin.demande.function_js_trie.demande_conger_js')
+                                        @endsection

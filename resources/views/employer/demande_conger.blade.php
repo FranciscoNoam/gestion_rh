@@ -17,7 +17,7 @@
         <div class="col-md-4">
             <div class="shadow p-3 bg-body  rounded">
                 <h4 class="text-center">Formulaire</h4>
-                <form action="{{route('demandeconger.store')}}" class="formulaire_conger mt-5" id="msform_facture"
+                <form action="{{route('demandeconger.store')}}" class="formulaire_conger_emp mt-5" id="msform_facture"
                     method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -78,7 +78,42 @@
 
         <div class="col-md-8" style="max-height: 800px; overflow-x: auto; overflow-y: 800px;">
             <div class="shadow p-3 bg-body  rounded">
-                <h4 class="text-center">Liste</h4>
+
+                <h5 class=" mx-0">
+                    <div class="row mx-3 my-1 text-success">
+                        <div class="col">
+                            <span class="mt-0 d-flex justify-content-start text-center text-success"
+                                style="font-size: 20px;">Liste</span>
+                        </div>
+
+                        <div class="col">
+                            <div class="d-flex justify-content-end">
+                                <form action="{{ route('demandeconger.month') }}"
+                                    class="formulaire_new d-flex justify-content-end" id="msform_facture" method="GET"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <label for="" class="form-control-label me-2">Mois</label>
+                                    <input type="month" name="search_month" id="search_month" placeholder="employer"
+                                        required class="form-control-input me-2">
+                                    <input type="text" name="page_cible" value="&accepter" id="page_cible" hidden
+                                        required class="form-control-input me-2">
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn_connection me-2"><i
+                                                class="fa fa-magnifying-glass"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col">
+
+
+                            @include('employer.pagination')
+
+
+                        </div>
+                    </div>
+                </h5>
+
                 @if(Session::has('success'))
                 <div class="alert alert-success">
                     {{Session::get('success')}}
@@ -93,150 +128,35 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col" colspan="2" class="text-center">#</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Status</th>
+                            <td scope="col" class="text-center">#</td>
+                            <td scope="col">Date &nbsp; <button class="btn btn_creer_trie date_debut_conger_trie" value="0"><i class="fa icon_trie fa-arrow-down"></i></button>
+                            </td>
+                            <td scope="col">Description &nbsp; <button class="btn btn_creer_trie motif_conger_trie" value="0"><i class="fa icon_trie fa-arrow-down"></i></button>
+                            </td>
+                            <td scope="col">Status</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody  id="list_data_trie_conger_emp">
                         @if (count($demande_conger)>0)
                         @foreach ($demande_conger as $demand)
-                        {{-- {{ dd($demand) }} --}}
 
-                        <div class="modal fade " id="dropDatapost{{ $demand->id }}" aria-hidden="true"
-                            aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                        @include('employer.modal_edit_delete_conger')
 
-                            <div class="modal-dialog   shadow p-3 lg-body  rounded">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Suppression du
-                                            demande de conger "{{$demand->object}}"</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <form action="{{ route('demandeconger.destroy',$demand->id) }}"
-                                        class="formulaire_new mt-5" id="msform_facture" method="GET"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="modal-body">
-                                            <p>Voulez vous vraiment rétiré cette information crusial? Cela est
-                                                irréversible. cette information sera
-                                                retiré dans la vos liste de demande de conger et de celle de
-                                                l'administration</p>
-                                            <p>Voulez vous continuer <span style="color:red;"> ?</span></p>
-                                        </div>
-                                        <div class="modal-footer  justify-content-center">
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Non,
-                                                j'annule</button>
-                                            <button type="submit" class="btn btn-success">Oui, je le
-                                                veux</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modal fade " id="NewDatapost{{ $demand->id }}" aria-hidden="true"
-                            aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                            <div class="modal-dialog   shadow p-3 lg-body  rounded">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modification du demande de conger
-                                            "{{ $demand->object }}"
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <form action="{{ route('demandeconger.update',$demand->id) }}"
-                                        class="formulaire_new mt-5" id="msform_facture" method="POST"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="form-group my-1">
-                                                        <label for="object" class="mb-1 form-control-placeholder">Object
-                                                            d'absence<strong style="color:#ff0000;">*</strong></label>
-                                                        <input type="text" name="object"
-                                                            class="form-control input_inscription"
-                                                            value="{{ $demand->object }}" placeholder="Object"
-                                                            id="object" required />
-                                                        @error('object')
-                                                        <span style="color:#ff0000;"> {{$message}} </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="form-group my-1">
-                                                        <label for="date_debut"
-                                                            class="mb-1 form-control-placeholder">Date début
-                                                            d'absence<strong style="color:#ff0000;">*</strong></label>
-                                                        <input type="date" name="date_debut"
-                                                            class="form-control input_inscription date_debut"
-                                                            value="{{ $demand->date_debut }}" id="date_debut"
-                                                            required />
-                                                        @error('date_debut')
-                                                        <span style="color:#ff0000;"> {{$message}} </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group my-1">
-                                                        <label for="date_fin"
-                                                            class="mb-1 form-control-placeholder ">Date
-                                                            fin d'absence<strong
-                                                                style="color:#ff0000;">*</strong></label>
-                                                        <input type="date" name="date_fin"
-                                                            class="form-control input_inscription date_fin"
-                                                            value="{{ $demand->date_fin }}" id="date_fin" required />
-                                                        @error('date_fin')
-                                                        <span style="color:#ff0000;"> {{$message}} </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="mb-3">
-                                                <label for="description" class="form-label">Description</label>
-                                                <textarea name="description" class="form-control" id="description"
-                                                    rows="4">{{ $demand->description }}</textarea>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer justify-content-center">
-                                            <button type="button" class="btn btn-primary"
-                                                data-bs-dismiss="modal">Annuler</button>
-                                            <button type="submit" class="btn btn-success">Modifier</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                         <tr>
-                            @if ($demand->validation==true || $demand->refus==true)
-                            <td>
-                                <button role="button" class="btn btn-link disabled" style="color:red;"><i
-                                        class="material-icons">&#xE872;</i></button>
-                            </td>
-                            <td> <button role="button" class="btn btn-link disabled" style="color:green;"><i
-                                        class="material-icons">&#xE254;</i></button>
-                            </td>
-                            @else
-                            <td>
-                                <a data-bs-toggle="modal" href="#dropDatapost{{ $demand->id }}" role="button"
-                                    class="btn btn-link" style="color:red;"><i class="material-icons">&#xE872;</i></a>
-                            </td>
-                            <td> <a data-bs-toggle="modal" href="#NewDatapost{{ $demand->id }}" role="button"
-                                    class="btn btn-link" style="color:green;"><i class="material-icons">&#xE254;</i></a>
-                            </td>
-                            @endif
 
+                            <td>
+
+                                @if ($demand->validation==true || $demand->refus==true)
+                                @else
+
+                                <button data-bs-toggle="modal" href="#dropDatapost{{ $demand->id }}" role="button"
+                                    class="btn btn-outline-danger" ><i class="material-icons">&#xE872;</i></button>&nbsp;
+                                <button data-bs-toggle="modal" href="#NewDatapost{{ $demand->id }}" role="button"
+                                    class="btn btn-outline-success" ><i  class="material-icons">&#xE254;</i></button>
+
+                                @endif
+
+                            </td>
 
                             <td>
                                 <div>
@@ -248,21 +168,22 @@
                             </td>
                             <td>
                                 <h6>{{ $demand->object ." ( ".$demand->totale_day_conger." jr)"}}</h6>
-                                <p>{{ $demand->description }}</p>
+                                <p style="width: 30rem;" class="lh-sm-4 text-break  text-muted">{{ $demand->description
+                                    }}</p>
                             </td>
                             <td>
                                 @if ($demand->validation==false && $demand->refus==false)
                                 <div
                                     style="background-color: rgb(102, 90, 65); border-radius: 10px; text-align: center;color: white">
-                                    En attente</div>
+                                    en attente</div>
                                 @elseif($demand->refus==true && $demand->validation==false)
                                 <div
                                     style="background-color: red; border-radius: 10px; text-align: center;color: white">
-                                    Refusé</div>
+                                    refusé</div>
                                 @elseif( $demand->validation==true && $demand->refus==false)
                                 <div
                                     style="background-color: green; border-radius: 10px; text-align: center;color: white">
-                                    Accepté</div>
+                                    accepté</div>
                                 @endif
 
                             </td>
@@ -271,7 +192,7 @@
                         @endforeach
                         @else
                         <tr>
-                            <td colspan="7" class="text-center" style="color:red;">Aucun Résultat</td>
+                            <td colspan="4" class="text-center" style="color:red;">Aucun Résultat</td>
                         </tr>
                         @endif
 
@@ -282,31 +203,6 @@
     </div>
 </div>
 
-<script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
-<script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        var tmp = document.getElementById("dernier_conger").value;
-      if(tmp!=null && tmp!=""){
-        document.getElementById("date_debut").setAttribute("min", tmp);
-      }
+@include('employer.function_js.demande_conger_js')
 
-
-    $('.create_conger').prop('disabled', true);
-
-        $('.formulaire_conger input').keyup(function() {
-                if ($('#date_debut').val().length > 5 && $('#object').val().length > 1 && $('#description').val().length > 1 &&
-                    $('#date_fin').val().length > 3) {
-                        $('.create_conger').prop('disabled', false);
-                } else {
-                    $('.create_conger').prop('disabled', true);
-                }
-            });
-        });
-
-
-$(document).on("keyup change", ".date_debut", function() {
-    document.getElementById("date_fin").setAttribute("min", $(this).val());
-});
-</script>
 @endsection

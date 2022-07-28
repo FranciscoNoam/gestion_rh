@@ -96,7 +96,7 @@
             } else {
                 $('#connexion').prop('disabled', true);
             }
-        }); 
+        });
 
          $('.formulaire_new input').keyup(function() {
             if ($('#nom').val().length > 0 && $('#phone').val().length > 9  && $('#email').val().length > 4 &&

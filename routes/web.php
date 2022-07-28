@@ -60,9 +60,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
     Route::get('/login', 'LoginController@show')->name('login.show');
 
-    Route::group(['middleware' => ['auth']], function () {
-        // Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
-    });
 });
 
 // Route::get('connection', function(){
@@ -90,6 +87,8 @@ Route::get('admin.generale', [AdminController::class, 'global'])->name('admin.ge
 Route::post('admin.login', [AdminController::class, 'login'])->name('admin.login');
 
 Route::get('home', [HomeController::class, 'index'])->name('home');
+
+
 // =============== URL EMPLOYER ==================================
 Route::resource('employe', EmployerController::class)->except(['update', 'destroy']);
 Route::post('employe.update/{id}', [EmployerController::class, 'update'])->name('employe.update');
@@ -101,20 +100,34 @@ Route::get('employe.trie', [EmployerController::class, 'trie'])->name('employe.t
 Route::resource('departement', DepartementController::class)->except(['update', 'destroy']);
 Route::post('departement.update/{id}', [DepartementController::class, 'update'])->name('departement.update');
 Route::get('departement.destroy/{id}', [DepartementController::class, 'destroy'])->name('departement.destroy');
+
+
 // =============== URL GENRE ==================================
 Route::resource('genre', GenreController::class)->except(['update', 'destroy']);
 Route::post('genre.update/{id}', [GenreController::class, 'update'])->name('genre.update');
 Route::get('genre.destroy/{id}', [GenreController::class, 'destroy'])->name('genre.destroy');
+
+
 // =============== URL POSTE ==================================
 Route::resource('poste', PosteController::class)->except(['update', 'destroy']);
 Route::post('poste.update/{id}', [PosteController::class, 'update'])->name('poste.update');
 Route::get('poste.destroy/{id}', [PosteController::class, 'destroy'])->name('poste.destroy');
+
+
 // =============== URL DEMMANDE CONGER ==================================
-Route::resource('demandeconger', DemandeCongerController::class)->except(['update', 'destroy']);
+Route::resource('demandeconger', DemandeCongerController::class)->except(['index','update', 'destroy']);
 Route::post('demandeconger.update/{id}', [DemandeCongerController::class, 'update'])->name('demandeconger.update');
 Route::post('demandeconger.accept/{id}', [DemandeCongerController::class, 'accept'])->name('demandeconger.accept');
 Route::post('demandeconger.refus/{id}', [DemandeCongerController::class, 'refus'])->name('demandeconger.refus');
 Route::get('demandeconger.destroy/{id}', [DemandeCongerController::class, 'destroy'])->name('demandeconger.destroy');
+// ---------------------------------------- PAGINATION -------------------------------------
+Route::get('demandeconger.index/{attente?}/{accepter?}/{refuser?}/{page_cible?}', [DemandeCongerController::class, 'index'])->name('demandeconger.index');
+Route::get('demandeconger.filtre/{attente?}/{accepter?}/{refuser?}/{page_cible?}/{search_name?}', [DemandeCongerController::class, 'filtre'])->name('demandeconger.filtre');
+Route::get('demandeconger.month/{attente?}/{accepter?}/{refuser?}/{page_cible?}/{search_month?}', [DemandeCongerController::class, 'month'])->name('demandeconger.month');
+// ---------------------------------------- TRIE DEMANDE ABSENCE----------------------------------------------------------
+Route::get('demandeconger.trie', [DemandeCongerController::class, 'trie'])->name('demandeconger.trie');
+
+
 // =============== URL DEMMANDE ABSENCE ==================================
 Route::resource('demandeabsence', DemandeAbsenceController::class)->except(['index','update', 'destroy']);
 Route::post('demandeabsence.update/{id}', [DemandeAbsenceController::class, 'update'])->name('demandeabsence.update');

@@ -158,7 +158,7 @@
                 </div>
 
                 <div class="row d-flex justify-content-center">
-                   
+
                     <div class="col-3">
                         <div class="form-group my-1">
                             <label for="salaire" class="mb-1 form-control-placeholder">Salaire<strong

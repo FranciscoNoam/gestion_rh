@@ -294,7 +294,7 @@
                             </td>
                             <td>
                                 <h6>{{ $demand->object }}</h6>
-                                <p>{{ $demand->description }}</p>
+                                <p style="width: 30rem;" class="lh-sm-4 text-break  text-muted">{{ $demand->description }}</p>
                             </td>
                             <td>
                                 @if ($demand->validation==false && $demand->refus==false)

@@ -81,7 +81,7 @@ class DemandeAbsenceController extends Controller
 
         if (Gate::allows('isEmployer')) {
             $employe_id = $this->fonct->findWhereMultiOne("employes", ["user_id"], [Auth::user()->id])->id;
-            $demande_absence = $this->fonct->findWhere("demande_absences", ["employe_id"], [$employe_id], ["id"], "DESC");
+            $demande_absence = $this->fonct->findWhere("v_demande_absence", ["employe_id"], [$employe_id], ["id"], "DESC");
             return view("employer.demande_absence", compact('demande_absence'));
         }
         if (Gate::allows('isSuperAdmin') || Gate::allows('isAdmin')) {
@@ -262,9 +262,9 @@ class DemandeAbsenceController extends Controller
         if($req->page_cible!=null){
               $page_cible=$req->page_cible;
             } else {
-                $page_cible=$page_cible_para; 
+                $page_cible=$page_cible_para;
             }
-        
+
         if ($nbPag_para_attente <= 0 || $nbPag_para_attente == null) {
             $nbPag_attente = 1;
         } else {
@@ -346,7 +346,7 @@ class DemandeAbsenceController extends Controller
         $demande_absence_attente = [];
         $demande_absence_accepter = [];
         $demande_absence_refuser = [];
-      
+
         if ($req->data_value == 0) { // order by ASC
             $order = "ASC";
         }
@@ -361,14 +361,14 @@ class DemandeAbsenceController extends Controller
         if ($req->colone == "DATE_DEBUT_ABSENCE") {
             $colone_trie = ["date_debut"];
         }
-      
+
         if ($req->colone == "NAME_EMP_ABSENCE") {
             $colone_trie = ["name"];
         }
 
         if (isset($req->search_name)) { // recherche par Employer
             $search_name = $req->search_name;
-          
+
             $demande_absence_attente = $this->fonct->findWhereTrieOrderBy(
                 "v_demande_absence_attente",["name", "username"], ["LIKE", "LIKE"], ["%" . $search_name . "%", "%" . $search_name . "%"],
                 $colone_trie,
@@ -398,7 +398,7 @@ class DemandeAbsenceController extends Controller
 
         } else if (isset($req->search_month)) { // recherche par date(Mois et année)
                 $search_month = $req->search_month;
-             
+
                 $demande_absence_attente = $this->fonct->findWhereTrieOrderBy(
                     "v_demande_absence_attente",["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month],
                     $colone_trie,
@@ -407,7 +407,7 @@ class DemandeAbsenceController extends Controller
                     $nbPag_attente,
                     $nb_limit
                 );
-    
+
                 $demande_absence_accepter = $this->fonct->findWhereTrieOrderBy(
                     "v_demande_absence_accepter",["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month],
                     $colone_trie,
@@ -416,7 +416,7 @@ class DemandeAbsenceController extends Controller
                     $nbPag_accepter,
                     $nb_limit
                 );
-    
+
                 $demande_absence_refuser = $this->fonct->findWhereTrieOrderBy(
                     "v_demande_absence_refuser",["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month],
                     $colone_trie,
@@ -425,14 +425,14 @@ class DemandeAbsenceController extends Controller
                     $nbPag_refuser,
                     $nb_limit
                 );
-           
+
         } else {
 
             $demande_absence_attente = $this->fonct->findWhereTrieOrderBy("v_demande_absence_attente",[], [], [], $colone_trie,"OR", $order, $nbPag_attente,$nb_limit );
 
             $demande_absence_accepter = $this->fonct->findWhereTrieOrderBy("v_demande_absence_accepter",[], [], [], $colone_trie, "OR",$order, $nbPag_accepter, $nb_limit );
 
-            $demande_absence_refuser = $this->fonct->findWhereTrieOrderBy("v_demande_absence_refuser",["month_date_debut", "month_date_fin"], ["=", "="], [$search_month, $search_month], $colone_trie,"OR", $order, $nbPag_refuser,$nb_limit );
+            $demande_absence_refuser = $this->fonct->findWhereTrieOrderBy("v_demande_absence_refuser",[], [], [], $colone_trie,"OR", $order, $nbPag_refuser,$nb_limit );
         }
         return response()->json([
             "demande_absence_attente" => $demande_absence_attente
