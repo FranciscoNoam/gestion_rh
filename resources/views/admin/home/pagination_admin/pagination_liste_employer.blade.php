@@ -26,10 +26,10 @@
             <span class="mt-0 d-flex justify-content-end text-center" style="font-size: 20px;">
 
                 @if(isset($search_name))
-                <a href="{{route('home.index')}}" role="button" class="mx-3 filtre_activer" ><i class='fa fa-close'></i> activer</a>
+                <a href="{{route('home.index')}}" role="button" class="mx-3 filtre_activer" ><i class='fa fa-close'></i> rétiré le filtre</a>
 
                  @elseif($pagination["debut_aff"]>1)
-                 <a href="{{route('home.index')}}" role="button" class="mx-3 filtre_activer" ><i class='fa fa-close'></i> activer</a>
+                 <a href="{{route('home.index')}}" role="button" class="mx-3 filtre_activer" ><i class='fa fa-close'></i> rétiré le filtre</a>
                   @endif
 
                 <span style="position: relative; bottom: -0.2rem; ">

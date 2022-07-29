@@ -124,7 +124,10 @@ Route::get('demandeconger.destroy/{id}', [DemandeCongerController::class, 'destr
 Route::get('demandeconger.index/{attente?}/{accepter?}/{refuser?}/{page_cible?}', [DemandeCongerController::class, 'index'])->name('demandeconger.index');
 Route::get('demandeconger.filtre/{attente?}/{accepter?}/{refuser?}/{page_cible?}/{search_name?}', [DemandeCongerController::class, 'filtre'])->name('demandeconger.filtre');
 Route::get('demandeconger.month/{attente?}/{accepter?}/{refuser?}/{page_cible?}/{search_month?}', [DemandeCongerController::class, 'month'])->name('demandeconger.month');
+Route::get('demandeconger.month.emp/{pagination?}/{search_month?}', [DemandeCongerController::class, 'month_emp'])->name('demandeconger.month.emp');
+
 // ---------------------------------------- TRIE DEMANDE ABSENCE----------------------------------------------------------
+Route::get('demandeconger.trie.emp', [DemandeCongerController::class, 'trie_emp'])->name('demandeconger.trie.emp');
 Route::get('demandeconger.trie', [DemandeCongerController::class, 'trie'])->name('demandeconger.trie');
 
 

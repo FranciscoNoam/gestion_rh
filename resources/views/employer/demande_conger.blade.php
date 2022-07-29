@@ -88,14 +88,12 @@
 
                         <div class="col">
                             <div class="d-flex justify-content-end">
-                                <form action="{{ route('demandeconger.month') }}"
+                                <form action="{{ route('demandeconger.month.emp') }}"
                                     class="formulaire_new d-flex justify-content-end" id="msform_facture" method="GET"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <label for="" class="form-control-label me-2">Mois</label>
                                     <input type="month" name="search_month" id="search_month" placeholder="employer"
-                                        required class="form-control-input me-2">
-                                    <input type="text" name="page_cible" value="&accepter" id="page_cible" hidden
                                         required class="form-control-input me-2">
                                     <div class="text-end">
                                         <button type="submit" class="btn btn_connection me-2"><i
@@ -137,6 +135,7 @@
                         </tr>
                     </thead>
                     <tbody  id="list_data_trie_conger_emp">
+                          <input type="hidden" value="{{ $dernier_conger->date_fin }}" id="dernier_conger">
                         @if (count($demande_conger)>0)
                         @foreach ($demande_conger as $demand)
 
@@ -162,7 +161,7 @@
                                 <div>
                                     <h6>date: <span class="text-muted">{{$demand->date_debut}}</span> à <span
                                             class="text-muted">{{$demand->date_fin }}</span></h6>
-                                    <input type="hidden" value="{{ $dernier_conger->date_fin }}" id="dernier_conger">
+
                                 </div>
 
                             </td>

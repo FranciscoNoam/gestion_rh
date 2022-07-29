@@ -3,14 +3,14 @@
 
     @if(isset($search_name))
     <a href="{{route('demandeconger.index')}}" role="button" class="mx-3 filtre_activer"><i class='fa fa-close'></i>
-        activer</a>
+        rétiré le filtre</a>
         @elseif(isset($search_month))
 
         <a href="{{route('demandeconger.index')}}" role="button" class="mx-3 filtre_activer"><i class='fa fa-close'></i>
-            activer</a>
+            rétiré le filtre</a>
     @elseif($pagination_accepter["debut_aff"]>1)
     <a href="{{route('demandeconger.index')}}" role="button" class="mx-3 filtre_activer"><i class='fa fa-close'></i>
-        activer</a>
+        rétiré le filtre</a>
     @endif
 
 

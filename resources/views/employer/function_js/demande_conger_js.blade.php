@@ -1,6 +1,7 @@
 <script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+
         var tmp = document.getElementById("dernier_conger").value;
       if(tmp!=null && tmp!=""){
         document.getElementById("date_debut").setAttribute("min", tmp);
@@ -44,6 +45,9 @@
 
     function HTML_demande_conger(listeAttente){
     var html='';
+    const dernier_cong = "@php echo $dernier_conger->date_fin;@endphp"
+
+
     if (listeAttente.length > 0) {
             for (var id = 0; id < listeAttente.length; id += 1) {
                 html+='<tr>';
@@ -56,7 +60,7 @@
                     }
                     html+='</td>';
                     html+='<td> <div><h6>date: <span class="text-muted">'+listeAttente[id].date_debut+'</span> à <span class="text-muted">'+listeAttente[id].date_fin+'</span></h6>';
-                    html+='<input type="hidden" value="'+listeAttente[id].date_fin+'" id="dernier_conger"></div> </td>';
+                    html+='</div> </td>';
                     html+='<td><h6>'+listeAttente[id].object+' ( '+listeAttente[id].totale_day_conger+' jr)</h6>';
                     html+='  <p style="width: 30rem;" class="lh-sm-4 text-break  text-muted">'+listeAttente[id].description+'</p> </td>';
 
@@ -85,7 +89,7 @@
         var dataValiny = {
             data_value:value
             ,colone: col_trie
-            , debut_aff_attente: @php echo $pagination_attente["debut_aff"];@endphp
+            , debut_aff: @php echo $pagination["debut_aff"];@endphp
         };
 
 
@@ -93,7 +97,7 @@
             dataValiny = {
                 data_value: value
                 ,colone: col_trie
-                , debut_aff_attente: @php echo $pagination_attente["debut_aff"];@endphp
+                , debut_aff: @php echo $pagination["debut_aff"];@endphp
                 , search_month: "@php echo $search_month; @endphp"
             };
             @php }   @endphp
@@ -104,7 +108,7 @@
     function start_request(dataValue){
     $.ajax({
             method: "GET"
-            , url: "{{route('demandeconger.trie')}}"
+            , url: "{{route('demandeconger.trie.emp')}}"
             , data: dataValue
             , dataType: "html"
             , success: function(response) {
